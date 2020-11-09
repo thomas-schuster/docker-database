@@ -396,6 +396,103 @@ ADD CONSTRAINT fk_locatedcityOn
 FOREIGN KEY (city, country, province) 
 REFERENCES city (name, country, province);
 
+ALTER TABLE isMember 
+ADD CONSTRAINT fk_ismember 
+FOREIGN KEY (organization) 
+REFERENCES organization (abbreviation);
+
+ALTER TABLE isMember 
+ADD CONSTRAINT fk_country 
+FOREIGN KEY (country) 
+REFERENCES country (code);
+
+ALTER TABLE province 
+ADD CONSTRAINT fk_provcountry 
+FOREIGN KEY (country) 
+REFERENCES country (code);
+
+ALTER TABLE borders 
+ADD CONSTRAINT fk_border1 
+FOREIGN KEY (country1) 
+REFERENCES country (code);
+
+ALTER TABLE borders 
+ADD CONSTRAINT fk_border2 
+FOREIGN KEY (country2) 
+REFERENCES country (code);
+
+ALTER TABLE countrypops 
+ADD CONSTRAINT fk_popscountry 
+FOREIGN KEY (country) 
+REFERENCES country (code);
+
+ALTER TABLE economy 
+ADD CONSTRAINT fk_ecoscountry 
+FOREIGN KEY (country) 
+REFERENCES country (code);
+
+ALTER TABLE politics 
+ADD CONSTRAINT fk_polscountry1 
+FOREIGN KEY (country) 
+REFERENCES country (code);
+
+ALTER TABLE politics 
+ADD CONSTRAINT fk_polscountry2 
+FOREIGN KEY (dependent) 
+REFERENCES country (code);
+
+ALTER TABLE politics 
+ADD CONSTRAINT fk_polscountry3 
+FOREIGN KEY (wasdependent) 
+REFERENCES country (code);
+
+ALTER TABLE population 
+ADD CONSTRAINT fk_popcountry 
+FOREIGN KEY (country) 
+REFERENCES country (code);
+
+ALTER TABLE language 
+ADD CONSTRAINT fk_langcountry 
+FOREIGN KEY (country) 
+REFERENCES country (code);
+
+ALTER TABLE religion 
+ADD CONSTRAINT fk_popcountry 
+FOREIGN KEY (country) 
+REFERENCES country (code);
+
+ALTER TABLE ethnicgroup 
+ADD CONSTRAINT fk_popcountry 
+FOREIGN KEY (country) 
+REFERENCES country (code);
+
+ALTER TABLE encompasses 
+ADD CONSTRAINT fk_enccountry 
+FOREIGN KEY (country) 
+REFERENCES country (code);
+
+ALTER TABLE encompasses 
+ADD CONSTRAINT fk_enccontinent 
+FOREIGN KEY (continent) 
+REFERENCES continent (name);
+
+
+ALTER TABLE geo_desert 
+ADD CONSTRAINT fk_desert 
+FOREIGN KEY (desert) 
+REFERENCES desert (name);
+
+ALTER TABLE geo_desert DISABLE TRIGGER ALL;
+ALTER TABLE encompasses DISABLE TRIGGER ALL;
+ALTER TABLE language DISABLE TRIGGER ALL;
+ALTER TABLE religion DISABLE TRIGGER ALL;
+ALTER TABLE ethnicgroup DISABLE TRIGGER ALL;
+ALTER TABLE politics DISABLE TRIGGER ALL;
+ALTER TABLE population DISABLE TRIGGER ALL;
+ALTER TABLE economy DISABLE TRIGGER ALL;
+ALTER TABLE countrypops DISABLE TRIGGER ALL;
+ALTER TABLE borders DISABLE TRIGGER ALL;
+ALTER TABLE isMember DISABLE TRIGGER ALL;
 ALTER TABLE located DISABLE TRIGGER ALL;
 ALTER TABLE locatedOn DISABLE TRIGGER ALL;
 ALTER TABLE province DISABLE TRIGGER ALL;
