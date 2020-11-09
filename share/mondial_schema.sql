@@ -205,7 +205,7 @@ CREATE TABLE Island
  Islands VARCHAR(50),
  Area DECIMAL CONSTRAINT IslandAr check (Area >= 0),
  Elevation DECIMAL,
- Type VARCHAR(10),
+ Type VARCHAR(12),
  Coordinates GeoCoord CONSTRAINT IslandCoord
      CHECK (((Coordinates).Latitude >= -90) AND 
             ((Coordinates).Latitude <= 90) AND
