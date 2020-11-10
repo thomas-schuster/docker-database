@@ -476,12 +476,81 @@ ADD CONSTRAINT fk_enccontinent
 FOREIGN KEY (continent) 
 REFERENCES continent (name);
 
-
 ALTER TABLE geo_desert 
 ADD CONSTRAINT fk_desert 
 FOREIGN KEY (desert) 
 REFERENCES desert (name);
 
+ALTER TABLE geo_desert 
+ADD CONSTRAINT fk_desertprovince 
+FOREIGN KEY (country, province) 
+REFERENCES province (country, name);
+
+ALTER TABLE geo_mountain
+ADD CONSTRAINT fk_mountainprovince 
+FOREIGN KEY (country, province) 
+REFERENCES province (country, name);
+
+ALTER TABLE geo_mountain
+ADD CONSTRAINT fk_geomountain 
+FOREIGN KEY (mountain) 
+REFERENCES mountain (name);
+
+ALTER TABLE geo_island
+ADD CONSTRAINT fk_islandprovince 
+FOREIGN KEY (country, province) 
+REFERENCES province (country, name);
+
+ALTER TABLE geo_sea
+ADD CONSTRAINT fk_seaprovince 
+FOREIGN KEY (country, province) 
+REFERENCES province (country, name);
+
+ALTER TABLE geo_estuary
+ADD CONSTRAINT fk_gestprovince 
+FOREIGN KEY (country, province) 
+REFERENCES province (country, name);
+
+ALTER TABLE geo_source
+ADD CONSTRAINT fk_gsrcprovince 
+FOREIGN KEY (country, province) 
+REFERENCES province (country, name);
+
+ALTER TABLE geo_river
+ADD CONSTRAINT fk_griverprovince 
+FOREIGN KEY (country, province) 
+REFERENCES province (country, name);
+
+ALTER TABLE geo_lake
+ADD CONSTRAINT fk_lakeprovince 
+FOREIGN KEY (country, province) 
+REFERENCES province (country, name);
+
+ALTER TABLE city
+ADD CONSTRAINT fk_cityprovince 
+FOREIGN KEY (country, province) 
+REFERENCES province (country, name);
+
+ALTER TABLE provpops
+ADD CONSTRAINT fk_ppopsprovince 
+FOREIGN KEY (country, province) 
+REFERENCES province (country, name);
+
+ALTER TABLE MountainOnIsland
+ADD CONSTRAINT fk_mtimountain 
+FOREIGN KEY (mountain) 
+REFERENCES mountain (name);
+
+ALTER TABLE MountainOnIsland DISABLE TRIGGER ALL;
+ALTER TABLE provpops DISABLE TRIGGER ALL;
+ALTER TABLE city DISABLE TRIGGER ALL;
+ALTER TABLE geo_lake DISABLE TRIGGER ALL;
+ALTER TABLE geo_river DISABLE TRIGGER ALL;
+ALTER TABLE geo_source DISABLE TRIGGER ALL;
+ALTER TABLE geo_estuary DISABLE TRIGGER ALL;
+ALTER TABLE geo_sea DISABLE TRIGGER ALL;
+ALTER TABLE geo_island DISABLE TRIGGER ALL;
+ALTER TABLE geo_mountain DISABLE TRIGGER ALL;
 ALTER TABLE geo_desert DISABLE TRIGGER ALL;
 ALTER TABLE encompasses DISABLE TRIGGER ALL;
 ALTER TABLE language DISABLE TRIGGER ALL;
