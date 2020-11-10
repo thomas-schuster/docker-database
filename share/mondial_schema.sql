@@ -391,10 +391,30 @@ ADD CONSTRAINT fk_locatedcity
 FOREIGN KEY (city, country, province) 
 REFERENCES city (name, country, province);
 
+ALTER TABLE located 
+ADD CONSTRAINT fk_locsea
+FOREIGN KEY (sea) 
+REFERENCES sea (name);
+
+ALTER TABLE located 
+ADD CONSTRAINT fk_locriver
+FOREIGN KEY (river) 
+REFERENCES river (name);
+
+ALTER TABLE located 
+ADD CONSTRAINT fk_loclake
+FOREIGN KEY (lake) 
+REFERENCES lake (name);
+
 ALTER TABLE locatedOn 
 ADD CONSTRAINT fk_locatedcityOn 
 FOREIGN KEY (city, country, province) 
 REFERENCES city (name, country, province);
+
+ALTER TABLE locatedOn
+ADD CONSTRAINT fk_onisland
+FOREIGN KEY (island) 
+REFERENCES island (name);
 
 ALTER TABLE isMember 
 ADD CONSTRAINT fk_ismember 
@@ -501,30 +521,60 @@ ADD CONSTRAINT fk_islandprovince
 FOREIGN KEY (country, province) 
 REFERENCES province (country, name);
 
+ALTER TABLE geo_island
+ADD CONSTRAINT fk_geoisland
+FOREIGN KEY (island) 
+REFERENCES island (name);
+
 ALTER TABLE geo_sea
 ADD CONSTRAINT fk_seaprovince 
 FOREIGN KEY (country, province) 
 REFERENCES province (country, name);
+
+ALTER TABLE geo_sea
+ADD CONSTRAINT fk_geosea
+FOREIGN KEY (sea) 
+REFERENCES sea (name);
 
 ALTER TABLE geo_estuary
 ADD CONSTRAINT fk_gestprovince 
 FOREIGN KEY (country, province) 
 REFERENCES province (country, name);
 
+ALTER TABLE geo_estuary
+ADD CONSTRAINT fk_gestriver 
+FOREIGN KEY (river) 
+REFERENCES river (name);
+
 ALTER TABLE geo_source
 ADD CONSTRAINT fk_gsrcprovince 
 FOREIGN KEY (country, province) 
 REFERENCES province (country, name);
+
+ALTER TABLE geo_source
+ADD CONSTRAINT fk_gsrcriver 
+FOREIGN KEY (river) 
+REFERENCES river (name);
 
 ALTER TABLE geo_river
 ADD CONSTRAINT fk_griverprovince 
 FOREIGN KEY (country, province) 
 REFERENCES province (country, name);
 
+ALTER TABLE geo_river
+ADD CONSTRAINT fk_georiver 
+FOREIGN KEY (river) 
+REFERENCES river (name);
+
 ALTER TABLE geo_lake
 ADD CONSTRAINT fk_lakeprovince 
 FOREIGN KEY (country, province) 
 REFERENCES province (country, name);
+
+ALTER TABLE geo_lake
+ADD CONSTRAINT fk_geolake 
+FOREIGN KEY (lake) 
+REFERENCES lake (name);
 
 ALTER TABLE city
 ADD CONSTRAINT fk_cityprovince 
@@ -541,6 +591,61 @@ ADD CONSTRAINT fk_mtimountain
 FOREIGN KEY (mountain) 
 REFERENCES mountain (name);
 
+ALTER TABLE islandin
+ADD CONSTRAINT fk_islandin
+FOREIGN KEY (island) 
+REFERENCES island (name);
+
+ALTER TABLE islandin
+ADD CONSTRAINT fk_insea
+FOREIGN KEY (sea) 
+REFERENCES sea (name);
+
+ALTER TABLE mergeswith
+ADD CONSTRAINT fk_sea1
+FOREIGN KEY (sea1) 
+REFERENCES sea (name);
+
+ALTER TABLE mergeswith
+ADD CONSTRAINT fk_sea2
+FOREIGN KEY (sea2) 
+REFERENCES sea (name);
+
+ALTER TABLE river
+ADD CONSTRAINT fk_riversea
+FOREIGN KEY (sea) 
+REFERENCES sea (name);
+
+ALTER TABLE river
+ADD CONSTRAINT fk_riverriver
+FOREIGN KEY (river) 
+REFERENCES river (name);
+
+ALTER TABLE river
+ADD CONSTRAINT fk_riverlake
+FOREIGN KEY (lake) 
+REFERENCES lake (name);
+
+ALTER TABLE riverthrough
+ADD CONSTRAINT fk_thriver
+FOREIGN KEY (river) 
+REFERENCES river (name);
+
+ALTER TABLE riverthrough
+ADD CONSTRAINT fk_thlake
+FOREIGN KEY (lake) 
+REFERENCES lake (name);
+
+ALTER TABLE lake
+ADD CONSTRAINT fk_lakeriver
+FOREIGN KEY (river) 
+REFERENCES river (name);
+
+ALTER TABLE lake DISABLE TRIGGER ALL;
+ALTER TABLE riverthrough DISABLE TRIGGER ALL;
+ALTER TABLE river DISABLE TRIGGER ALL;
+ALTER TABLE mergeswith DISABLE TRIGGER ALL;
+ALTER TABLE islandin DISABLE TRIGGER ALL;
 ALTER TABLE MountainOnIsland DISABLE TRIGGER ALL;
 ALTER TABLE provpops DISABLE TRIGGER ALL;
 ALTER TABLE city DISABLE TRIGGER ALL;
