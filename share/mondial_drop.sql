@@ -1,58 +1,58 @@
-DROP TABLE Country CASCADE;
-DROP TABLE Province CASCADE;
-DROP TABLE City CASCADE;
-DROP TABLE Economy CASCADE;
-DROP TABLE Population CASCADE;
-DROP TABLE Politics CASCADE;
-DROP TABLE Language CASCADE;
-DROP TABLE Religion CASCADE;
-DROP TABLE EthnicGroup CASCADE;
+DROP TABLE if exists Country CASCADE;
+DROP TABLE if exists Province CASCADE;
+DROP TABLE if exists City CASCADE;
+DROP TABLE if exists Economy CASCADE;
+DROP TABLE if exists Population CASCADE;
+DROP TABLE if exists Politics CASCADE;
+DROP TABLE if exists Language CASCADE;
+DROP TABLE if exists Religion CASCADE;
+DROP TABLE if exists EthnicGroup CASCADE;
 
-DROP TABLE Countrypops CASCADE;
-DROP TABLE Provpops CASCADE;
-DROP TABLE Citypops CASCADE;
+DROP TABLE if exists Countrypops CASCADE;
+DROP TABLE if exists Provpops CASCADE;
+DROP TABLE if exists Citypops CASCADE;
 
-DROP TABLE Countryothername CASCADE;
-DROP TABLE Provinceothername CASCADE;
-DROP TABLE Cityothername CASCADE;
+DROP TABLE if exists Countryothername CASCADE;
+DROP TABLE if exists Provinceothername CASCADE;
+DROP TABLE if exists Cityothername CASCADE;
 
-DROP TABLE Countrylocalname CASCADE;
-DROP TABLE Provincelocalname CASCADE;
-DROP TABLE Citylocalname CASCADE;
+DROP TABLE if exists Countrylocalname CASCADE;
+DROP TABLE if exists Provincelocalname CASCADE;
+DROP TABLE if exists Citylocalname CASCADE;
 
-DROP TABLE borders CASCADE;
+DROP TABLE if exists borders CASCADE;
 
-DROP TABLE Continent CASCADE;
-DROP TABLE encompasses CASCADE;
+DROP TABLE if exists Continent CASCADE;
+DROP TABLE if exists encompasses CASCADE;
 
-DROP TABLE Organization CASCADE;
-DROP TABLE isMember CASCADE;
+DROP TABLE if exists Organization CASCADE;
+DROP TABLE if exists isMember CASCADE;
 
-DROP TABLE Mountain CASCADE;
-DROP TABLE Desert CASCADE;
-DROP TABLE Island CASCADE;
-DROP TABLE Lake CASCADE;
-DROP TABLE Sea CASCADE;
-DROP TABLE River CASCADE;
-DROP TABLE RiverThrough CASCADE;
+DROP TABLE if exists Mountain CASCADE;
+DROP TABLE if exists Desert CASCADE;
+DROP TABLE if exists Island CASCADE;
+DROP TABLE if exists Lake CASCADE;
+DROP TABLE if exists Sea CASCADE;
+DROP TABLE if exists River CASCADE;
+DROP TABLE if exists RiverThrough CASCADE;
 
-DROP TABLE geo_Mountain CASCADE;
-DROP TABLE geo_Desert CASCADE;
-DROP TABLE geo_Island CASCADE;
-DROP TABLE geo_River CASCADE;
-DROP TABLE geo_Sea CASCADE;
-DROP TABLE geo_Lake CASCADE;
-DROP TABLE geo_Source CASCADE;
-DROP TABLE geo_Estuary CASCADE;
+DROP TABLE if exists geo_Mountain CASCADE;
+DROP TABLE if exists geo_Desert CASCADE;
+DROP TABLE if exists geo_Island CASCADE;
+DROP TABLE if exists geo_River CASCADE;
+DROP TABLE if exists geo_Sea CASCADE;
+DROP TABLE if exists geo_Lake CASCADE;
+DROP TABLE if exists geo_Source CASCADE;
+DROP TABLE if exists geo_Estuary CASCADE;
 
-DROP TABLE mergesWith CASCADE;
-DROP TABLE located CASCADE;
-DROP TABLE locatedOn CASCADE;
-DROP TABLE islandIn CASCADE;
-DROP TABLE mountainOnIsland CASCADE;
-DROP TABLE riverOnIsland CASCADE;
-DROP TABLE lakeOnIsland CASCADE;
+DROP TABLE if exists mergesWith CASCADE;
+DROP TABLE if exists located CASCADE;
+DROP TABLE if exists locatedOn CASCADE;
+DROP TABLE if exists islandIn CASCADE;
+DROP TABLE if exists mountainOnIsland CASCADE;
+DROP TABLE if exists riverOnIsland CASCADE;
+DROP TABLE if exists lakeOnIsland CASCADE;
 
-DROP TABLE airport CASCADE;
+DROP TABLE if exists airport CASCADE;
 
 DROP TYPE if exists GeoCoord;
