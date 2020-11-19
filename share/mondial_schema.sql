@@ -1,6 +1,13 @@
+drop database if exists mondial;
 
+CREATE DATABASE mondial
+	ENCODING = 'UTF8'
+	LC_COLLATE = 'en_US.utf8'
+	LC_CTYPE = 'en_US.utf8'
+	TABLESPACE = pg_default
+	OWNER = postgres;
 
-
+\c mondial
 
 CREATE TABLE Country
 (Name VARCHAR(50) NOT NULL UNIQUE,
@@ -369,278 +376,386 @@ CREATE TABLE Airport
 ALTER TABLE organization 
 ADD CONSTRAINT fk_capital 
 FOREIGN KEY (city, country, province) 
-REFERENCES city (name, country, province);
+REFERENCES city (name, country, province)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE country 
 ADD CONSTRAINT fk_capital 
 FOREIGN KEY (capital, code, province) 
-REFERENCES city (name, country, province);
+REFERENCES city (name, country, province)
+DEFERRABLE INITIALLY DEFERRED;
+
+ALTER TABLE airport 
+ADD CONSTRAINT fk_airportcity
+FOREIGN KEY (city, country, province) 
+REFERENCES city (name, country, province)
+DEFERRABLE INITIALLY DEFERRED;
+
+ALTER TABLE airport 
+ADD CONSTRAINT fk_airportisland
+FOREIGN KEY (island) 
+REFERENCES island (name )
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE citypops 
 ADD CONSTRAINT fk_citypops 
 FOREIGN KEY (city, country, province) 
-REFERENCES city (name, country, province);
+REFERENCES city (name, country, province)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE province 
 ADD CONSTRAINT fk_citycapital 
 FOREIGN KEY (capital, country, capprov) 
-REFERENCES city (name, country, province);
+REFERENCES city (name, country, province)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE located 
 ADD CONSTRAINT fk_locatedcity 
 FOREIGN KEY (city, country, province) 
-REFERENCES city (name, country, province);
+REFERENCES city (name, country, province)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE located 
 ADD CONSTRAINT fk_locsea
 FOREIGN KEY (sea) 
-REFERENCES sea (name);
+REFERENCES sea (name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE located 
 ADD CONSTRAINT fk_locriver
 FOREIGN KEY (river) 
-REFERENCES river (name);
+REFERENCES river (name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE located 
 ADD CONSTRAINT fk_loclake
 FOREIGN KEY (lake) 
-REFERENCES lake (name);
+REFERENCES lake (name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE locatedOn 
 ADD CONSTRAINT fk_locatedcityOn 
 FOREIGN KEY (city, country, province) 
-REFERENCES city (name, country, province);
+REFERENCES city (name, country, province)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE locatedOn
 ADD CONSTRAINT fk_onisland
 FOREIGN KEY (island) 
-REFERENCES island (name);
+REFERENCES island (name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE isMember 
 ADD CONSTRAINT fk_ismember 
 FOREIGN KEY (organization) 
-REFERENCES organization (abbreviation);
+REFERENCES organization (abbreviation)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE isMember 
 ADD CONSTRAINT fk_country 
 FOREIGN KEY (country) 
-REFERENCES country (code);
+REFERENCES country (code)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE province 
 ADD CONSTRAINT fk_provcountry 
 FOREIGN KEY (country) 
-REFERENCES country (code);
+REFERENCES country (code)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE borders 
 ADD CONSTRAINT fk_border1 
 FOREIGN KEY (country1) 
-REFERENCES country (code);
+REFERENCES country (code)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE borders 
 ADD CONSTRAINT fk_border2 
 FOREIGN KEY (country2) 
-REFERENCES country (code);
+REFERENCES country (code)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE countrypops 
 ADD CONSTRAINT fk_popscountry 
 FOREIGN KEY (country) 
-REFERENCES country (code);
+REFERENCES country (code)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE economy 
 ADD CONSTRAINT fk_ecoscountry 
 FOREIGN KEY (country) 
-REFERENCES country (code);
+REFERENCES country (code)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE politics 
 ADD CONSTRAINT fk_polscountry1 
 FOREIGN KEY (country) 
-REFERENCES country (code);
+REFERENCES country (code)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE politics 
 ADD CONSTRAINT fk_polscountry2 
 FOREIGN KEY (dependent) 
-REFERENCES country (code);
+REFERENCES country (code)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE politics 
 ADD CONSTRAINT fk_polscountry3 
 FOREIGN KEY (wasdependent) 
-REFERENCES country (code);
+REFERENCES country (code)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE population 
 ADD CONSTRAINT fk_popcountry 
 FOREIGN KEY (country) 
-REFERENCES country (code);
+REFERENCES country (code)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE language 
 ADD CONSTRAINT fk_langcountry 
 FOREIGN KEY (country) 
-REFERENCES country (code);
+REFERENCES country (code)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE religion 
 ADD CONSTRAINT fk_popcountry 
 FOREIGN KEY (country) 
-REFERENCES country (code);
+REFERENCES country (code)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE ethnicgroup 
 ADD CONSTRAINT fk_popcountry 
 FOREIGN KEY (country) 
-REFERENCES country (code);
+REFERENCES country (code)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE encompasses 
 ADD CONSTRAINT fk_enccountry 
 FOREIGN KEY (country) 
-REFERENCES country (code);
+REFERENCES country (code)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE encompasses 
 ADD CONSTRAINT fk_enccontinent 
 FOREIGN KEY (continent) 
-REFERENCES continent (name);
+REFERENCES continent (name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE geo_desert 
 ADD CONSTRAINT fk_desert 
 FOREIGN KEY (desert) 
-REFERENCES desert (name);
+REFERENCES desert (name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE geo_desert 
 ADD CONSTRAINT fk_desertprovince 
 FOREIGN KEY (country, province) 
-REFERENCES province (country, name);
+REFERENCES province (country, name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE geo_mountain
 ADD CONSTRAINT fk_mountainprovince 
 FOREIGN KEY (country, province) 
-REFERENCES province (country, name);
+REFERENCES province (country, name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE geo_mountain
 ADD CONSTRAINT fk_geomountain 
 FOREIGN KEY (mountain) 
-REFERENCES mountain (name);
+REFERENCES mountain (name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE geo_island
 ADD CONSTRAINT fk_islandprovince 
 FOREIGN KEY (country, province) 
-REFERENCES province (country, name);
+REFERENCES province (country, name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE geo_island
 ADD CONSTRAINT fk_geoisland
 FOREIGN KEY (island) 
-REFERENCES island (name);
+REFERENCES island (name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE geo_sea
 ADD CONSTRAINT fk_seaprovince 
 FOREIGN KEY (country, province) 
-REFERENCES province (country, name);
+REFERENCES province (country, name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE geo_sea
 ADD CONSTRAINT fk_geosea
 FOREIGN KEY (sea) 
-REFERENCES sea (name);
+REFERENCES sea (name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE geo_estuary
 ADD CONSTRAINT fk_gestprovince 
 FOREIGN KEY (country, province) 
-REFERENCES province (country, name);
+REFERENCES province (country, name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE geo_estuary
 ADD CONSTRAINT fk_gestriver 
 FOREIGN KEY (river) 
-REFERENCES river (name);
+REFERENCES river (name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE geo_source
 ADD CONSTRAINT fk_gsrcprovince 
 FOREIGN KEY (country, province) 
-REFERENCES province (country, name);
+REFERENCES province (country, name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE geo_source
 ADD CONSTRAINT fk_gsrcriver 
 FOREIGN KEY (river) 
-REFERENCES river (name);
+REFERENCES river (name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE geo_river
 ADD CONSTRAINT fk_griverprovince 
 FOREIGN KEY (country, province) 
-REFERENCES province (country, name);
+REFERENCES province (country, name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE geo_river
 ADD CONSTRAINT fk_georiver 
 FOREIGN KEY (river) 
-REFERENCES river (name);
+REFERENCES river (name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE geo_lake
 ADD CONSTRAINT fk_lakeprovince 
 FOREIGN KEY (country, province) 
-REFERENCES province (country, name);
+REFERENCES province (country, name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE geo_lake
 ADD CONSTRAINT fk_geolake 
 FOREIGN KEY (lake) 
-REFERENCES lake (name);
+REFERENCES lake (name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE city
 ADD CONSTRAINT fk_cityprovince 
 FOREIGN KEY (country, province) 
-REFERENCES province (country, name);
+REFERENCES province (country, name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE provpops
 ADD CONSTRAINT fk_ppopsprovince 
 FOREIGN KEY (country, province) 
-REFERENCES province (country, name);
+REFERENCES province (country, name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE MountainOnIsland
 ADD CONSTRAINT fk_mtimountain 
 FOREIGN KEY (mountain) 
-REFERENCES mountain (name);
+REFERENCES mountain (name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE islandin
 ADD CONSTRAINT fk_islandin
 FOREIGN KEY (island) 
-REFERENCES island (name);
+REFERENCES island (name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE islandin
 ADD CONSTRAINT fk_insea
 FOREIGN KEY (sea) 
-REFERENCES sea (name);
+REFERENCES sea (name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE mergeswith
 ADD CONSTRAINT fk_sea1
 FOREIGN KEY (sea1) 
-REFERENCES sea (name);
+REFERENCES sea (name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE mergeswith
 ADD CONSTRAINT fk_sea2
 FOREIGN KEY (sea2) 
-REFERENCES sea (name);
+REFERENCES sea (name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE river
 ADD CONSTRAINT fk_riversea
 FOREIGN KEY (sea) 
-REFERENCES sea (name);
+REFERENCES sea (name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE river
 ADD CONSTRAINT fk_riverriver
 FOREIGN KEY (river) 
-REFERENCES river (name);
+REFERENCES river (name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE river
 ADD CONSTRAINT fk_riverlake
 FOREIGN KEY (lake) 
-REFERENCES lake (name);
+REFERENCES lake (name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE riverthrough
 ADD CONSTRAINT fk_thriver
 FOREIGN KEY (river) 
-REFERENCES river (name);
+REFERENCES river (name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE riverthrough
 ADD CONSTRAINT fk_thlake
 FOREIGN KEY (lake) 
-REFERENCES lake (name);
+REFERENCES lake (name)
+DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE lake
 ADD CONSTRAINT fk_lakeriver
 FOREIGN KEY (river) 
-REFERENCES river (name);
+REFERENCES river (name)
+DEFERRABLE INITIALLY DEFERRED;
 
+ALTER TABLE lakeonisland
+ADD CONSTRAINT fk_lakeoisland
+FOREIGN KEY (island) 
+REFERENCES island (name)
+DEFERRABLE INITIALLY DEFERRED;
+
+ALTER TABLE lakeonisland
+ADD CONSTRAINT fk_islandLake
+FOREIGN KEY (lake) 
+REFERENCES lake (name)
+DEFERRABLE INITIALLY DEFERRED;
+
+ALTER TABLE riveronisland
+ADD CONSTRAINT fk_riveroisland
+FOREIGN KEY (island) 
+REFERENCES island (name)
+DEFERRABLE INITIALLY DEFERRED;
+
+ALTER TABLE riveronisland
+ADD CONSTRAINT fk_islandRiver
+FOREIGN KEY (river) 
+REFERENCES river (name)
+DEFERRABLE INITIALLY DEFERRED;
+
+ALTER TABLE Provinceothername
+ADD CONSTRAINT fk_provinceother
+FOREIGN KEY (province, country) 
+REFERENCES province (name, country)
+DEFERRABLE INITIALLY DEFERRED;
+
+ALTER TABLE Provincelocalname
+ADD CONSTRAINT fk_provincelocal
+FOREIGN KEY (province, country) 
+REFERENCES province (name, country)
+DEFERRABLE INITIALLY DEFERRED;
+
+ALTER TABLE Provinceothername DISABLE TRIGGER ALL;
+ALTER TABLE Provincelocalname DISABLE TRIGGER ALL;
+ALTER TABLE riveronisland DISABLE TRIGGER ALL;
+ALTER TABLE lakeonisland DISABLE TRIGGER ALL;
+ALTER TABLE airport DISABLE TRIGGER ALL;
 ALTER TABLE lake DISABLE TRIGGER ALL;
 ALTER TABLE riverthrough DISABLE TRIGGER ALL;
 ALTER TABLE river DISABLE TRIGGER ALL;
