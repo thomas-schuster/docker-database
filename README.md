@@ -1,9 +1,15 @@
-# ngmondial-docker-db
-This is the repository for the ngmondial-docker-db image, which sets up a production-grade postgres-based database for use with the ngmondial-backend.
-The image will create two databases, two users and populate the databases with  data.
+ # ![logo](mondialdb64.png) DockerDatabase
 
-## Building
-Run `./gradlew docker` (*nix) or `gradlew.bat docker` (Windows)
+Welcome to the DockerDatabase! The project is dedicated to deliver free database models defined in SQL and stored in PostgreSQL database systems. It is called DockerDatabase because a Docker build file is included in order to deliver database models and data as part of docker images.
+
+A Docker image is also used in classroom environment at Hochschule Pforzheim. The main database utilized in this context is the [Mondial](http://www.dbis.informatik.uni-goettingen.de/Mondial/) database. Students may use this project to setup their own environment.
+
+## Database Models
+This project delivers different database models. All of them are implemented as PostgreSQL schema including corresponding data. Besides that all models also provide SQL instructions to delete (drop) the schema. Currently the project includes these schemas:
+
+- Mondial
+- Warehouse
+
 
 ## Running
 When using the ngmondial-docker-db image you will only have to specify a few environment variables when running
