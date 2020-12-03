@@ -1,3 +1,5 @@
+ \c MONDIAL
+ 
  INSERT INTO country VALUES ('Albania','AL','Tirana','Albania',28750,2821977);
  INSERT INTO country VALUES ('Greece','GR','Athina','Attikis',131940,10816286);
  INSERT INTO country VALUES ('Cyprus','CY','Lefkosia','Cyprus',9251,1133803);
