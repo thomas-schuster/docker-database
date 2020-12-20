@@ -17,14 +17,16 @@ In order to use these schemas within a docker container, you'll have to build a 
 ### Environment Variables
 The Dockerfile comes with several environment variables which you may modify. Since our image relies on the official docker image of [PostgreSQL](https://hub.docker.com/_/postgres/), the mandatory admin password for postgres is included in these default presets as well. 
 
-The following environment variables are defined as preset:
+The following environment variables are pre-defined:
 
-- `POSTGRES_USER`: postgres superuser (admin)
-- `POSTGRES_PASSWORD`: the password for the user above
-- `NXTGENMONDIAL_DB_USERNAME`: the username for accessing the `nxtgenmondialdb` database
-- `NXTGENMONDIAL_DB_PASSWORD`: the password for the user above
-- `NXTGENMONDIAL_MONDIALDB_USERNAME`: the username for accessing the `mondialdb` database
-- `NXTGENMONDIAL_MONDIALDB_PASSWORD`: the password for the user above
+Variable | Description | Default Value | Source
+------------ | ------------- | ------------- | ------------- 
+`POSTGRES_USER` | postgres superuser (admin) | postgres | [PostgreSQL](https://hub.docker.com/_/postgres/)
+`POSTGRES_PASSWORD` | password for postgres superuser  | admin | [PostgreSQL](https://hub.docker.com/_/postgres/), preset by this image definition
+`MONDIALDB` | the postgres name of the mondial database  | `mondial` | defined by image definition
+`MONDIALUSER` | the username for accessing the `MONDIALDB` database | `mondial` | defined by image definition
+`USERPASSWORD` | the password for the `MONDIALUSER` | `mondial!` | defined by image definition
+
 
 ### Build and run DockerDatabase with Mondial
 In root directory of this project. Build the image by calling:
@@ -34,10 +36,10 @@ foo@bar:~$ docker build -t ngmondial .
 
 Run your image
 ```bash
-foo@bar:~$ docker run --name ngmondial -p 5432:5432 -d ngmondial
+foo@bar:~$ docker run --name ngmondial -e "POSTGRES_PASSWORD=admin" -p 5432:5432 -d ngmondial
 ```
 
-You can leave out the `-p 5432:5432` part if you do not want to have access to the database from the host.
+[Publishing ports](https://docs.docker.com/config/containers/container-networking/) as defined by `-p 5432:5432` is optional and only needed in case you want to have direct access to the database from your host.
 
-To store postgres data on the host machine in a directory (e.g. for backup), add `-v </path/to/host/directory>:/var/lib/postgresql/data/`
+In case you plan to store postgres data in a host directory (e.g. for backup of changes), you can add a volume option to your run command. Such as: `-v </path/to/host/directory>:/var/lib/postgresql/data/`.
 
