@@ -4,6 +4,7 @@ FROM postgres:${CODE_VERSION}
 ENV MONDIALDB mondial
 ENV MONDIALUSER mondial
 ENV USERPASSWORD mondial!
+ENV POSTGRES_PASSWORD admin
 
 WORKDIR /sql
 COPY sql/*.sql /sql/
