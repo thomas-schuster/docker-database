@@ -29437,7 +29437,7 @@ COMMIT;
  INSERT INTO provincelocalname VALUES ('KyÃ¯vska','UA','ÐšÐ¸Ñ—Ð²ÑÑŒÐºÐ°');
  INSERT INTO provincelocalname VALUES ('Kirovohradska','UA','ÐšÑ–Ñ€Ð¾Ð²Ð¾Ð³Ñ€Ð°Ð´ÑÑŒÐºÐ°');
  INSERT INTO provincelocalname VALUES ('Luhanska','UA','Ð›ÑƒÐ³Ð°Ð½ÑÑŒÐºÐ°');
- INSERT INTO provincelocalname VALUES ('Lvivska','UA','Ð›ÑŒÐ²Ñ–Ð²ÑÑŒÐºÐ°');
+ INSERT INTO provincelocalname VALUES ('Lvivska','UA','Ð�����ÑŒÐ²Ñ–Ð²ÑÑŒÐºÐ°');
  INSERT INTO provincelocalname VALUES ('MykolaÃ¯vska','UA','ÐœÐ¸ÐºÐ¾Ð»Ð°Ñ—Ð²ÑÑŒÐºÐ°');
  INSERT INTO provincelocalname VALUES ('Odeska','UA','ÐžÐ´ÐµÑÑŒÐºÐ°');
  INSERT INTO provincelocalname VALUES ('Poltavska','UA','ÐŸÐ¾Ð»Ñ‚Ð°Ð²ÑÑŒÐºÐ°');
