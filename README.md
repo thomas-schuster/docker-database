@@ -12,7 +12,7 @@ This project delivers different database models. All of them are implemented as 
 
 
 ## Get Ready
-In order to use these schemas within a docker container, you'll have to build a proper image first. Currently the Mondial schema is integrated by default. For other schemas you have to modify the Dockerfile.
+In order to use these schemas within a docker container, you'll have to build a proper image first. Currently the Mondial schema is integrated by default. For other schemas you have to modify the Dockerfile or interact with the Docker container directly.
 
 ### Environment Variables
 The Dockerfile comes with several environment variables which you may modify. Since our image relies on the official docker image of [PostgreSQL](https://hub.docker.com/_/postgres/), the mandatory admin password for postgres is included in these default presets as well. 
