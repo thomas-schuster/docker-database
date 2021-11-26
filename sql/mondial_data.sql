@@ -493,8 +493,6 @@
  INSERT INTO population VALUES ('FALK',0.01,NULL);
 
 
-
-
  INSERT INTO politics VALUES ('AL','1912-11-28','Ottoman Empire',NULL,'parliamentary democracy');
  INSERT INTO politics VALUES ('GR','1829-01-01','Ottoman Empire',NULL,'parliamentary republic');
  INSERT INTO politics VALUES ('CY','1960-08-16','GB',NULL,'republic');

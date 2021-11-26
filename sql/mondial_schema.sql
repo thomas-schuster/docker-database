@@ -499,12 +499,6 @@ FOREIGN KEY (dependent)
 REFERENCES country (code)
 DEFERRABLE INITIALLY DEFERRED;
 
-ALTER TABLE politics 
-ADD CONSTRAINT fk_polscountry3 
-FOREIGN KEY (wasdependent) 
-REFERENCES country (code)
-DEFERRABLE INITIALLY DEFERRED;
-
 ALTER TABLE population 
 ADD CONSTRAINT fk_popcountry 
 FOREIGN KEY (country) 
