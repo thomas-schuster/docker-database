@@ -8854,7 +8854,7 @@
  INSERT INTO city VALUES ('Mersin','TR','Mersin',876958,36.8,34.63,10);
  INSERT INTO city VALUES ('Tarsus','TR','Mersin',245671,36.92,34.9,NULL);
  INSERT INTO city VALUES ('Isparta','TR','Isparta',198385,37.76,30.56,1049);
- INSERT INTO city VALUES ('İstanbul','TR','İstanbul',13710512,41.01,28.96,40);
+ INSERT INTO city VALUES ('İstanbul','TR','İstanbul',15462452,41.01,28.96,40);
  INSERT INTO city VALUES ('İzmir','TR','İzmir',3401994,38.42,27.13,25);
  INSERT INTO city VALUES ('Karaman','TR','Karaman',141630,37.18,33.22,NULL);
  INSERT INTO city VALUES ('Kahramanmaraş','TR','Kahramanmaraş',443575,37.58,36.93,67);
