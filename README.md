@@ -1,4 +1,6 @@
- # ![logo](mondialdb64.png) DockerDatabase
+[![Publish Docker Image](https://github.com/thomas-schuster/docker-database/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/thomas-schuster/docker-database/actions/workflows/docker-publish.yml)
+
+# ![logo](mondialdb64.png) DockerDatabase
 
 Welcome to the DockerDatabase! The project is dedicated to deliver free database models defined in SQL and stored in PostgreSQL database systems. It is called DockerDatabase because a Docker build file is included in order to deliver database models and data as part of docker images.
 
