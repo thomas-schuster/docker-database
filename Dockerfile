@@ -15,6 +15,7 @@ ADD sql/*.sql /sql/
 ADD scripts/readenvironment.sh /sql
 ADD scripts/init.sh /docker-entrypoint-initdb.d/
 # probably not necessary
+RUN ["dos2unix", "/docker-entrypoint-initdb.d/init.sh"]
 RUN ["dos2unix", "/sql/readenvironment.sh"]
 RUN ["/bin/bash", "-c", "chmod +x /sql/readenvironment.sh"]
 RUN ["/bin/bash", "-c", "/sql/readenvironment.sh"]
