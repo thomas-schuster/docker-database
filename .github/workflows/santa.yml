@@ -1,0 +1,12 @@
+name: "Dear Santa"
+
+on:
+  issue_comment:
+  issues:
+    types: [opened, edited]
+
+jobs:
+  dear-santa:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: imjohnbo/dear-santa-action@v1
