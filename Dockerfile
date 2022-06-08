@@ -1,8 +1,8 @@
 ARG CODE_VERSION=latest
 ARG DEBIAN_FRONTEND=noninteractive
 FROM postgres:${CODE_VERSION}
-RUN apt-get update && apt-get install -y postgresql-plperl-13 dos2unix
-RUN apt-get install -y postgresql-plpython3-13
+RUN apt-get update && apt-get install -y postgresql-plperl-14 dos2unix
+RUN apt-get install -y postgresql-plpython3-14
 ENV MONDIALDB mondial
 ENV MONDIALUSER mondial
 ENV USERPASSWORD admin
