@@ -2,7 +2,7 @@ version: "3.7"
 services:
 
  db:
-   image: ngmondial
+   image: postgres:latest
    ports:
     - "5432:5432"
    environment:
@@ -13,7 +13,7 @@ services:
     ports:
      - "5050:80"
     environment:
-     PGADMIN_DEFAULT_EMAIL: user@example.com
+     PGADMIN_DEFAULT_EMAIL: bwmi@hs-pforzheim.de
      PGADMIN_DEFAULT_PASSWORD: secret
     volumes: 
       - ./servers.json:/pgadmin4/servers.json
