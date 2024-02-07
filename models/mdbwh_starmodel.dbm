@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
  Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="1.0.2" use-changelog="false" last-position="0,0" last-zoom="1" max-obj-count="6"
+<dbmodel pgmodeler-ver="1.0.2" use-changelog="false" last-position="0,0" last-zoom="1.05" max-obj-count="6"
 	 default-schema="public" default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
@@ -16,14 +16,14 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <schema name="public" layers="0" fill-color="#e1e1e1" sql-disabled="true">
 </schema>
 
-<schema name="mondial_wh" layers="0" rect-visible="true" fill-color="#e1e1e1">
+<schema name="mondial_wh" layers="0" rect-visible="true" fill-color="#ffffff">
 	<role name="postgres"/>
 </schema>
 
-<table name="Article" layers="0" collapse-mode="2" max-obj-count="19" z-value="0">
+<table name="Article" layers="0" collapse-mode="1" max-obj-count="19" z-value="0">
 	<schema name="mondial_wh"/>
 	<role name="postgres"/>
-	<position x="160" y="280"/>
+	<position x="280" y="160"/>
 	<column name="ArticleId" not-null="true">
 		<type name="varchar" length="8"/>
 	</column>
@@ -77,10 +77,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="Sales" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+<table name="Sales" layers="0" collapse-mode="1" max-obj-count="7" z-value="0">
 	<schema name="mondial_wh"/>
 	<role name="postgres"/>
-	<position x="640" y="280"/>
+	<position x="660" y="260"/>
 	<column name="ArticleId" not-null="true">
 		<type name="varchar" length="8"/>
 	</column>
@@ -104,10 +104,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="Time" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+<table name="Time" layers="0" collapse-mode="1" max-obj-count="2" z-value="0">
 	<schema name="mondial_wh"/>
 	<role name="postgres"/>
-	<position x="660" y="100"/>
+	<position x="680" y="60"/>
 	<column name="TimeId" not-null="true">
 		<type name="varchar" length="8"/>
 	</column>
@@ -119,10 +119,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="Customer" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+<table name="Customer" layers="0" collapse-mode="1" max-obj-count="3" z-value="0">
 	<schema name="mondial_wh"/>
 	<role name="postgres"/>
-	<position x="1140" y="300"/>
+	<position x="980" y="300"/>
 	<column name="CustomerId" not-null="true">
 		<type name="varchar" length="8"/>
 	</column>
@@ -137,10 +137,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="Location" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+<table name="Location" layers="0" collapse-mode="1" max-obj-count="4" z-value="0">
 	<schema name="mondial_wh"/>
 	<role name="postgres"/>
-	<position x="640" y="580"/>
+	<position x="680" y="560"/>
 	<column name="StoreId" not-null="true">
 		<type name="varchar" length="8"/>
 	</column>
@@ -201,9 +201,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 dst-table="mondial_wh.&quot;Customer&quot;" reference-fk="CustomerId_fk"
 	 src-required="false" dst-required="true"/>
 
-<relationship name="&quot;rel_Sales_Location&quot;" type="relfk" layers="0"
+<relationship name="rel_Sales_Location" type="relfk" layers="0"
 	 src-table="mondial_wh.&quot;Sales&quot;"
 	 dst-table="mondial_wh.&quot;Location&quot;" reference-fk="StoreId_fk"
-	 src-required="false" dst-required="true"/>
+	 src-required="false" dst-required="true">
+	<label ref-type="name-label">
+		<position x="10.8719" y="-21.153"/>
+	</label>
+</relationship>
 
 </dbmodel>
