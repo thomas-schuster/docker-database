@@ -14,5 +14,10 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" -d warehouse -f /sql/warehou
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" -f /sql/bl_schema.sql
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" -d bundesliga -f /sql/bl_data.sql
 
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" -f create_mondial_warehouse_schema.sql
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" -d mondial_wh -f /sql/create_mondial_warehouse_data.sql
+
+
+
 #psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" -f /sql/nxtgenmondialdb_schema.sql
 #psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" -d nxtgenmondialdb -f /sql/nxtgenmondialdb_data.sql
