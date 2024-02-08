@@ -1,3 +1,5 @@
+-- TODO: Set up schema similar to other schema files
+
 -- Database generated with pgModeler (PostgreSQL Database Modeler).
 -- pgModeler version: 1.0.2
 -- PostgreSQL version: 15.0
