@@ -1,25 +1,31 @@
--- TODO: Set up schema similar to other schema files
+-- db setup
+DO $$ 
+BEGIN 
+    IF NOT EXISTS(SELECT 1 FROM pg_database WHERE datname = 'mondial') THEN
+        CREATE DATABASE mondial
+			ENCODING = 'UTF8'
+			LC_COLLATE = 'en_US.utf8'
+			LC_CTYPE = 'en_US.utf8'
+			TABLESPACE = pg_default
+			OWNER = MONDIALUSER;
+    END IF; 
+END $$;
 
--- Database generated with pgModeler (PostgreSQL Database Modeler).
--- pgModeler version: 1.0.2
--- PostgreSQL version: 15.0
--- Project Site: pgmodeler.io
--- Model Author: ---
+DO $$
+BEGIN
+    IF NOT EXISTS(SELECT 1 FROM pg_user WHERE usename = 'MONDIALUSER') THEN
+        CREATE USER MONDIALUSER WITH PASSWORD 'admin';
+    END IF;
+END $$;
 
--- Database creation must be performed outside a multi lined SQL file. 
--- These commands were put in this file only as a convenience.
--- 
--- object: new_database | type: DATABASE --
--- DROP DATABASE IF EXISTS new_database;
-CREATE DATABASE new_database;
--- ddl-end --
+--GRANT ALL PRIVILEGES ON DATABASE mondial TO mondial;
+-- Connect to the Mondial Database
+\c mondial;
 
 
--- object: mondial_wh | type: SCHEMA --
--- DROP SCHEMA IF EXISTS mondial_wh CASCADE;
-CREATE SCHEMA mondial_wh;
--- ddl-end --
-ALTER SCHEMA mondial_wh OWNER TO postgres;
+-- Create the new schema if it doesn't exist
+CREATE SCHEMA IF NOT EXISTS mondial_wh;
+ALTER SCHEMA mondial_wh OWNER TO POSTGRES;
 -- ddl-end --
 
 SET search_path TO pg_catalog,public,mondial_wh;
@@ -33,13 +39,13 @@ CREATE TABLE mondial_wh."Article" (
 	"ArticleName" varchar,
 	"Weight" decimal,
 	"Description" varchar(256),
-	"Manufacturer" varchar(32),
+	"Manufacturer" varchar(64),
 	"Brand" varchar(32),
-	"ProductGroup" varchar(32),
+	"ProductGroup" varchar(64),
 	"Width" decimal(16),
 	"Length" decimal(16),
 	"Height" decimal(16),
-	"Volume" decimal(16) GENERATED ALWAYS AS (Width * Length * Height) STORED,
+	"Volume" decimal(16) GENERATED ALWAYS AS ("Width" * "Length" * "Height") STORED,
 	"SizeMeasure" text,
 	"UnitCost" decimal(16),
 	"UnitPrice" decimal(16),
@@ -129,7 +135,7 @@ CREATE TABLE mondial_wh."Customer" (
 	"Phone" varchar(32),
 	"AdressLine1" varchar(32),
 	"AdressLine2" varchar(32),
-	"ZIP" smallint,
+	"ZIP" int,
 	"City" text,
 	"FirstPurchaseDate" date,
 	"LastPurchaseDate" date,
@@ -156,7 +162,7 @@ CREATE TABLE mondial_wh."Location" (
 	"StoreFax" varchar(32),
 	"AdressLine1" text,
 	"AdressLine2" text,
-	"ZIP" smallint,
+	"ZIP" int,
 	"City" varchar(32),
 	"Country" varchar(32),
 	"CloseReason" text,
