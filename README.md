@@ -1,4 +1,4 @@
-[![Publish Docker Image](https://github.com/thomas-schuster/docker-database/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/thomas-schuster/docker-database/actions/workflows/docker-publish.yml)
+[![Publish Docker Image](https://github.com/hochschule-pforzheim/docker-database/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/hochschule-pforzheim/docker-database/actions/workflows/docker-publish.yml)
 
 # ![logo](mondialdb64.png) DockerDatabase
 
