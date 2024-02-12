@@ -1,8 +1,8 @@
 begin;
 /*!40000 ALTER TABLE Liga DISABLE KEYS */;
 INSERT INTO Liga VALUES (1,'DFL','1963-08-24',4,'Karl-Heinz Körbel',602);
-INSERT INTO Liga VALUES (2,'DFL Deutsche FuÃball Liga','1974-08-02',10,'Willi Landgraf',508);
-INSERT INTO Liga VALUES (3,'Deutscher FuÃball-Bund','2008-07-25',47,'Tim Danneberg',332);
+INSERT INTO Liga VALUES (2,'DFL Deutsche Fussball Liga','1974-08-02',10,'Willi Landgraf',508);
+INSERT INTO Liga VALUES (3,'Deutscher Fussball-Bund','2008-07-25',47,'Tim Danneberg',332);
 /*!40000 ALTER TABLE Liga ENABLE KEYS */;
 
 

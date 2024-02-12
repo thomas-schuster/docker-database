@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+ Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="1.0.2" use-changelog="false" last-position="0,416" last-zoom="1" max-obj-count="6"
+<dbmodel pgmodeler-ver="1.0.2" use-changelog="false" last-position="0,0" last-zoom="1.05" max-obj-count="6"
+	 default-schema="public" default-owner="postgres"
+	 layers="Default layer"
+	 active-layers="0"
+	 layer-name-colors="#000000"
+	 layer-rect-colors="#b4b4b4"
+	 show-layer-names="false" show-layer-rects="false">
+<database name="new_database" is-template="false" allow-conns="true">
+</database>
+
+<schema name="public" layers="0" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<schema name="mondial_wh" layers="0" rect-visible="true" fill-color="#ffffff">
+	<role name="postgres"/>
+</schema>
+
+<table name="Article" layers="0" collapse-mode="2" max-obj-count="20" z-value="0">
+	<schema name="mondial_wh"/>
+	<role name="postgres"/>
+	<position x="80" y="900"/>
+	<column name="ArticleId" not-null="true">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="GTIN">
+		<type name="text" length="0"/>
+	</column>
+	<column name="ArticleName">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="Weight">
+		<type name="decimal" length="0"/>
+	</column>
+	<column name="Description">
+		<type name="varchar" length="256"/>
+	</column>
+	<column name="Manufacturer">
+		<type name="varchar" length="32"/>
+	</column>
+	<column name="Brand">
+		<type name="varchar" length="32"/>
+	</column>
+	<column name="ProductGroup">
+		<type name="varchar" length="32"/>
+	</column>
+	<column name="Width">
+		<type name="decimal" length="16"/>
+	</column>
+	<column name="Length">
+		<type name="decimal" length="16"/>
+	</column>
+	<column name="Height">
+		<type name="decimal" length="16"/>
+	</column>
+	<column name="Volume" default-value="Width * Length * Height" generated="true">
+		<type name="decimal" length="16"/>
+	</column>
+	<column name="SizeMeasure">
+		<type name="text" length="2"/>
+	</column>
+	<column name="UnitCost">
+		<type name="decimal" length="16"/>
+	</column>
+	<column name="UnitPrice">
+		<type name="decimal" length="16"/>
+	</column>
+	<column name="AvailableSince">
+		<type name="date" length="0"/>
+	</column>
+	<column name="SaleStoppedSince">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="ArticleId_pk" type="pk-constr" table="mondial_wh.&quot;Article&quot;">
+		<columns names="ArticleId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="Sales" layers="0" collapse-mode="1" max-obj-count="7" z-value="0">
+	<schema name="mondial_wh"/>
+	<role name="postgres"/>
+	<position x="620" y="920"/>
+	<column name="ArticleId" not-null="true">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="TimeId" not-null="true">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="StoreId" not-null="true">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="CustomerId" not-null="true">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="SalesVolume">
+		<type name="decimal" length="24"/>
+	</column>
+	<column name="Amount">
+		<type name="smallint" length="0"/>
+	</column>
+	<constraint name="Sales_pk" type="pk-constr" table="mondial_wh.&quot;Sales&quot;">
+		<columns names="ArticleId,TimeId,StoreId,CustomerId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="Time" layers="0" collapse-mode="2" max-obj-count="34" z-value="0">
+	<schema name="mondial_wh"/>
+	<role name="postgres"/>
+	<position x="540" y="200"/>
+	<column name="TimeId" not-null="true">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="FullDateLabel" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<column name="DateDescription">
+		<type name="text" length="0"/>
+	</column>
+	<column name="CalendarYear" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="CalendarYearLabel">
+		<type name="text" length="0"/>
+	</column>
+	<column name="CalendarHalfYear">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="CalendarHalfYearLabel">
+		<type name="text" length="0"/>
+	</column>
+	<column name="CalendarQuarter" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="CalendarQuarterLabel">
+		<type name="text" length="0"/>
+	</column>
+	<column name="CalendarMonth" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="CalendarMonthLabel">
+		<type name="text" length="0"/>
+	</column>
+	<column name="CalendarWeek" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="CalendarWeekLabel">
+		<type name="text" length="0"/>
+	</column>
+	<column name="CalendarDay" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="CalendarDayLabel">
+		<type name="text" length="0"/>
+	</column>
+	<column name="CalendarDayOfWeek" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="CalendarDayOfWeekLabel">
+		<type name="text" length="0"/>
+	</column>
+	<column name="FiscalYear">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="FiscalYearLabel">
+		<type name="text" length="0"/>
+	</column>
+	<column name="FiscalHalfYear">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="FiscalHalfYearLabel">
+		<type name="text" length="0"/>
+	</column>
+	<column name="FiscalQuarter">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="FiscalQuarterLabel">
+		<type name="text" length="0"/>
+	</column>
+	<column name="FiscalMonth">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="FiscalMonthLabel">
+		<type name="text" length="0"/>
+	</column>
+	<column name="IsWorkDay" not-null="true">
+		<type name="bit" length="0"/>
+	</column>
+	<column name="IsHoliday" not-null="true">
+		<type name="bit" length="0"/>
+	</column>
+	<column name="HolidayName">
+		<type name="text" length="0"/>
+	</column>
+	<column name="EuropeSeason">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="TimeId_pk" type="pk-constr" table="mondial_wh.&quot;Time&quot;">
+		<columns names="TimeId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="Customer" layers="0" collapse-mode="2" max-obj-count="33" z-value="0">
+	<schema name="mondial_wh"/>
+	<role name="postgres"/>
+	<position x="1060" y="920"/>
+	<column name="CustomerId" not-null="true">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="Group">
+		<type name="varchar" length="16"/>
+	</column>
+	<column name="Title">
+		<type name="varchar" length="6"/>
+	</column>
+	<column name="FirstName">
+		<type name="text" length="0"/>
+	</column>
+	<column name="MiddleName">
+		<type name="text" length="32"/>
+	</column>
+	<column name="LastName">
+		<type name="text" length="0"/>
+	</column>
+	<column name="BirthDate">
+		<type name="date" length="0"/>
+	</column>
+	<column name="Age">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="Gender">
+		<type name="varchar" length="1"/>
+	</column>
+	<column name="EductationLevel">
+		<type name="text" length="0"/>
+	</column>
+	<column name="MartialStatus">
+		<type name="bit" length="0"/>
+	</column>
+	<column name="Children">
+		<type name="bit" length="0"/>
+	</column>
+	<column name="NumberOfChildren">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="NumberOfChildrenAtHome">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="YearlyIncome">
+		<type name="decimal" length="16"/>
+	</column>
+	<column name="Occupation">
+		<type name="text" length="0"/>
+	</column>
+	<column name="HouseOwnerFlag">
+		<type name="bit" length="0"/>
+	</column>
+	<column name="CarOwnerFlag">
+		<type name="bit" length="0"/>
+	</column>
+	<column name="EmailAdress">
+		<type name="varchar" length="32"/>
+	</column>
+	<column name="Phone">
+		<type name="varchar" length="32"/>
+	</column>
+	<column name="AdressLine1">
+		<type name="varchar" length="32"/>
+	</column>
+	<column name="AdressLine2">
+		<type name="varchar" length="32"/>
+	</column>
+	<column name="ZIP">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="City">
+		<type name="text" length="0"/>
+	</column>
+	<column name="FirstPurchaseDate">
+		<type name="date" length="0"/>
+	</column>
+	<column name="LastPurchaseDate">
+		<type name="date" length="0"/>
+	</column>
+	<column name="TotalSpent">
+		<type name="decimal" length="16"/>
+	</column>
+	<column name="CustomerType">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="CustomerId_pk" type="pk-constr" table="mondial_wh.&quot;Customer&quot;">
+		<columns names="CustomerId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="Location" layers="0" collapse-mode="2" max-obj-count="25" z-value="0">
+	<schema name="mondial_wh"/>
+	<role name="postgres"/>
+	<position x="580" y="1340"/>
+	<column name="StoreId" not-null="true">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="StoreManagerId">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="StoreManagerName">
+		<type name="text" length="0"/>
+	</column>
+	<column name="StoreType">
+		<type name="text" length="0"/>
+	</column>
+	<column name="StoreName">
+		<type name="varchar" length="32"/>
+	</column>
+	<column name="Status">
+		<type name="text" length="0"/>
+	</column>
+	<column name="OpenDate">
+		<type name="date" length="0"/>
+	</column>
+	<column name="CloseDate">
+		<type name="date" length="0"/>
+	</column>
+	<column name="StorePhone">
+		<type name="varchar" length="32"/>
+	</column>
+	<column name="StoreFax">
+		<type name="varchar" length="32"/>
+	</column>
+	<column name="AdressLine1">
+		<type name="text" length="0"/>
+	</column>
+	<column name="AdressLine2">
+		<type name="text" length="0"/>
+	</column>
+	<column name="ZIP">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="City">
+		<type name="varchar" length="32"/>
+	</column>
+	<column name="Country">
+		<type name="varchar" length="32"/>
+	</column>
+	<column name="CloseReason">
+		<type name="text" length="0"/>
+	</column>
+	<column name="EmployeeCount">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="SellingSizeArea">
+		<type name="float" length="0"/>
+	</column>
+	<column name="LastRemodelDate">
+		<type name="date" length="0"/>
+	</column>
+	<column name="MaxDailyCustomerCountRecorded">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="AvgDailyCustomerCountRecorded">
+		<type name="smallint" length="0"/>
+	</column>
+	<constraint name="StoreId_pk" type="pk-constr" table="mondial_wh.&quot;Location&quot;">
+		<columns names="StoreId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<constraint name="ArticleId_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="mondial_wh.&quot;Article&quot;" table="mondial_wh.&quot;Sales&quot;">
+	<columns names="ArticleId" ref-type="src-columns"/>
+	<columns names="ArticleId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="TimeId_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="mondial_wh.&quot;Time&quot;" table="mondial_wh.&quot;Sales&quot;">
+	<columns names="TimeId" ref-type="src-columns"/>
+	<columns names="TimeId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="CustomerId_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="mondial_wh.&quot;Customer&quot;" table="mondial_wh.&quot;Sales&quot;">
+	<columns names="CustomerId" ref-type="src-columns"/>
+	<columns names="CustomerId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="StoreId_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="mondial_wh.&quot;Location&quot;" table="mondial_wh.&quot;Sales&quot;">
+	<columns names="StoreId" ref-type="src-columns"/>
+	<columns names="StoreId" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="&quot;rel_Sales_Article&quot;" type="relfk" layers="0"
+	 src-table="mondial_wh.&quot;Sales&quot;"
+	 dst-table="mondial_wh.&quot;Article&quot;" reference-fk="ArticleId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_Sales_Time" type="relfk" layers="0"
+	 src-table="mondial_wh.&quot;Sales&quot;"
+	 dst-table="mondial_wh.&quot;Time&quot;" reference-fk="TimeId_fk"
+	 src-required="false" dst-required="true">
+	<label ref-type="src-label">
+		<position x="14.0805" y="-3.4"/>
+	</label>
+</relationship>
+
+<relationship name="&quot;rel_Sales_Customer&quot;" type="relfk" layers="0"
+	 src-table="mondial_wh.&quot;Sales&quot;"
+	 dst-table="mondial_wh.&quot;Customer&quot;" reference-fk="CustomerId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_Sales_Location" type="relfk" layers="0"
+	 src-table="mondial_wh.&quot;Sales&quot;"
+	 dst-table="mondial_wh.&quot;Location&quot;" reference-fk="StoreId_fk"
+	 src-required="false" dst-required="true">
+	<label ref-type="name-label">
+		<position x="10.8719" y="-21.153"/>
+	</label>
+</relationship>
+
+</dbmodel>
