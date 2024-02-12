@@ -20,3 +20,4 @@ RUN ["dos2unix", "/sql/readenvironment.sh"]
 RUN ["/bin/bash", "-c", "chmod +x /sql/readenvironment.sh"]
 RUN ["/bin/bash", "-c", "/sql/readenvironment.sh"]
 EXPOSE 5432
+EXPOSE 5050
