@@ -364,7 +364,7 @@ VALUES
 ('T-0362', '2018-12-28', NULL, 2018, '2018', 4, 'Q4', 11, 'December', 52, 'Week 52', 58, 'Friday', 6, 'Friday', 2019, '2019/2020', 2, 'Q1', 2, 'November', 1::BIT, 0::BIT, NULL, 'Winter'),
 ('T-0363', '2018-12-29', NULL, 2018, '2018', 4, 'Q4', 11, 'December', 52, 'Week 52', 59, 'Saturday', 7, 'Saturday', 2019, '2019/2020', 2, 'Q1', 2, 'November', 0::BIT, 0::BIT, NULL, 'Winter'),
 ('T-0364', '2018-12-30', NULL, 2018, '2018', 4, 'Q4', 11, 'December', 53, 'Week 53', 60, 'Sunday', 1, 'Sunday', 2019, '2019/2020', 2, 'Q1', 2, 'November', 0::BIT, 0::BIT, NULL, 'Winter'),
-('T-0365', '2018-12-31', NULL, 2018, '2018', 4, 'Q4', 11, 'December', 53, 'Week 53', 61, 'Monday', 2, 'Monday', 2019, '2019/2020', 2, 'Q1', 2, 'November', 1::BIT, 0::BIT, NULL, 'Winter'),
+('T-0365', '2018-12-31', NULL, 2018, '2018', 4, 'Q4', 11, 'December', 53, 'Week 53', 61, 'Monday', 2, 'Monday', 2019, '2019/2020', 2, 'Q1', 2, 'November', 1::BIT, 0::BIT, NULL, 'Winter');
 
 --jan 2019
 INSERT INTO mondial_wh."time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
