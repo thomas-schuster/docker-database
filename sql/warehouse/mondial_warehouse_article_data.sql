@@ -1,6 +1,6 @@
 
 -- Populate "Article" table
-INSERT INTO mondial_wh."Article" ("ArticleId", "GTIN", "ArticleName", "Weight", "Description", "Manufacturer", "Brand", "ProductGroup", "Width", "Length", "Height", "SizeMeasure", "UnitCost", "UnitPrice", "AvailableSince", "SaleStoppedSince")
+INSERT INTO mondial_wh."article" ("ArticleId", "GTIN", "ArticleName", "Weight", "Description", "Manufacturer", "Brand", "ProductGroup", "Width", "Length", "Height", "SizeMeasure", "UnitCost", "UnitPrice", "AvailableSince", "SaleStoppedSince")
 VALUES
 ('A-001', '0123456789011', 'Laptop', 1.5, 'Powerful laptop for work and entertainment', 'AGC Incorporated', 'Dell', 'Electronics', 14.0, 9.5, 0.8, 'inches', 800.00, 1200.00, '2023-11-20', NULL),
 ('A-002', '1234567890122', 'Monitor', 5.0, 'High-resolution monitor for immersive viewing experience', 'Amkor Technology Incorporated', 'Dell', 'Electronics', 24.0, 14.0, 2.0, 'inches', 300.00, 500.00, '2023-12-05', NULL),

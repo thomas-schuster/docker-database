@@ -1,6 +1,6 @@
 
 
-INSERT INTO mondial_wh."Sales" ("ArticleId", "CustomerId", "StoreId", "TimeId", "Amount", "SalesVolume")
+INSERT INTO mondial_wh."sales" ("ArticleId", "CustomerId", "StoreId", "TimeId", "Amount", "SalesVolume")
 VALUES 
 ('A-130','C-056','S-014','T-0179',2,50),
 ('A-122','C-037','S-014','T-0289',5,75),

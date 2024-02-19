@@ -1,4 +1,4 @@
-INSERT INTO mondial_wh."Time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "CalendarDayOfWeekLabel", "FiscalYear", "FiscalYearLabel", "FiscalQuarter", "FiscalQuarterLabel", "FiscalMonth", "FiscalMonthLabel", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
+INSERT INTO mondial_wh."time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "CalendarDayOfWeekLabel", "FiscalYear", "FiscalYearLabel", "FiscalQuarter", "FiscalQuarterLabel", "FiscalMonth", "FiscalMonthLabel", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
 VALUES 
 ('T-0001', '2018-01-01', NULL, 2018, '2018', 1, 'Q1', 1, 'January', 1, 'Week 1', 1, 'Monday', 2, 'Tuesday', 2017, '2017/2018', 2, 'Q2', 4, 'October', 0::BIT, 1::BIT, 'New Year Day', 'Winter'),
 ('T-0002', '2018-01-02', NULL, 2018, '2018', 1, 'Q1', 1, 'January', 1, 'Week 1', 2, 'Tuesday', 3, 'Wednesday', 2017, '2017/2018', 2, 'Q2', 4, 'October', 1::BIT, 0::BIT, NULL, 'Winter'),
@@ -367,7 +367,7 @@ VALUES
 ('T-0365', '2018-12-31', NULL, 2018, '2018', 4, 'Q4', 11, 'December', 53, 'Week 53', 61, 'Monday', 2, 'Monday', 2019, '2019/2020', 2, 'Q1', 2, 'November', 1::BIT, 0::BIT, NULL, 'Winter'),
 
 --jan 2019
-INSERT INTO mondial_wh."Time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
+INSERT INTO mondial_wh."time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
 VALUES 
 ('T-0366', '2019-01-01', NULL, 2019, '2019', 1, 'H1', 1, 'Q1', 1, 'January', 1, 'Week 1', 1, 'Tuesday', 2, 1::BIT, 0::BIT, NULL, 'Winter'),
 ('T-0367', '2019-01-02', NULL, 2019, '2019', 1, 'H1', 1, 'Q1', 1, 'January', 1, 'Week 1', 2, 'Wednesday', 3, 1::BIT, 0::BIT, NULL, 'Winter'),
@@ -402,7 +402,7 @@ VALUES
 ('T-0396', '2019-01-31', NULL, 2019, '2019', 1, 'H1', 1, 'Q1', 1, 'January', 5, 'Week 5', 31, 'Thursday', 4, 1::BIT, 0::BIT, NULL, 'Winter');
 
 --feb 2019
-INSERT INTO mondial_wh."Time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
+INSERT INTO mondial_wh."time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
 VALUES 
 ('T-0397', '2019-02-01', NULL, 2019, '2019', 1, 'H1', 1, 'Q1', 2, 'February', 5, 'Week 5', 32, 'Friday', 5, 1::BIT, 0::BIT, NULL, 'Winter'),
 ('T-0398', '2019-02-02', NULL, 2019, '2019', 1, 'H1', 1, 'Q1', 2, 'February', 5, 'Week 5', 33, 'Saturday', 6, 0::BIT, 0::BIT, NULL, 'Winter'),
@@ -434,7 +434,7 @@ VALUES
 ('T-0424', '2019-02-28', NULL, 2019, '2019', 1, 'H1', 1, 'Q1', 2, 'February', 9, 'Week 9', 59, 'Thursday', 4, 1::BIT, 0::BIT, NULL, 'Winter');
 
 --march 19
-INSERT INTO mondial_wh."Time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
+INSERT INTO mondial_wh."time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
 VALUES 
 ('T-0425', '2019-03-01', NULL, 2019, '2019', 1, 'H1', 1, 'Q1', 3, 'March', 9, 'Week 9', 60, 'Friday', 5, 1::BIT, 0::BIT, NULL, 'Spring'),
 ('T-0426', '2019-03-02', NULL, 2019, '2019', 1, 'H1', 1, 'Q1', 3, 'March', 9, 'Week 9', 61, 'Saturday', 6, 0::BIT, 0::BIT, NULL, 'Spring'),
@@ -469,7 +469,7 @@ VALUES
 ('T-0455', '2019-03-31', NULL, 2019, '2019', 1, 'H1', 1, 'Q1', 3, 'March', 14, 'Week 14', 90, 'Sunday',7, 0::BIT, 0::BIT, NULL, 'Spring');
 
 --april 19
-INSERT INTO mondial_wh."Time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
+INSERT INTO mondial_wh."time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
 VALUES 
 ('T-0456', '2019-04-01', NULL, 2019, '2019', 1, 'H1', 2, 'Q2', 4, 'April', 14, 'Week 14', 91, 'Monday', 1, 1::BIT, 0::BIT, NULL, 'Spring'),
 ('T-0457', '2019-04-02', NULL, 2019, '2019', 1, 'H1', 2, 'Q2', 4, 'April', 14, 'Week 14', 92, 'Tuesday', 2, 1::BIT, 0::BIT, NULL, 'Spring'),
@@ -503,7 +503,7 @@ VALUES
 ('T-0485', '2019-04-30', NULL, 2019, '2019', 1, 'H1', 2, 'Q2', 4, 'April', 18, 'Week 18', 120, 'Tuesday', 2, 1::BIT, 0::BIT, NULL, 'Spring');
 
 --may 19
-INSERT INTO mondial_wh."Time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
+INSERT INTO mondial_wh."time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
 VALUES 
 ('T-0486', '2019-05-01', NULL, 2019, '2019', 1, 'H1', 2, 'Q2', 5, 'May', 18, 'Week 18', 121, 'Wednesday', 3, 1::BIT, 0::BIT, NULL, 'Spring'),
 ('T-0487', '2019-05-02', NULL, 2019, '2019', 1, 'H1', 2, 'Q2', 5, 'May', 18, 'Week 18', 122, 'Thursday', 4, 1::BIT, 0::BIT, NULL, 'Spring'),
@@ -539,7 +539,7 @@ VALUES
 
 
 --june 19
-INSERT INTO mondial_wh."Time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
+INSERT INTO mondial_wh."time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
 VALUES 
 ('T-0517', '2019-06-01', NULL, 2019, '2019', 1, 'H1', 2, 'Q2', 6, 'June', 22, 'Week 22', 152, 'Saturday', 6, 0::BIT, 0::BIT, NULL, 'Spring'),
 ('T-0518', '2019-06-02', NULL, 2019, '2019', 1, 'H1', 2, 'Q2', 6, 'June', 23, 'Week 23', 153, 'Sunday', 7, 0::BIT, 0::BIT, NULL, 'Spring'),
@@ -573,7 +573,7 @@ VALUES
 ('T-0546', '2019-06-30', NULL, 2019, '2019', 1, 'H1', 2, 'Q2', 6, 'June', 27, 'Week 27', 181, 'Sunday', 7, 0::BIT, 0::BIT, NULL, 'Spring');
 
 --july 19
-INSERT INTO mondial_wh."Time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
+INSERT INTO mondial_wh."time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
 VALUES 
 ('T-0547', '2019-07-01', NULL, 2019, '2019', 2, 'H2', 3, 'Q3', 7, 'July', 27, 'Week 27', 182, 'Monday', 1, 1::BIT, 0::BIT, NULL, 'Summer'),
 ('T-0548', '2019-07-02', NULL, 2019, '2019', 2, 'H2', 3, 'Q3', 7, 'July', 27, 'Week 27', 183, 'Tuesday', 2, 1::BIT, 0::BIT, NULL, 'Summer'),
@@ -608,7 +608,7 @@ VALUES
 ('T-0577', '2019-07-31', NULL, 2019, '2019', 2, 'H2', 3, 'Q3', 7, 'July', 31, 'Week 31', 212, 'Wednesday', 3, 1::BIT, 0::BIT, NULL, 'Summer');
 
 --august 19
-INSERT INTO mondial_wh."Time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
+INSERT INTO mondial_wh."time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
 VALUES 
 ('T-0578', '2019-08-01', NULL, 2019, '2019', 2, 'H2', 3, 'Q3', 8, 'August', 31, 'Week 31', 213, 'Thursday', 4, 1::BIT, 0::BIT, NULL, 'Summer'),
 ('T-0579', '2019-08-02', NULL, 2019, '2019', 2, 'H2', 3, 'Q3', 8, 'August', 31, 'Week 31', 214, 'Friday', 5, 1::BIT, 0::BIT, NULL, 'Summer'),
@@ -643,7 +643,7 @@ VALUES
 ('T-0608', '2019-08-31', NULL, 2019, '2019', 2, 'H2', 3, 'Q3', 8, 'August', 35, 'Week 35', 243, 'Saturday', 6, 0::BIT, 0::BIT, NULL, 'Summer');
 
 --september19
-INSERT INTO mondial_wh."Time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
+INSERT INTO mondial_wh."time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
 VALUES 
 ('T-0609', '2019-09-01', NULL, 2019, '2019', 2, 'H2', 3, 'Q3', 9, 'September', 35, 'Week 35', 244, 'Sunday', 7, 0::BIT, 0::BIT, NULL, 'Summer'),
 ('T-0610', '2019-09-02', NULL, 2019, '2019', 2, 'H2', 3, 'Q3', 9, 'September', 36, 'Week 36', 245, 'Monday', 1, 1::BIT, 0::BIT, NULL, 'Summer'),
@@ -677,7 +677,7 @@ VALUES
 ('T-0638', '2019-09-30', NULL, 2019, '2019', 2, 'H2', 3, 'Q3', 9, 'September', 40, 'Week 40', 273, 'Monday', 1, 1::BIT, 0::BIT, NULL, 'Summer');
 
 --ocotber19
-INSERT INTO mondial_wh."Time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
+INSERT INTO mondial_wh."time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
 VALUES 
 ('T-0639', '2019-10-01', NULL, 2019, '2019', 2, 'H2', 4, 'Q4', 10, 'October', 40, 'Week 40', 274, 'Tuesday', 2, 1::BIT, 0::BIT, NULL, 'Autumn'),
 ('T-0640', '2019-10-02', NULL, 2019, '2019', 2, 'H2', 4, 'Q4', 10, 'October', 40, 'Week 40', 275, 'Wednesday', 3, 1::BIT, 0::BIT, NULL, 'Autumn'),
@@ -712,7 +712,7 @@ VALUES
 ('T-0669', '2019-10-31', NULL, 2019, '2019', 2, 'H2', 4, 'Q4', 10, 'October', 44, 'Week 44', 304, 'Thursday', 4, 1::BIT, 0::BIT, NULL, 'Autumn');
 
 --november 19
-INSERT INTO mondial_wh."Time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
+INSERT INTO mondial_wh."time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
 VALUES 
 ('T-0670', '2019-11-01', NULL, 2019, '2019', 2, 'H2', 4, 'Q4', 11, 'November', 44, 'Week 44', 305, 'Friday', 5, 1::BIT, 0::BIT, NULL, 'Autumn'),
 ('T-0671', '2019-11-02', NULL, 2019, '2019', 2, 'H2', 4, 'Q4', 11, 'November', 44, 'Week 44', 306, 'Saturday', 6, 0::BIT, 0::BIT, NULL, 'Autumn'),
@@ -746,7 +746,7 @@ VALUES
 ('T-0699', '2019-11-30', NULL, 2019, '2019', 2, 'H2', 4, 'Q4', 11, 'November', 48, 'Week 48', 334, 'Saturday', 6, 0::BIT, 0::BIT, NULL, 'Autumn');
 
 --december19
-INSERT INTO mondial_wh."Time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
+INSERT INTO mondial_wh."time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
 VALUES 
 ('T-0700', '2019-12-01', NULL, 2019, '2019', 2, 'H2', 4, 'Q4', 12, 'December', 48, 'Week 48', 335, 'Sunday', 7, 0::BIT, 0::BIT, NULL, 'Winter'),
 ('T-0701', '2019-12-02', NULL, 2019, '2019', 2, 'H2', 4, 'Q4', 12, 'December', 49, 'Week 49', 336, 'Monday', 1, 1::BIT, 0::BIT, NULL, 'Winter'),
@@ -781,7 +781,7 @@ VALUES
 ('T-0730', '2019-12-31', NULL, 2019, '2019', 2, 'H2', 4, 'Q4', 12, 'December', 53, 'Week 53', 365, 'Tuesday', 2, 1::BIT, 0::BIT, NULL, 'Winter');
 
 --jan20
-INSERT INTO mondial_wh."Time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
+INSERT INTO mondial_wh."time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
 VALUES 
 ('T-0731', '2020-01-01', NULL, 2020, '2020', 1, 'H1', 1, 'Q1', 1, 'January', 1, 'Week 1', 1, 'Wednesday', 3, 0::BIT, 1::BIT, 'New Year', 'Winter'),
 ('T-0732', '2020-01-02', NULL, 2020, '2020', 1, 'H1', 1, 'Q1', 1, 'January', 1, 'Week 1', 2, 'Thursday', 4, 1::BIT, 0::BIT, NULL, 'Winter'),
@@ -816,7 +816,7 @@ VALUES
 ('T-0761', '2020-01-31', NULL, 2020, '2020', 1, 'H1', 1, 'Q1', 1, 'January', 5, 'Week 5', 31, 'Friday', 5, 1::BIT, 0::BIT, NULL, 'Winter');
 
 --feb20
-INSERT INTO mondial_wh."Time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
+INSERT INTO mondial_wh."time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
 VALUES 
 ('T-0793', '2020-02-01', NULL, 2020, '2020', 1, 'H1', 1, 'Q1', 2, 'February', 5, 'Week 5', 32, 'Saturday', 6, 0::BIT, 0::BIT, NULL, 'Winter'),
 ('T-0794', '2020-02-02', NULL, 2020, '2020', 1, 'H1', 1, 'Q1', 2, 'February', 5, 'Week 5', 33, 'Sunday', 7, 0::BIT, 0::BIT, NULL, 'Winter'),
@@ -848,7 +848,7 @@ VALUES
 ('T-0820', '2020-02-28', NULL, 2020, '2020', 1, 'H1', 1, 'Q1', 2, 'February', 9, 'Week 9', 59, 'Friday', 5, 1::BIT, 0::BIT, NULL, 'Winter');
 
 --march20
-INSERT INTO mondial_wh."Time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
+INSERT INTO mondial_wh."time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
 VALUES 
 ('T-0821', '2020-03-01', NULL, 2020, '2020', 1, 'H1', 1, 'Q1', 3, 'March', 9, 'Week 9', 60, 'Sunday', 7, 0::BIT, 0::BIT, NULL, 'Spring'),
 ('T-0822', '2020-03-02', NULL, 2020, '2020', 1, 'H1', 1, 'Q1', 3, 'March', 9, 'Week 9', 61, 'Monday', 1, 1::BIT, 0::BIT, NULL, 'Spring'),
@@ -883,7 +883,7 @@ VALUES
 ('T-0851', '2020-03-31', NULL, 2020, '2020', 1, 'H1', 1, 'Q1', 3, 'March', 13, 'Week 13', 90, 'Tuesday', 2, 1::BIT, 0::BIT, NULL, 'Spring');
 
 --april20
-INSERT INTO mondial_wh."Time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
+INSERT INTO mondial_wh."time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
 VALUES 
 ('T-0852', '2020-04-01', NULL, 2020, '2020', 1, 'H1', 2, 'Q2', 4, 'April', 14, 'Week 14', 91, 'Wednesday', 3, 1::BIT, 0::BIT, NULL, 'Spring'),
 ('T-0853', '2020-04-02', NULL, 2020, '2020', 1, 'H1', 2, 'Q2', 4, 'April', 14, 'Week 14', 92, 'Thursday', 4, 1::BIT, 0::BIT, NULL, 'Spring'),
@@ -917,7 +917,7 @@ VALUES
 ('T-0881', '2020-04-30', NULL, 2020, '2020', 1, 'H1', 2, 'Q2', 4, 'April', 18, 'Week 18', 120, 'Thursday', 4, 1::BIT, 0::BIT, NULL, 'Spring');
 
 --May 20
-INSERT INTO mondial_wh."Time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
+INSERT INTO mondial_wh."time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
 VALUES 
 ('T-0882', '2020-05-01', NULL, 2020, '2020', 1, 'H1', 2, 'Q2', 5, 'May', 18, 'Week 18', 122, 'Friday', 5, 1::BIT, 0::BIT, NULL, 'Spring'),
 ('T-0883', '2020-05-02', NULL, 2020, '2020', 1, 'H1', 2, 'Q2', 5, 'May', 18, 'Week 18', 123, 'Saturday', 6, 0::BIT, 0::BIT, NULL, 'Spring'),
@@ -952,7 +952,7 @@ VALUES
 ('T-0912', '2020-05-31', NULL, 2020, '2020', 1, 'H1', 2, 'Q2', 5, 'May', 23, 'Week 23', 152, 'Sunday', 7, 0::BIT, 0::BIT, NULL, 'Spring');
 
 --June 20
-INSERT INTO mondial_wh."Time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
+INSERT INTO mondial_wh."time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
 VALUES 
 ('T-0913', '2020-06-01', NULL, 2020, '2020', 1, 'H1', 2, 'Q2', 6, 'June', 23, 'Week 23', 153, 'Monday', 1, 1::BIT, 0::BIT, NULL, 'Summer'),
 ('T-0914', '2020-06-02', NULL, 2020, '2020', 1, 'H1', 2, 'Q2', 6, 'June', 23, 'Week 23', 154, 'Tuesday', 2, 1::BIT, 0::BIT, NULL, 'Summer'),
@@ -987,7 +987,7 @@ VALUES
 
 --July 20
 -- July 2020
-INSERT INTO mondial_wh."Time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
+INSERT INTO mondial_wh."time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
 VALUES 
 ('T-0943', '2020-07-01', NULL, 2020, '2020', 2, 'H2', 3, 'Q3', 7, 'July', 27, 'Week 27', 183, 'Wednesday', 3, 1::BIT, 0::BIT, NULL, 'Summer'),
 ('T-0944', '2020-07-02', NULL, 2020, '2020', 2, 'H2', 3, 'Q3', 7, 'July', 27, 'Week 27', 184, 'Thursday', 4, 1::BIT, 0::BIT, NULL, 'Summer'),
@@ -1022,7 +1022,7 @@ VALUES
 ('T-0973', '2020-07-31', NULL, 2020, '2020', 2, 'H2', 3, 'Q3', 7, 'July', 31, 'Week 31', 213, 'Friday', 5, 1::BIT, 0::BIT, NULL, 'Summer');
 
 -- August 2020
-INSERT INTO mondial_wh."Time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
+INSERT INTO mondial_wh."time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
 VALUES 
 ('T-0974', '2020-08-01', NULL, 2020, '2020', 2, 'H2', 3, 'Q3', 8, 'August', 31, 'Week 31', 214, 'Saturday', 6, 0::BIT, 0::BIT, NULL, 'Summer'),
 ('T-0975', '2020-08-02', NULL, 2020, '2020', 2, 'H2', 3, 'Q3', 8, 'August', 32, 'Week 32', 215, 'Sunday', 7, 0::BIT, 0::BIT, NULL, 'Summer'),
@@ -1057,7 +1057,7 @@ VALUES
 ('T-1004', '2020-08-31', NULL, 2020, '2020', 2, 'H2', 3, 'Q3', 8, 'August', 36, 'Week 36', 244, 'Monday', 1, 1::BIT, 0::BIT, NULL, 'Summer');
 
 -- September 2020
-INSERT INTO mondial_wh."Time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
+INSERT INTO mondial_wh."time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
 VALUES 
 ('T-1005', '2020-09-01', NULL, 2020, '2020', 2, 'H2', 3, 'Q3', 9, 'September', 36, 'Week 36', 245, 'Tuesday', 2, 1::BIT, 0::BIT, NULL, 'Autumn'),
 ('T-1006', '2020-09-02', NULL, 2020, '2020', 2, 'H2', 3, 'Q3', 9, 'September', 36, 'Week 36', 246, 'Wednesday', 3, 1::BIT, 0::BIT, NULL, 'Autumn'),
@@ -1091,7 +1091,7 @@ VALUES
 ('T-1034', '2020-09-30', NULL, 2020, '2020', 2, 'H2', 3, 'Q3', 9, 'September', 40, 'Week 40', 274, 'Wednesday', 3, 1::BIT, 0::BIT, NULL, 'Autumn');
 
 -- October 2020
-INSERT INTO mondial_wh."Time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
+INSERT INTO mondial_wh."time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
 VALUES 
 ('T-1035', '2020-10-01', NULL, 2020, '2020', 2, 'H2', 4, 'Q4', 10, 'October', 40, 'Week 40', 275, 'Thursday', 4, 1::BIT, 0::BIT, NULL, 'Autumn'),
 ('T-1036', '2020-10-02', NULL, 2020, '2020', 2, 'H2', 4, 'Q4', 10, 'October', 40, 'Week 40', 276, 'Friday', 5, 1::BIT, 0::BIT, NULL, 'Autumn'),
@@ -1126,7 +1126,7 @@ VALUES
 ('T-1065', '2020-10-31', NULL, 2020, '2020', 2, 'H2', 4, 'Q4', 10, 'October', 44, 'Week 44', 305, 'Saturday', 6, 0::BIT, 0::BIT, NULL, 'Autumn');
 
 -- November 2020
-INSERT INTO mondial_wh."Time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
+INSERT INTO mondial_wh."time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
 VALUES 
 ('T-1066', '2020-11-01', NULL, 2020, '2020', 2, 'H2', 4, 'Q4', 11, 'November', 44, 'Week 44', 306, 'Sunday', 7, 0::BIT, 0::BIT, NULL, 'Autumn'),
 ('T-1067', '2020-11-02', NULL, 2020, '2020', 2, 'H2', 4, 'Q4', 11, 'November', 45, 'Week 45', 307, 'Monday', 1, 1::BIT, 0::BIT, NULL, 'Autumn'),
@@ -1160,7 +1160,7 @@ VALUES
 ('T-1095', '2020-11-30', NULL, 2020, '2020', 2, 'H2', 4, 'Q4', 11, 'November', 49, 'Week 49', 335, 'Monday', 1, 1::BIT, 0::BIT, NULL, 'Autumn');
 
 -- December 2020
-INSERT INTO mondial_wh."Time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
+INSERT INTO mondial_wh."time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
 VALUES 
 ('T-1096', '2020-12-01', NULL, 2020, '2020', 2, 'H2', 4, 'Q4', 12, 'December', 49, 'Week 49', 336, 'Tuesday', 2, 1::BIT, 0::BIT, NULL, 'Winter'),
 ('T-1097', '2020-12-02', NULL, 2020, '2020', 2, 'H2', 4, 'Q4', 12, 'December', 49, 'Week 49', 337, 'Wednesday', 3, 1::BIT, 0::BIT, NULL, 'Winter'),
@@ -1195,7 +1195,7 @@ VALUES
 ('T-1126', '2020-12-31', NULL, 2020, '2020', 2, 'H2', 4, 'Q4', 12, 'December', 53, 'Week 53', 366, 'Thursday', 4, 1::BIT, 1::BIT, 'New Year''s Eve', 'Winter');
 
 -- January 2021
-INSERT INTO mondial_wh."Time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
+INSERT INTO mondial_wh."time" ("TimeId", "FullDateLabel", "DateDescription", "CalendarYear", "CalendarYearLabel", "CalendarHalfYear", "CalendarHalfYearLabel", "CalendarQuarter", "CalendarQuarterLabel", "CalendarMonth", "CalendarMonthLabel", "CalendarWeek", "CalendarWeekLabel", "CalendarDay", "CalendarDayLabel", "CalendarDayOfWeek", "IsWorkDay", "IsHoliday", "HolidayName", "EuropeSeason")
 VALUES 
 ('T-1127', '2021-01-01', NULL, 2021, '2021', 1, 'H1', 1, 'Q1', 1, 'January', 53, 'Week 53', 1, 'Friday', 5, 0::BIT, 1::BIT, 'New Year''s Day', 'Winter'),
 ('T-1128', '2021-01-02', NULL, 2021, '2021', 1, 'H1', 1, 'Q1', 1, 'January', 53, 'Week 53', 2, 'Saturday', 6, 0::BIT, 0::BIT, NULL, 'Winter'),
