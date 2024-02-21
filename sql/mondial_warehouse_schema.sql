@@ -25,7 +25,7 @@ END $$;
 
 -- Create the new schema if it doesn't exist
 CREATE SCHEMA IF NOT EXISTS warehouse;
-ALTER SCHEMA warehouse OWNER TO POSTGRES;
+ALTER SCHEMA warehouse OWNER TO mondial;
 -- ddl-end --
 
 SET search_path TO pg_catalog,public,warehouse;
@@ -54,7 +54,7 @@ CREATE TABLE warehouse."article" (
 	CONSTRAINT "ArticleId_pk" PRIMARY KEY ("ArticleId")
 );
 -- ddl-end --
-ALTER TABLE warehouse."article" OWNER TO postgres;
+ALTER TABLE warehouse."article" OWNER TO mondial;
 -- ddl-end --
 
 -- object: warehouse."Sales" | type: TABLE --
@@ -69,7 +69,7 @@ CREATE TABLE warehouse."sales" (
 	CONSTRAINT "Sales_pk" PRIMARY KEY ("ArticleId","TimeId","StoreId","CustomerId")
 );
 -- ddl-end --
-ALTER TABLE warehouse."sales" OWNER TO postgres;
+ALTER TABLE warehouse."sales" OWNER TO mondial;
 -- ddl-end --
 
 -- object: warehouse."Time" | type: TABLE --
@@ -107,7 +107,7 @@ CREATE TABLE warehouse."time" (
 	CONSTRAINT "TimeId_pk" PRIMARY KEY ("TimeId")
 );
 -- ddl-end --
-ALTER TABLE warehouse."time" OWNER TO postgres;
+ALTER TABLE warehouse."time" OWNER TO mondial;
 -- ddl-end --
 
 -- object: warehouse."Customer" | type: TABLE --
@@ -144,7 +144,7 @@ CREATE TABLE warehouse."customer" (
 	CONSTRAINT "CustomerId_pk" PRIMARY KEY ("CustomerId")
 );
 -- ddl-end --
-ALTER TABLE warehouse."customer" OWNER TO postgres;
+ALTER TABLE warehouse."customer" OWNER TO mondial;
 -- ddl-end --
 
 -- object: warehouse."Location" | type: TABLE --
@@ -175,7 +175,7 @@ CREATE TABLE warehouse."location" (
 	CONSTRAINT "StoreId_pk" PRIMARY KEY ("StoreId")
 );
 -- ddl-end --
-ALTER TABLE warehouse."location" OWNER TO postgres;
+ALTER TABLE warehouse."location" OWNER TO mondial;
 -- ddl-end --
 
 -- object: "ArticleId_fk" | type: CONSTRAINT --
