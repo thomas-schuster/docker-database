@@ -1,9 +1,0 @@
-hspf/domain/services/IGeneratorService.class
-hspf/Generator.class
-hspf/domain/models/Field.class
-hspf/App.class
-hspf/domain/models/Table.class
-hspf/domain/models/FieldType.class
-hspf/domain/models/Row.class
-hspf/domain/models/ConstraintType.class
-hspf/domain/models/Constraint.class

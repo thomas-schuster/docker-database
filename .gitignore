@@ -3,3 +3,13 @@
 .idea/
 /shelf/
 /workspace.xml
+/generator/target/
+/generator/pom.xml.tag
+/generator/pom.xml.releaseBackup
+/generator/pom.xml.versionsBackup
+/generator/pom.xml.next
+/generator/release.properties
+/generator/dependency-reduced-pom.xml
+/generator/buildNumber.properties
+/generator/.mvn/timing.properties
+/generator/.mvn/wrapper/maven-wrapper.jar
