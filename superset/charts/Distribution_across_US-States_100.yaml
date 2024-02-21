@@ -1,0 +1,46 @@
+slice_name: Distribution across US-States
+description: null
+certified_by: null
+certification_details: null
+viz_type: pie
+params:
+  datasource: 27__table
+  viz_type: pie
+  groupby:
+  - Province
+  metric: count
+  adhoc_filters:
+  - clause: WHERE
+    subject: OpenDate
+    operator: TEMPORAL_RANGE
+    comparator: No filter
+    expressionType: SIMPLE
+  row_limit: 5000
+  sort_by_metric: true
+  color_scheme: supersetColors
+  show_labels_threshold: 5
+  show_legend: false
+  legendType: scroll
+  legendOrientation: top
+  legendMargin: null
+  label_type: key
+  number_format: ~g
+  currency_format: {}
+  date_format: smart_date
+  show_labels: true
+  labels_outside: true
+  label_line: true
+  show_total: true
+  outerRadius: 62
+  donut: true
+  innerRadius: 30
+  extra_form_data: {}
+  dashboards:
+  - 11
+query_context: '{"datasource":{"id":27,"type":"table"},"force":false,"queries":[{"filters":[{"col":"OpenDate","op":"TEMPORAL_RANGE","val":"No
+  filter"}],"extras":{"having":"","where":""},"applied_time_extras":{},"columns":["Province"],"metrics":["count"],"orderby":[["count",false]],"annotation_layers":[],"row_limit":5000,"series_limit":0,"order_desc":true,"url_params":{},"custom_params":{},"custom_form_data":{}}],"form_data":{"datasource":"27__table","viz_type":"pie","groupby":["Province"],"metric":"count","adhoc_filters":[{"clause":"WHERE","subject":"OpenDate","operator":"TEMPORAL_RANGE","comparator":"No
+  filter","expressionType":"SIMPLE"}],"row_limit":5000,"sort_by_metric":true,"color_scheme":"supersetColors","show_labels_threshold":5,"show_legend":false,"legendType":"scroll","legendOrientation":"top","legendMargin":null,"label_type":"key","number_format":"~g","currency_format":{},"date_format":"smart_date","show_labels":true,"labels_outside":true,"label_line":true,"show_total":true,"outerRadius":62,"donut":true,"innerRadius":30,"extra_form_data":{},"dashboards":[11],"force":false,"result_format":"json","result_type":"full"},"result_format":"json","result_type":"full"}'
+cache_timeout: null
+uuid: 19b1f55a-42f7-453e-b4fd-3cd266886a66
+version: 1.0.0
+dataset_uuid: ca1058a5-6a85-482a-a235-f198a89c72cb
