@@ -1,0 +1,2451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+ Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="1.0.2" use-changelog="false" last-position="377,721" last-zoom="0.7" max-obj-count="80"
+	 default-schema="public" default-owner="postgres"
+	 layers="Default layer"
+	 active-layers="0"
+	 layer-name-colors="#000000"
+	 layer-rect-colors="#b4b4b4"
+	 show-layer-names="false" show-layer-rects="false">
+<role name="pg_database_owner"
+ inherit="true"
+ password="********"
+ sql-disabled="true">
+</role>
+
+<role name="mondial"
+ inherit="true"
+ login="true"
+ password="********">
+</role>
+
+<role name="mondialuser"
+ inherit="true"
+ login="true"
+ password="********">
+</role>
+
+<database name="mondial" encoding="UTF8" lc-collate="en_US.utf8" lc-ctype="en_US.utf8" is-template="false" allow-conns="true">
+	<role name="mondial"/>
+	<tablespace name="pg_default"/>
+</database>
+
+<schema name="public" layers="0" fill-color="#ffffff" sql-disabled="true">
+</schema>
+
+<schema name="warehouse" layers="0" fill-color="#ffffff">
+	<role name="mondial"/>
+</schema>
+
+<extension name="plperl" cur-version="1.0">
+	<schema name="pg_catalog"/>
+	<comment> <![CDATA[PL/Perl procedural language]]> </comment>
+</extension>
+
+<extension name="bool_plperl" cur-version="1.0">
+	<schema name="public"/>
+	<comment> <![CDATA[transform between bool and plperl]]> </comment>
+</extension>
+
+<extension name="plpython3u" cur-version="1.0">
+	<schema name="pg_catalog"/>
+	<comment> <![CDATA[PL/Python3U untrusted procedural language]]> </comment>
+</extension>
+
+<extension name="pgcrypto" cur-version="1.3">
+	<schema name="public"/>
+	<comment> <![CDATA[cryptographic functions]]> </comment>
+</extension>
+
+<table name="country" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="60" y="60"/>
+	<column name="name" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="code" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="capital">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="province">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="area">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="population">
+		<type name="numeric" length="0"/>
+	</column>
+	<constraint name="countryarea" type="ck-constr" table="public.country">
+			<expression> <![CDATA[(area >= (0)::numeric)]]> </expression>
+	</constraint>
+	<constraint name="countrypop" type="ck-constr" table="public.country">
+			<expression> <![CDATA[(population >= (0)::numeric)]]> </expression>
+	</constraint>
+	<constraint name="countrykey" type="pk-constr" table="public.country">
+		<columns names="code" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="country_name_key" type="uq-constr" table="public.country">
+		<columns names="name" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="city" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="300" y="120"/>
+	<column name="name" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="province" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="population">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="latitude">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="longitude">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="elevation">
+		<type name="numeric" length="0"/>
+	</column>
+	<constraint name="citypop" type="ck-constr" table="public.city">
+			<expression> <![CDATA[(population >= (0)::numeric)]]> </expression>
+	</constraint>
+	<constraint name="citylat" type="ck-constr" table="public.city">
+			<expression> <![CDATA[((latitude >= ('-90'::integer)::numeric) AND (latitude <= (90)::numeric))]]> </expression>
+	</constraint>
+	<constraint name="citylon" type="ck-constr" table="public.city">
+			<expression> <![CDATA[((longitude >= ('-180'::integer)::numeric) AND (longitude <= (180)::numeric))]]> </expression>
+	</constraint>
+	<constraint name="citykey" type="pk-constr" table="public.city">
+		<columns names="name,country,province" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="province" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="340" y="480"/>
+	<column name="name" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="population">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="area">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="capital">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="capprov">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="prpop" type="ck-constr" table="public.province">
+			<expression> <![CDATA[(population >= (0)::numeric)]]> </expression>
+	</constraint>
+	<constraint name="prar" type="ck-constr" table="public.province">
+			<expression> <![CDATA[(area >= (0)::numeric)]]> </expression>
+	</constraint>
+	<constraint name="prkey" type="pk-constr" table="public.province">
+		<columns names="name,country" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="economy" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="400" y="800"/>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="gdp">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="agriculture">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="service">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="industry">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="inflation">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="unemployment">
+		<type name="numeric" length="0"/>
+	</column>
+	<constraint name="economygdp" type="ck-constr" table="public.economy">
+			<expression> <![CDATA[(gdp >= (0)::numeric)]]> </expression>
+	</constraint>
+	<constraint name="economykey" type="pk-constr" table="public.economy">
+		<columns names="country" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="population" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="440" y="1120"/>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="population_growth">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="infant_mortality">
+		<type name="numeric" length="0"/>
+	</column>
+	<constraint name="popkey" type="pk-constr" table="public.population">
+		<columns names="country" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="politics" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="500" y="1340"/>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="independence">
+		<type name="date" length="0"/>
+	</column>
+	<column name="wasdependent">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="dependent">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="government">
+		<type name="character varying" length="120"/>
+	</column>
+	<constraint name="politicskey" type="pk-constr" table="public.politics">
+		<columns names="country" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="religion" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="540" y="1620"/>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="percentage">
+		<type name="numeric" length="0"/>
+	</column>
+	<constraint name="religionpercent" type="ck-constr" table="public.religion">
+			<expression> <![CDATA[((percentage > (0)::numeric) AND (percentage <= (100)::numeric))]]> </expression>
+	</constraint>
+	<constraint name="religionkey" type="pk-constr" table="public.religion">
+		<columns names="name,country" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="ethnicgroup" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="600" y="1840"/>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="percentage">
+		<type name="numeric" length="0"/>
+	</column>
+	<constraint name="ethnicpercent" type="ck-constr" table="public.ethnicgroup">
+			<expression> <![CDATA[((percentage > (0)::numeric) AND (percentage <= (100)::numeric))]]> </expression>
+	</constraint>
+	<constraint name="ethnickey" type="pk-constr" table="public.ethnicgroup">
+		<columns names="name,country" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="language" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="640" y="2080"/>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="percentage">
+		<type name="numeric" length="0"/>
+	</column>
+	<constraint name="languagepercent" type="ck-constr" table="public.language">
+			<expression> <![CDATA[((percentage > (0)::numeric) AND (percentage <= (100)::numeric))]]> </expression>
+	</constraint>
+	<constraint name="languagekey" type="pk-constr" table="public.language">
+		<columns names="name,country" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="countrypops" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="700" y="2320"/>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="year" not-null="true">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="population">
+		<type name="numeric" length="0"/>
+	</column>
+	<constraint name="countrypopsyear" type="ck-constr" table="public.countrypops">
+			<expression> <![CDATA[(year >= (0)::numeric)]]> </expression>
+	</constraint>
+	<constraint name="countrypopspop" type="ck-constr" table="public.countrypops">
+			<expression> <![CDATA[(population >= (0)::numeric)]]> </expression>
+	</constraint>
+	<constraint name="countrypopskey" type="pk-constr" table="public.countrypops">
+		<columns names="country,year" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="countryothername" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="820" y="5160"/>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="othername" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="countryothernamekey" type="pk-constr" table="public.countryothername">
+		<columns names="country,othername" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="countrylocalname" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="560" y="5160"/>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="localname">
+		<type name="character varying" length="300"/>
+	</column>
+	<constraint name="countrylocalnamekey" type="pk-constr" table="public.countrylocalname">
+		<columns names="country" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="provpops" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1320" y="2260"/>
+	<column name="province" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="year" not-null="true">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="population">
+		<type name="numeric" length="0"/>
+	</column>
+	<constraint name="provpopsyear" type="ck-constr" table="public.provpops">
+			<expression> <![CDATA[(year >= (0)::numeric)]]> </expression>
+	</constraint>
+	<constraint name="provpopspop" type="ck-constr" table="public.provpops">
+			<expression> <![CDATA[(population >= (0)::numeric)]]> </expression>
+	</constraint>
+	<constraint name="provpopkey" type="pk-constr" table="public.provpops">
+		<columns names="country,province,year" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="provinceothername" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1380" y="2540"/>
+	<column name="province" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="othername" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="provothernamekey" type="pk-constr" table="public.provinceothername">
+		<columns names="country,province,othername" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="provincelocalname" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1420" y="2760"/>
+	<column name="province" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="localname">
+		<type name="character varying" length="300"/>
+	</column>
+	<constraint name="provlocalnamekey" type="pk-constr" table="public.provincelocalname">
+		<columns names="country,province" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="citypops" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1020" y="120"/>
+	<column name="city" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="province" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="year" not-null="true">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="population">
+		<type name="numeric" length="0"/>
+	</column>
+	<constraint name="citypopsyear" type="ck-constr" table="public.citypops">
+			<expression> <![CDATA[(year >= (0)::numeric)]]> </expression>
+	</constraint>
+	<constraint name="citypopspop" type="ck-constr" table="public.citypops">
+			<expression> <![CDATA[(population >= (0)::numeric)]]> </expression>
+	</constraint>
+	<constraint name="citypopkey" type="pk-constr" table="public.citypops">
+		<columns names="country,province,city,year" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="cityothername" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="60" y="5160"/>
+	<column name="city" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="province" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="othername" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="cityothernamekey" type="pk-constr" table="public.cityothername">
+		<columns names="country,province,city,othername" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="citylocalname" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="300" y="5160"/>
+	<column name="city" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="province" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="localname">
+		<type name="character varying" length="300"/>
+	</column>
+	<constraint name="citylocalnamekey" type="pk-constr" table="public.citylocalname">
+		<columns names="country,province,city" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="continent" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1880" y="4860"/>
+	<column name="name" not-null="true">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="area">
+		<type name="numeric" length="10" precision="0"/>
+	</column>
+	<constraint name="continentkey" type="pk-constr" table="public.continent">
+		<columns names="name" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="borders" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="740" y="2580"/>
+	<column name="country1" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="country2" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="length">
+		<type name="numeric" length="0"/>
+	</column>
+	<constraint name="borders_length_check" type="ck-constr" table="public.borders">
+			<expression> <![CDATA[(length > (0)::numeric)]]> </expression>
+	</constraint>
+	<constraint name="borderkey" type="pk-constr" table="public.borders">
+		<columns names="country1,country2" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="encompasses" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="800" y="2840"/>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="continent" not-null="true">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="percentage">
+		<type name="numeric" length="0"/>
+	</column>
+	<constraint name="encompasses_percentage_check" type="ck-constr" table="public.encompasses">
+			<expression> <![CDATA[((percentage > (0)::numeric) AND (percentage <= (100)::numeric))]]> </expression>
+	</constraint>
+	<constraint name="encompasseskey" type="pk-constr" table="public.encompasses">
+		<columns names="country,continent" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="organization" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1080" y="420"/>
+	<column name="abbreviation" not-null="true">
+		<type name="character varying" length="12"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="city">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="country">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="province">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="established">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="orgkey" type="pk-constr" table="public.organization">
+		<columns names="abbreviation" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="orgnameunique" type="uq-constr" table="public.organization">
+		<columns names="name" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="ismember" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="840" y="3100"/>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="organization" not-null="true">
+		<type name="character varying" length="12"/>
+	</column>
+	<column name="type" default-value="'member'">
+		<type name="character varying" length="60"/>
+	</column>
+	<constraint name="memberkey" type="pk-constr" table="public.ismember">
+		<columns names="country,organization" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<usertype name="geocoord" configuration="composite">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<typeattrib name="longitude">
+		<type name="numeric" length="0"/>
+	</typeattrib>
+	<typeattrib name="latitude">
+		<type name="numeric" length="0"/>
+	</typeattrib>
+</usertype>
+
+<table name="mountain" layers="0" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2300" y="1880"/>
+	<column name="name" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="mountains">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="elevation">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="type">
+		<type name="character varying" length="10"/>
+	</column>
+	<column name="coordinates">
+		<type name="public.geocoord" length="0"/>
+	</column>
+	<constraint name="mountaincoord" type="ck-constr" table="public.mountain">
+			<expression> <![CDATA[(((coordinates).latitude >= ('-90'::integer)::numeric) AND ((coordinates).latitude <= (90)::numeric) AND ((coordinates).longitude > ('-180'::integer)::numeric) AND ((coordinates).longitude <= (180)::numeric))]]> </expression>
+	</constraint>
+	<constraint name="mountainkey" type="pk-constr" table="public.mountain">
+		<columns names="name" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="desert" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2360" y="2120"/>
+	<column name="name" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="area">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="coordinates">
+		<type name="public.geocoord" length="0"/>
+	</column>
+	<constraint name="descoord" type="ck-constr" table="public.desert">
+			<expression> <![CDATA[(((coordinates).latitude >= ('-90'::integer)::numeric) AND ((coordinates).latitude <= (90)::numeric) AND ((coordinates).longitude > ('-180'::integer)::numeric) AND ((coordinates).longitude <= (180)::numeric))]]> </expression>
+	</constraint>
+	<constraint name="desertkey" type="pk-constr" table="public.desert">
+		<columns names="name" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="island" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2200" y="1240"/>
+	<column name="name" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="islands">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="area">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="elevation">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="type">
+		<type name="character varying" length="12"/>
+	</column>
+	<column name="coordinates">
+		<type name="public.geocoord" length="0"/>
+	</column>
+	<constraint name="islandar" type="ck-constr" table="public.island">
+			<expression> <![CDATA[(area >= (0)::numeric)]]> </expression>
+	</constraint>
+	<constraint name="islandcoord" type="ck-constr" table="public.island">
+			<expression> <![CDATA[(((coordinates).latitude >= ('-90'::integer)::numeric) AND ((coordinates).latitude <= (90)::numeric) AND ((coordinates).longitude > ('-180'::integer)::numeric) AND ((coordinates).longitude <= (180)::numeric))]]> </expression>
+	</constraint>
+	<constraint name="islandkey" type="pk-constr" table="public.island">
+		<columns names="name" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="lake" layers="0" collapse-mode="2" max-obj-count="9" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2160" y="860"/>
+	<column name="name" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="river">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="area">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="elevation">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="depth">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="height">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="type">
+		<type name="character varying" length="12"/>
+	</column>
+	<column name="coordinates">
+		<type name="public.geocoord" length="0"/>
+	</column>
+	<constraint name="lakear" type="ck-constr" table="public.lake">
+			<expression> <![CDATA[(area >= (0)::numeric)]]> </expression>
+	</constraint>
+	<constraint name="lakedpth" type="ck-constr" table="public.lake">
+			<expression> <![CDATA[(depth >= (0)::numeric)]]> </expression>
+	</constraint>
+	<constraint name="damheight" type="ck-constr" table="public.lake">
+			<expression> <![CDATA[(height > (0)::numeric)]]> </expression>
+	</constraint>
+	<constraint name="lakecoord" type="ck-constr" table="public.lake">
+			<expression> <![CDATA[(((coordinates).latitude >= ('-90'::integer)::numeric) AND ((coordinates).latitude <= (90)::numeric) AND ((coordinates).longitude > ('-180'::integer)::numeric) AND ((coordinates).longitude <= (180)::numeric))]]> </expression>
+	</constraint>
+	<constraint name="lakekey" type="pk-constr" table="public.lake">
+		<columns names="name" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="sea" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2060" y="120"/>
+	<column name="name" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="area">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="depth">
+		<type name="numeric" length="0"/>
+	</column>
+	<constraint name="seaar" type="ck-constr" table="public.sea">
+			<expression> <![CDATA[(area >= (0)::numeric)]]> </expression>
+	</constraint>
+	<constraint name="seadepth" type="ck-constr" table="public.sea">
+			<expression> <![CDATA[(depth >= (0)::numeric)]]> </expression>
+	</constraint>
+	<constraint name="seakey" type="pk-constr" table="public.sea">
+		<columns names="name" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="river" layers="0" collapse-mode="2" max-obj-count="13" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2100" y="360"/>
+	<column name="name" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="river">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="lake">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="sea">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="length">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="area">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="source">
+		<type name="public.geocoord" length="0"/>
+	</column>
+	<column name="mountains">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="sourceelevation">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="estuary">
+		<type name="public.geocoord" length="0"/>
+	</column>
+	<column name="estuaryelevation">
+		<type name="numeric" length="0"/>
+	</column>
+	<constraint name="riverlength" type="ck-constr" table="public.river">
+			<expression> <![CDATA[(length >= (0)::numeric)]]> </expression>
+	</constraint>
+	<constraint name="riverarea" type="ck-constr" table="public.river">
+			<expression> <![CDATA[(area >= (0)::numeric)]]> </expression>
+	</constraint>
+	<constraint name="sourcecoord" type="ck-constr" table="public.river">
+			<expression> <![CDATA[(((source).latitude >= ('-90'::integer)::numeric) AND ((source).latitude <= (90)::numeric) AND ((source).longitude > ('-180'::integer)::numeric) AND ((source).longitude <= (180)::numeric))]]> </expression>
+	</constraint>
+	<constraint name="estcoord" type="ck-constr" table="public.river">
+			<expression> <![CDATA[(((estuary).latitude >= ('-90'::integer)::numeric) AND ((estuary).latitude <= (90)::numeric) AND ((estuary).longitude > ('-180'::integer)::numeric) AND ((estuary).longitude <= (180)::numeric))]]> </expression>
+	</constraint>
+	<constraint name="rivflowsinto" type="ck-constr" table="public.river">
+			<expression> <![CDATA[(((river IS NULL) AND (lake IS NULL)) OR ((river IS NULL) AND (sea IS NULL)) OR ((lake IS NULL) AND (sea IS NULL)))]]> </expression>
+	</constraint>
+	<constraint name="riverkey" type="pk-constr" table="public.river">
+		<columns names="name" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="riverthrough" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2620" y="580"/>
+	<column name="river" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="lake" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="rthroughkey" type="pk-constr" table="public.riverthrough">
+		<columns names="river,lake" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="geo_mountain" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1480" y="2960"/>
+	<column name="mountain" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="province" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="gmountainkey" type="pk-constr" table="public.geo_mountain">
+		<columns names="province,country,mountain" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="geo_desert" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1520" y="3200"/>
+	<column name="desert" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="province" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="gdesertkey" type="pk-constr" table="public.geo_desert">
+		<columns names="province,country,desert" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="geo_island" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1580" y="3440"/>
+	<column name="island" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="province" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="gislandkey" type="pk-constr" table="public.geo_island">
+		<columns names="province,country,island" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="geo_river" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1620" y="3680"/>
+	<column name="river" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="province" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="griverkey" type="pk-constr" table="public.geo_river">
+		<columns names="province,country,river" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="geo_sea" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1680" y="3920"/>
+	<column name="sea" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="province" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="gseakey" type="pk-constr" table="public.geo_sea">
+		<columns names="province,country,sea" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="geo_lake" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1720" y="4160"/>
+	<column name="lake" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="province" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="glakekey" type="pk-constr" table="public.geo_lake">
+		<columns names="province,country,lake" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="geo_source" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1780" y="4400"/>
+	<column name="river" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="province" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="gsourcekey" type="pk-constr" table="public.geo_source">
+		<columns names="province,country,river" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="geo_estuary" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1820" y="4640"/>
+	<column name="river" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="province" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="gestuarykey" type="pk-constr" table="public.geo_estuary">
+		<columns names="province,country,river" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="mergeswith" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2520" y="120"/>
+	<column name="sea1" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="sea2" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="mergeswithkey" type="pk-constr" table="public.mergeswith">
+		<columns names="sea1,sea2" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="located" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1120" y="720"/>
+	<column name="city">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="province">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="country">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="river">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="lake">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="sea">
+		<type name="character varying" length="50"/>
+	</column>
+</table>
+
+<table name="locatedon" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1180" y="1020"/>
+	<column name="city" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="province" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="country" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="island" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="locatedonkey" type="pk-constr" table="public.locatedon">
+		<columns names="city,province,country,island" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="islandin" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2580" y="340"/>
+	<column name="island">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="sea">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="lake">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="river">
+		<type name="character varying" length="50"/>
+	</column>
+</table>
+
+<table name="mountainonisland" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2920" y="3040"/>
+	<column name="mountain" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="island" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="mountainislkey" type="pk-constr" table="public.mountainonisland">
+		<columns names="mountain,island" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="lakeonisland" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2720" y="1020"/>
+	<column name="lake" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="island" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="lakeislkey" type="pk-constr" table="public.lakeonisland">
+		<columns names="lake,island" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="riveronisland" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2680" y="800"/>
+	<column name="river" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="island" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="riverislkey" type="pk-constr" table="public.riveronisland">
+		<columns names="river,island" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="airport" layers="0" collapse-mode="2" max-obj-count="12" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1220" y="1280"/>
+	<column name="iatacode" not-null="true">
+		<type name="character varying" length="3"/>
+	</column>
+	<column name="name">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="country">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="city">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="province">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="island">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="latitude">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="longitude">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="elevation">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="gmtoffset">
+		<type name="numeric" length="0"/>
+	</column>
+	<constraint name="airplat" type="ck-constr" table="public.airport">
+			<expression> <![CDATA[((latitude >= ('-90'::integer)::numeric) AND (latitude <= (90)::numeric))]]> </expression>
+	</constraint>
+	<constraint name="airplon" type="ck-constr" table="public.airport">
+			<expression> <![CDATA[((longitude >= ('-180'::integer)::numeric) AND (longitude <= (180)::numeric))]]> </expression>
+	</constraint>
+	<constraint name="airport_pkey" type="pk-constr" table="public.airport">
+		<columns names="iatacode" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="article" layers="0" collapse-mode="2" max-obj-count="20" z-value="0">
+	<schema name="warehouse"/>
+	<role name="mondial"/>
+	<position x="2780" y="1240"/>
+	<column name="ArticleId" not-null="true">
+		<type name="character varying" length="8"/>
+	</column>
+	<column name="GTIN">
+		<type name="text" length="0"/>
+	</column>
+	<column name="ArticleName">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="Weight">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="Description">
+		<type name="character varying" length="256"/>
+	</column>
+	<column name="Manufacturer">
+		<type name="character varying" length="64"/>
+	</column>
+	<column name="Brand">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="ProductGroup">
+		<type name="character varying" length="64"/>
+	</column>
+	<column name="Width">
+		<type name="numeric" length="16" precision="0"/>
+	</column>
+	<column name="Length">
+		<type name="numeric" length="16" precision="0"/>
+	</column>
+	<column name="Height">
+		<type name="numeric" length="16" precision="0"/>
+	</column>
+	<column name="Volume" default-value="(&quot;Width&quot; * &quot;Length&quot;) * &quot;Height&quot;" generated="true">
+		<type name="numeric" length="16" precision="0"/>
+	</column>
+	<column name="SizeMeasure">
+		<type name="text" length="0"/>
+	</column>
+	<column name="UnitCost">
+		<type name="numeric" length="16" precision="0"/>
+	</column>
+	<column name="UnitPrice">
+		<type name="numeric" length="16" precision="0"/>
+	</column>
+	<column name="AvailableSince">
+		<type name="date" length="0"/>
+	</column>
+	<column name="SaleStoppedSince">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="ArticleId_pk" type="pk-constr" table="warehouse.article">
+		<columns names="ArticleId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="sales" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="warehouse"/>
+	<role name="mondial"/>
+	<position x="2260" y="1540"/>
+	<column name="ArticleId" not-null="true">
+		<type name="character varying" length="8"/>
+	</column>
+	<column name="TimeId" not-null="true">
+		<type name="character varying" length="8"/>
+	</column>
+	<column name="StoreId" not-null="true">
+		<type name="character varying" length="8"/>
+	</column>
+	<column name="CustomerId" not-null="true">
+		<type name="character varying" length="8"/>
+	</column>
+	<column name="SalesVolume">
+		<type name="numeric" length="24" precision="0"/>
+	</column>
+	<column name="Amount">
+		<type name="smallint" length="0"/>
+	</column>
+	<constraint name="Sales_pk" type="pk-constr" table="warehouse.sales">
+		<columns names="ArticleId,TimeId,StoreId,CustomerId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="time" layers="0" collapse-mode="2" max-obj-count="34" z-value="0">
+	<schema name="warehouse"/>
+	<role name="mondial"/>
+	<position x="2820" y="1700"/>
+	<column name="TimeId" not-null="true">
+		<type name="character varying" length="8"/>
+	</column>
+	<column name="FullDateLabel" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<column name="DateDescription">
+		<type name="text" length="0"/>
+	</column>
+	<column name="CalendarYear" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="CalendarYearLabel">
+		<type name="text" length="0"/>
+	</column>
+	<column name="CalendarHalfYear">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="CalendarHalfYearLabel">
+		<type name="text" length="0"/>
+	</column>
+	<column name="CalendarQuarter" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="CalendarQuarterLabel">
+		<type name="text" length="0"/>
+	</column>
+	<column name="CalendarMonth" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="CalendarMonthLabel">
+		<type name="text" length="0"/>
+	</column>
+	<column name="CalendarWeek" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="CalendarWeekLabel">
+		<type name="text" length="0"/>
+	</column>
+	<column name="CalendarDay" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="CalendarDayLabel">
+		<type name="text" length="0"/>
+	</column>
+	<column name="CalendarDayOfWeek" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="CalendarDayOfWeekLabel">
+		<type name="text" length="0"/>
+	</column>
+	<column name="FiscalYear">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="FiscalYearLabel">
+		<type name="text" length="0"/>
+	</column>
+	<column name="FiscalHalfYear">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="FiscalHalfYearLabel">
+		<type name="text" length="0"/>
+	</column>
+	<column name="FiscalQuarter">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="FiscalQuarterLabel">
+		<type name="text" length="0"/>
+	</column>
+	<column name="FiscalMonth">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="FiscalMonthLabel">
+		<type name="text" length="0"/>
+	</column>
+	<column name="IsWorkDay" not-null="true">
+		<type name="bit" length="1"/>
+	</column>
+	<column name="IsHoliday" not-null="true">
+		<type name="bit" length="1"/>
+	</column>
+	<column name="HolidayName">
+		<type name="text" length="0"/>
+	</column>
+	<column name="EuropeSeason">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="TimeId_pk" type="pk-constr" table="warehouse.&quot;time&quot;">
+		<columns names="TimeId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="customer" layers="0" collapse-mode="2" max-obj-count="33" z-value="0">
+	<schema name="warehouse"/>
+	<role name="mondial"/>
+	<position x="2880" y="2380"/>
+	<column name="CustomerId" not-null="true">
+		<type name="character varying" length="8"/>
+	</column>
+	<column name="Group">
+		<type name="character varying" length="16"/>
+	</column>
+	<column name="Title">
+		<type name="character varying" length="6"/>
+	</column>
+	<column name="FirstName">
+		<type name="text" length="0"/>
+	</column>
+	<column name="MiddleName">
+		<type name="text" length="0"/>
+	</column>
+	<column name="LastName">
+		<type name="text" length="0"/>
+	</column>
+	<column name="BirthDate">
+		<type name="date" length="0"/>
+	</column>
+	<column name="Age">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="Gender">
+		<type name="character varying" length="1"/>
+	</column>
+	<column name="EductationLevel">
+		<type name="text" length="0"/>
+	</column>
+	<column name="MartialStatus">
+		<type name="bit" length="1"/>
+	</column>
+	<column name="Children">
+		<type name="bit" length="1"/>
+	</column>
+	<column name="NumberOfChildren">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="NumberOfChildrenAtHome">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="YearlyIncome">
+		<type name="numeric" length="16" precision="0"/>
+	</column>
+	<column name="Occupation">
+		<type name="text" length="0"/>
+	</column>
+	<column name="HouseOwnerFlag">
+		<type name="bit" length="1"/>
+	</column>
+	<column name="CarOwnerFlag">
+		<type name="bit" length="1"/>
+	</column>
+	<column name="EmailAdress">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="Phone">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="AdressLine1">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="AdressLine2">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="ZIP">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="City">
+		<type name="text" length="0"/>
+	</column>
+	<column name="FirstPurchaseDate">
+		<type name="date" length="0"/>
+	</column>
+	<column name="LastPurchaseDate">
+		<type name="date" length="0"/>
+	</column>
+	<column name="TotalSpent">
+		<type name="numeric" length="16" precision="0"/>
+	</column>
+	<column name="CustomerType">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="CustomerId_pk" type="pk-constr" table="warehouse.customer">
+		<columns names="CustomerId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="location" layers="0" collapse-mode="2" max-obj-count="26" z-value="0">
+	<schema name="warehouse"/>
+	<role name="mondial"/>
+	<position x="1280" y="1680"/>
+	<column name="StoreId" not-null="true">
+		<type name="character varying" length="8"/>
+	</column>
+	<column name="StoreManagerId">
+		<type name="character varying" length="8"/>
+	</column>
+	<column name="StoreManagerName">
+		<type name="text" length="0"/>
+	</column>
+	<column name="StoreType">
+		<type name="text" length="0"/>
+	</column>
+	<column name="StoreName">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="Status">
+		<type name="text" length="0"/>
+	</column>
+	<column name="OpenDate">
+		<type name="date" length="0"/>
+	</column>
+	<column name="CloseDate">
+		<type name="date" length="0"/>
+	</column>
+	<column name="StorePhone">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="StoreFax">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="AdressLine1">
+		<type name="text" length="0"/>
+	</column>
+	<column name="AdressLine2">
+		<type name="text" length="0"/>
+	</column>
+	<column name="ZIP">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="City">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="Country">
+		<type name="character varying" length="4"/>
+	</column>
+	<column name="Province">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="CloseReason">
+		<type name="text" length="0"/>
+	</column>
+	<column name="EmployeeCount">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="SellingSizeArea">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="LastRemodelDate">
+		<type name="date" length="0"/>
+	</column>
+	<column name="MaxDailyCustomerCountRecorded">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="AvgDailyCustomerCountRecorded">
+		<type name="smallint" length="0"/>
+	</column>
+	<constraint name="StoreId_pk" type="pk-constr" table="warehouse.location">
+		<columns names="StoreId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<constraint name="fk_capital" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.city"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.country">
+	<columns names="capital,code,province" ref-type="src-columns"/>
+	<columns names="name,country,province" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_cityprovince" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.province"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.city">
+	<columns names="country,province" ref-type="src-columns"/>
+	<columns names="country,name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_citycapital" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.city"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.province">
+	<columns names="capital,country,capprov" ref-type="src-columns"/>
+	<columns names="name,country,province" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_provcountry" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.country"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.province">
+	<columns names="country" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_ecoscountry" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.country"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.economy">
+	<columns names="country" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_popcountry" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.country"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.population">
+	<columns names="country" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_polscountry1" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.country"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.politics">
+	<columns names="country" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_polscountry2" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.country"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.politics">
+	<columns names="dependent" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_popcountry" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.country"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.religion">
+	<columns names="country" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_popcountry" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.country"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.ethnicgroup">
+	<columns names="country" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_langcountry" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.country"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.language">
+	<columns names="country" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_popscountry" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.country"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.countrypops">
+	<columns names="country" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_ppopsprovince" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.province"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.provpops">
+	<columns names="country,province" ref-type="src-columns"/>
+	<columns names="country,name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_provinceother" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.province"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.provinceothername">
+	<columns names="province,country" ref-type="src-columns"/>
+	<columns names="name,country" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_provincelocal" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.province"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.provincelocalname">
+	<columns names="province,country" ref-type="src-columns"/>
+	<columns names="name,country" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_citypops" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.city"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.citypops">
+	<columns names="city,country,province" ref-type="src-columns"/>
+	<columns names="name,country,province" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_border1" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.country"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.borders">
+	<columns names="country1" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_border2" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.country"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.borders">
+	<columns names="country2" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_enccountry" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.country"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.encompasses">
+	<columns names="country" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_enccontinent" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.continent"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.encompasses">
+	<columns names="continent" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_capital" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.city"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.organization">
+	<columns names="city,country,province" ref-type="src-columns"/>
+	<columns names="name,country,province" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_ismember" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.organization"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.ismember">
+	<columns names="organization" ref-type="src-columns"/>
+	<columns names="abbreviation" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_country" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.country"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.ismember">
+	<columns names="country" ref-type="src-columns"/>
+	<columns names="code" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_lakeriver" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.river"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.lake">
+	<columns names="river" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_riversea" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.sea"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.river">
+	<columns names="sea" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_riverriver" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.river"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.river">
+	<columns names="river" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_riverlake" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.lake"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.river">
+	<columns names="lake" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_thriver" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.river"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.riverthrough">
+	<columns names="river" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_thlake" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.lake"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.riverthrough">
+	<columns names="lake" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_mountainprovince" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.province"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.geo_mountain">
+	<columns names="country,province" ref-type="src-columns"/>
+	<columns names="country,name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_geomountain" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.mountain"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.geo_mountain">
+	<columns names="mountain" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_desert" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.desert"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.geo_desert">
+	<columns names="desert" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_desertprovince" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.province"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.geo_desert">
+	<columns names="country,province" ref-type="src-columns"/>
+	<columns names="country,name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_islandprovince" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.province"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.geo_island">
+	<columns names="country,province" ref-type="src-columns"/>
+	<columns names="country,name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_geoisland" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.island"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.geo_island">
+	<columns names="island" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_griverprovince" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.province"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.geo_river">
+	<columns names="country,province" ref-type="src-columns"/>
+	<columns names="country,name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_georiver" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.river"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.geo_river">
+	<columns names="river" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_seaprovince" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.province"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.geo_sea">
+	<columns names="country,province" ref-type="src-columns"/>
+	<columns names="country,name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_geosea" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.sea"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.geo_sea">
+	<columns names="sea" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_lakeprovince" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.province"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.geo_lake">
+	<columns names="country,province" ref-type="src-columns"/>
+	<columns names="country,name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_geolake" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.lake"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.geo_lake">
+	<columns names="lake" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_gsrcprovince" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.province"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.geo_source">
+	<columns names="country,province" ref-type="src-columns"/>
+	<columns names="country,name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_gsrcriver" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.river"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.geo_source">
+	<columns names="river" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_gestprovince" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.province"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.geo_estuary">
+	<columns names="country,province" ref-type="src-columns"/>
+	<columns names="country,name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_gestriver" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.river"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.geo_estuary">
+	<columns names="river" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_sea1" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.sea"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.mergeswith">
+	<columns names="sea1" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_sea2" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.sea"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.mergeswith">
+	<columns names="sea2" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_locatedcity" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.city"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.located">
+	<columns names="city,country,province" ref-type="src-columns"/>
+	<columns names="name,country,province" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_locsea" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.sea"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.located">
+	<columns names="sea" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_locriver" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.river"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.located">
+	<columns names="river" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_loclake" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.lake"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.located">
+	<columns names="lake" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_locatedcityon" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.city"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.locatedon">
+	<columns names="city,country,province" ref-type="src-columns"/>
+	<columns names="name,country,province" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_onisland" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.island"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.locatedon">
+	<columns names="island" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_islandin" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.island"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.islandin">
+	<columns names="island" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_insea" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.sea"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.islandin">
+	<columns names="sea" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_mtimountain" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.mountain"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.mountainonisland">
+	<columns names="mountain" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_lakeoisland" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.island"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.lakeonisland">
+	<columns names="island" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_islandlake" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.lake"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.lakeonisland">
+	<columns names="lake" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_riveroisland" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.island"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.riveronisland">
+	<columns names="island" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_islandriver" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.river"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.riveronisland">
+	<columns names="river" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_airportcity" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.city"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.airport">
+	<columns names="city,country,province" ref-type="src-columns"/>
+	<columns names="name,country,province" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_airportisland" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.island"
+	deferrable="true" defer-type="INITIALLY DEFERRED"
+ table="public.airport">
+	<columns names="island" ref-type="src-columns"/>
+	<columns names="name" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="ArticleId_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="warehouse.article" table="warehouse.sales">
+	<columns names="ArticleId" ref-type="src-columns"/>
+	<columns names="ArticleId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="TimeId_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="warehouse.&quot;time&quot;" table="warehouse.sales">
+	<columns names="TimeId" ref-type="src-columns"/>
+	<columns names="TimeId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="CustomerId_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="warehouse.customer" table="warehouse.sales">
+	<columns names="CustomerId" ref-type="src-columns"/>
+	<columns names="CustomerId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="StoreId_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="warehouse.location" table="warehouse.sales">
+	<columns names="StoreId" ref-type="src-columns"/>
+	<columns names="StoreId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="rel_mondial_to_warehouse" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.city" table="warehouse.location">
+	<columns names="City,Country,Province" ref-type="src-columns"/>
+	<columns names="name,country,province" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_country_city" type="relfk" layers="0"
+	 custom-color="#1af08e"
+	 src-table="public.country"
+	 dst-table="public.city" reference-fk="fk_capital"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_city_province" type="relfk" layers="0"
+	 custom-color="#0e0269"
+	 src-table="public.city"
+	 dst-table="public.province" reference-fk="fk_cityprovince"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_province_city" type="relfk" layers="0"
+	 custom-color="#514192"
+	 src-table="public.province"
+	 dst-table="public.city" reference-fk="fk_citycapital"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_province_country" type="relfk" layers="0"
+	 custom-color="#09b731"
+	 src-table="public.province"
+	 dst-table="public.country" reference-fk="fk_provcountry"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_economy_country" type="relfk" layers="0"
+	 custom-color="#2b6b21"
+	 src-table="public.economy"
+	 dst-table="public.country" reference-fk="fk_ecoscountry"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_population_country" type="relfk" layers="0"
+	 custom-color="#2821c7"
+	 src-table="public.population"
+	 dst-table="public.country" reference-fk="fk_popcountry"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_politics_country" type="relfk" layers="0"
+	 custom-color="#ceeb8a"
+	 src-table="public.politics"
+	 dst-table="public.country" reference-fk="fk_polscountry1"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_politics_country1" type="relfk" layers="0"
+	 custom-color="#95ece1"
+	 src-table="public.politics"
+	 dst-table="public.country" reference-fk="fk_polscountry2"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_religion_country" type="relfk" layers="0"
+	 custom-color="#2cf989"
+	 src-table="public.religion"
+	 dst-table="public.country" reference-fk="fk_popcountry"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_ethnicgroup_country" type="relfk" layers="0"
+	 custom-color="#de38a7"
+	 src-table="public.ethnicgroup"
+	 dst-table="public.country" reference-fk="fk_popcountry"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_language_country" type="relfk" layers="0"
+	 custom-color="#9a91d9"
+	 src-table="public.language"
+	 dst-table="public.country" reference-fk="fk_langcountry"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_countrypops_country" type="relfk" layers="0"
+	 custom-color="#f1420f"
+	 src-table="public.countrypops"
+	 dst-table="public.country" reference-fk="fk_popscountry"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_provpops_province" type="relfk" layers="0"
+	 custom-color="#baa92d"
+	 src-table="public.provpops"
+	 dst-table="public.province" reference-fk="fk_ppopsprovince"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_provinceothername_province" type="relfk" layers="0"
+	 custom-color="#60becf"
+	 src-table="public.provinceothername"
+	 dst-table="public.province" reference-fk="fk_provinceother"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_provincelocalname_province" type="relfk" layers="0"
+	 custom-color="#a9645f"
+	 src-table="public.provincelocalname"
+	 dst-table="public.province" reference-fk="fk_provincelocal"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_citypops_city" type="relfk" layers="0"
+	 custom-color="#b327f7"
+	 src-table="public.citypops"
+	 dst-table="public.city" reference-fk="fk_citypops"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_borders_country" type="relfk" layers="0"
+	 custom-color="#4aa05a"
+	 src-table="public.borders"
+	 dst-table="public.country" reference-fk="fk_border1"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_borders_country1" type="relfk" layers="0"
+	 custom-color="#48c2ac"
+	 src-table="public.borders"
+	 dst-table="public.country" reference-fk="fk_border2"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_encompasses_country" type="relfk" layers="0"
+	 custom-color="#a7f88f"
+	 src-table="public.encompasses"
+	 dst-table="public.country" reference-fk="fk_enccountry"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_encompasses_continent" type="relfk" layers="0"
+	 custom-color="#074180"
+	 src-table="public.encompasses"
+	 dst-table="public.continent" reference-fk="fk_enccontinent"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_organization_city" type="relfk" layers="0"
+	 custom-color="#ded8e9"
+	 src-table="public.organization"
+	 dst-table="public.city" reference-fk="fk_capital"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_ismember_organization" type="relfk" layers="0"
+	 custom-color="#4e1ff5"
+	 src-table="public.ismember"
+	 dst-table="public.organization" reference-fk="fk_ismember"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_ismember_country" type="relfk" layers="0"
+	 custom-color="#98e61b"
+	 src-table="public.ismember"
+	 dst-table="public.country" reference-fk="fk_country"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_lake_river" type="relfk" layers="0"
+	 custom-color="#6e0d99"
+	 src-table="public.lake"
+	 dst-table="public.river" reference-fk="fk_lakeriver"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_river_sea" type="relfk" layers="0"
+	 custom-color="#85fe25"
+	 src-table="public.river"
+	 dst-table="public.sea" reference-fk="fk_riversea"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_river_river" type="relfk" layers="0"
+	 custom-color="#ac44bd"
+	 src-table="public.river"
+	 dst-table="public.river" reference-fk="fk_riverriver"
+	 src-required="false" dst-required="false">
+	<line>
+		<position x="2273.15" y="500.975"/>
+	<position x="2273.15" y="327"/>
+	<position x="2193.43" y="327"/>
+	</line>
+</relationship>
+
+<relationship name="rel_river_lake" type="relfk" layers="0"
+	 custom-color="#4ce021"
+	 src-table="public.river"
+	 dst-table="public.lake" reference-fk="fk_riverlake"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_riverthrough_river" type="relfk" layers="0"
+	 custom-color="#f02b7b"
+	 src-table="public.riverthrough"
+	 dst-table="public.river" reference-fk="fk_thriver"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_riverthrough_lake" type="relfk" layers="0"
+	 custom-color="#4faac0"
+	 src-table="public.riverthrough"
+	 dst-table="public.lake" reference-fk="fk_thlake"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_geo_mountain_province" type="relfk" layers="0"
+	 custom-color="#3b9459"
+	 src-table="public.geo_mountain"
+	 dst-table="public.province" reference-fk="fk_mountainprovince"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_geo_mountain_mountain" type="relfk" layers="0"
+	 custom-color="#162257"
+	 src-table="public.geo_mountain"
+	 dst-table="public.mountain" reference-fk="fk_geomountain"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_geo_desert_desert" type="relfk" layers="0"
+	 custom-color="#d1f70e"
+	 src-table="public.geo_desert"
+	 dst-table="public.desert" reference-fk="fk_desert"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_geo_desert_province" type="relfk" layers="0"
+	 custom-color="#87dcda"
+	 src-table="public.geo_desert"
+	 dst-table="public.province" reference-fk="fk_desertprovince"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_geo_island_province" type="relfk" layers="0"
+	 custom-color="#8f7888"
+	 src-table="public.geo_island"
+	 dst-table="public.province" reference-fk="fk_islandprovince"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_geo_island_island" type="relfk" layers="0"
+	 custom-color="#7d574a"
+	 src-table="public.geo_island"
+	 dst-table="public.island" reference-fk="fk_geoisland"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_geo_river_province" type="relfk" layers="0"
+	 custom-color="#543e87"
+	 src-table="public.geo_river"
+	 dst-table="public.province" reference-fk="fk_griverprovince"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_geo_river_river" type="relfk" layers="0"
+	 custom-color="#b7aa95"
+	 src-table="public.geo_river"
+	 dst-table="public.river" reference-fk="fk_georiver"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_geo_sea_province" type="relfk" layers="0"
+	 custom-color="#e3f065"
+	 src-table="public.geo_sea"
+	 dst-table="public.province" reference-fk="fk_seaprovince"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_geo_sea_sea" type="relfk" layers="0"
+	 custom-color="#9f7f13"
+	 src-table="public.geo_sea"
+	 dst-table="public.sea" reference-fk="fk_geosea"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_geo_lake_province" type="relfk" layers="0"
+	 custom-color="#0dd7e3"
+	 src-table="public.geo_lake"
+	 dst-table="public.province" reference-fk="fk_lakeprovince"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_geo_lake_lake" type="relfk" layers="0"
+	 custom-color="#eaf91b"
+	 src-table="public.geo_lake"
+	 dst-table="public.lake" reference-fk="fk_geolake"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_geo_source_province" type="relfk" layers="0"
+	 custom-color="#c8a9bb"
+	 src-table="public.geo_source"
+	 dst-table="public.province" reference-fk="fk_gsrcprovince"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_geo_source_river" type="relfk" layers="0"
+	 custom-color="#fd70c5"
+	 src-table="public.geo_source"
+	 dst-table="public.river" reference-fk="fk_gsrcriver"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_geo_estuary_province" type="relfk" layers="0"
+	 custom-color="#d088e5"
+	 src-table="public.geo_estuary"
+	 dst-table="public.province" reference-fk="fk_gestprovince"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_geo_estuary_river" type="relfk" layers="0"
+	 custom-color="#f47642"
+	 src-table="public.geo_estuary"
+	 dst-table="public.river" reference-fk="fk_gestriver"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_mergeswith_sea" type="relfk" layers="0"
+	 custom-color="#d0447d"
+	 src-table="public.mergeswith"
+	 dst-table="public.sea" reference-fk="fk_sea1"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_mergeswith_sea1" type="relfk" layers="0"
+	 custom-color="#997550"
+	 src-table="public.mergeswith"
+	 dst-table="public.sea" reference-fk="fk_sea2"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_located_city" type="relfk" layers="0"
+	 custom-color="#49a306"
+	 src-table="public.located"
+	 dst-table="public.city" reference-fk="fk_locatedcity"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_located_sea" type="relfk" layers="0"
+	 custom-color="#81df82"
+	 src-table="public.located"
+	 dst-table="public.sea" reference-fk="fk_locsea"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_located_river" type="relfk" layers="0"
+	 custom-color="#8c6eaf"
+	 src-table="public.located"
+	 dst-table="public.river" reference-fk="fk_locriver"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_located_lake" type="relfk" layers="0"
+	 custom-color="#084e19"
+	 src-table="public.located"
+	 dst-table="public.lake" reference-fk="fk_loclake"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_locatedon_city" type="relfk" layers="0"
+	 custom-color="#9742a3"
+	 src-table="public.locatedon"
+	 dst-table="public.city" reference-fk="fk_locatedcityon"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_locatedon_island" type="relfk" layers="0"
+	 custom-color="#b0be6d"
+	 src-table="public.locatedon"
+	 dst-table="public.island" reference-fk="fk_onisland"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_islandin_island" type="relfk" layers="0"
+	 custom-color="#90c51c"
+	 src-table="public.islandin"
+	 dst-table="public.island" reference-fk="fk_islandin"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_islandin_sea" type="relfk" layers="0"
+	 custom-color="#c8fc70"
+	 src-table="public.islandin"
+	 dst-table="public.sea" reference-fk="fk_insea"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_mountainonisland_mountain" type="relfk" layers="0"
+	 custom-color="#770f47"
+	 src-table="public.mountainonisland"
+	 dst-table="public.mountain" reference-fk="fk_mtimountain"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_lakeonisland_island" type="relfk" layers="0"
+	 custom-color="#23d2e4"
+	 src-table="public.lakeonisland"
+	 dst-table="public.island" reference-fk="fk_lakeoisland"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_lakeonisland_lake" type="relfk" layers="0"
+	 custom-color="#ad3e67"
+	 src-table="public.lakeonisland"
+	 dst-table="public.lake" reference-fk="fk_islandlake"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_riveronisland_island" type="relfk" layers="0"
+	 custom-color="#175d00"
+	 src-table="public.riveronisland"
+	 dst-table="public.island" reference-fk="fk_riveroisland"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_riveronisland_river" type="relfk" layers="0"
+	 custom-color="#9232c2"
+	 src-table="public.riveronisland"
+	 dst-table="public.river" reference-fk="fk_islandriver"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_airport_city" type="relfk" layers="0"
+	 custom-color="#e0d2a9"
+	 src-table="public.airport"
+	 dst-table="public.city" reference-fk="fk_airportcity"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_airport_island" type="relfk" layers="0"
+	 custom-color="#393360"
+	 src-table="public.airport"
+	 dst-table="public.island" reference-fk="fk_airportisland"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_sales_article" type="relfk" layers="0"
+	 custom-color="#370ed0"
+	 src-table="warehouse.sales"
+	 dst-table="warehouse.article" reference-fk="ArticleId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_sales_time" type="relfk" layers="0"
+	 custom-color="#5fbaaf"
+	 src-table="warehouse.sales"
+	 dst-table="warehouse.&quot;time&quot;" reference-fk="TimeId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_sales_customer" type="relfk" layers="0"
+	 custom-color="#35eb97"
+	 src-table="warehouse.sales"
+	 dst-table="warehouse.customer" reference-fk="CustomerId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_sales_location" type="relfk" layers="0"
+	 custom-color="#1c10ab"
+	 src-table="warehouse.sales"
+	 dst-table="warehouse.location" reference-fk="StoreId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_location_city" type="relfk" layers="0"
+	 custom-color="#a5caa5"
+	 src-table="warehouse.location"
+	 dst-table="public.city" reference-fk="rel_mondial_to_warehouse"
+	 src-required="false" dst-required="false"/>
+
+<permission>
+	<object name="public" type="schema"/>
+	<roles names="pg_database_owner"/>
+	<privileges create="true" usage="true"/>
+</permission>
+<permission>
+	<object name="public" type="schema"/>
+	<privileges usage="true"/>
+</permission>
+<permission>
+	<object name="mondial" type="database"/>
+	<privileges connect="true" temporary="true"/>
+</permission>
+<permission>
+	<object name="mondial" type="database"/>
+	<roles names="mondial"/>
+	<privileges create="true" connect="true" temporary="true"/>
+</permission>
+</dbmodel>
