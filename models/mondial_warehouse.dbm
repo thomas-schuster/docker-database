@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
  Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="1.0.2" use-changelog="false" last-position="0,0" last-zoom="0.7" max-obj-count="80"
+<dbmodel pgmodeler-ver="1.0.2" use-changelog="false" last-position="811,0" last-zoom="1" max-obj-count="80"
 	 default-schema="public" default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
@@ -1148,7 +1148,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="article" layers="0" collapse-mode="2" max-obj-count="20" z-value="0">
 	<schema name="warehouse"/>
 	<role name="mondial"/>
-	<position x="1460" y="640"/>
+	<position x="1400" y="800"/>
 	<column name="ArticleId" not-null="true">
 		<type name="character varying" length="8"/>
 	</column>
@@ -1208,7 +1208,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="sales" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
 	<schema name="warehouse"/>
 	<role name="mondial"/>
-	<position x="1800" y="440"/>
+	<position x="1800" y="640"/>
 	<column name="ArticleId" not-null="true">
 		<type name="character varying" length="8"/>
 	</column>
@@ -1235,7 +1235,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="time" layers="0" collapse-mode="2" max-obj-count="34" z-value="0">
 	<schema name="warehouse"/>
 	<role name="mondial"/>
-	<position x="2080" y="60"/>
+	<position x="2180" y="60"/>
 	<column name="TimeId" not-null="true">
 		<type name="character varying" length="8"/>
 	</column>
@@ -1331,7 +1331,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="customer" layers="0" collapse-mode="2" max-obj-count="33" z-value="0">
 	<schema name="warehouse"/>
 	<role name="mondial"/>
-	<position x="1980" y="700"/>
+	<position x="2180" y="780"/>
 	<column name="CustomerId" not-null="true">
 		<type name="character varying" length="8"/>
 	</column>
@@ -2178,9 +2178,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 dst-table="public.river" reference-fk="fk_riverriver"
 	 src-required="false" dst-required="false">
 	<line>
-		<position x="773.15" y="1680.97"/>
-	<position x="773.15" y="1507"/>
-	<position x="693.433" y="1507"/>
+		<position x="972.75" y="1680.97"/>
+	<position x="972.75" y="1507"/>
+	<position x="826.5" y="1507"/>
 	</line>
 </relationship>
 
