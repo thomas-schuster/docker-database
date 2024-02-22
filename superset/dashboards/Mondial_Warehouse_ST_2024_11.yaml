@@ -1,0 +1,191 @@
+dashboard_title: Mondial Warehouse ST 2024
+description: null
+css: ".navbar {\n    transition: opacity 0.5s ease;\n    opacity: 0.05;\n}\n.navbar:hover\
+  \ {\n    opacity: 1;\n}\n.chart-header .header{\n    font-weight: @font-weight-normal;\n\
+  \    font-size: 12px;\n}\n/*\nvar bnbColors = [\n    //rausch    hackb      kazan\
+  \      babu      lima        beach     tirol\n    '#ff5a5f', '#7b0051', '#007A87',\
+  \ '#00d1c1', '#8ce071', '#ffb400', '#b4a76c',\n    '#ff8083', '#cc0086', '#00a1b3',\
+  \ '#00ffeb', '#bbedab', '#ffd266', '#cbc29a',\n    '#ff3339', '#ff1ab1', '#005c66',\
+  \ '#00b3a5', '#55d12e', '#b37e00', '#988b4e',\n ];\n*/\n"
+slug: mondial-warehouse-st24
+certified_by: Department of Information Systems
+certification_details: ''
+published: true
+uuid: 80c06b3b-2547-4408-93f1-71196da8f9c0
+position:
+  CHART-KwCpk5bwVT:
+    children: []
+    id: CHART-KwCpk5bwVT
+    meta:
+      chartId: 97
+      height: 27
+      sliceName: Birth Years of Customers
+      uuid: 4f1b2f66-3704-4121-abf7-26bb3c3285e4
+      width: 6
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - ROW-otoWuydLq
+    type: CHART
+  CHART-explore-100-1:
+    children: []
+    id: CHART-explore-100-1
+    meta:
+      chartId: 100
+      height: 50
+      sliceName: Distribution across US-States
+      uuid: 19b1f55a-42f7-453e-b4fd-3cd266886a66
+      width: 5
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - ROW-87HJeiAkNd
+    type: CHART
+  CHART-explore-98-1:
+    children: []
+    id: CHART-explore-98-1
+    meta:
+      chartId: 98
+      height: 27
+      sliceName: Sales for current Year
+      uuid: ae23154e-0bf8-4705-9aa4-78f8849f4026
+      width: 3
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - ROW-otoWuydLq
+    type: CHART
+  CHART-explore-99-1:
+    children: []
+    id: CHART-explore-99-1
+    meta:
+      chartId: 99
+      height: 49
+      sliceName: Overview of Products by Brand (in Groups)
+      uuid: 959ca9ce-1094-4315-be0b-3130cc181865
+      width: 4
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - ROW-87HJeiAkNd
+    type: CHART
+  DASHBOARD_VERSION_KEY: v2
+  GRID_ID:
+    children:
+    - HEADER-0uM-er8_xp
+    - ROW-otoWuydLq
+    - ROW-87HJeiAkNd
+    id: GRID_ID
+    parents:
+    - ROOT_ID
+    type: GRID
+  HEADER-0uM-er8_xp:
+    children: []
+    id: HEADER-0uM-er8_xp
+    meta:
+      background: BACKGROUND_WHITE
+      headerSize: LARGE_HEADER
+      text: Welcome to the Mondial Warehouse Dashboard
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    type: HEADER
+  HEADER_ID:
+    id: HEADER_ID
+    meta:
+      text: Mondial Warehouse ST 2024
+    type: HEADER
+  ROOT_ID:
+    children:
+    - GRID_ID
+    id: ROOT_ID
+    type: ROOT
+  ROW-87HJeiAkNd:
+    children:
+    - CHART-explore-99-1
+    - CHART-explore-100-1
+    id: ROW-87HJeiAkNd
+    meta:
+      '0': ROOT_ID
+      background: BACKGROUND_TRANSPARENT
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    type: ROW
+  ROW-otoWuydLq:
+    children:
+    - CHART-explore-98-1
+    - CHART-KwCpk5bwVT
+    id: ROW-otoWuydLq
+    meta:
+      background: BACKGROUND_TRANSPARENT
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    type: ROW
+metadata:
+  chart_configuration:
+    '99':
+      id: 99
+      crossFilters:
+        scope: global
+        chartsInScope:
+        - 97
+        - 98
+        - 100
+    '100':
+      id: 100
+      crossFilters:
+        scope: global
+        chartsInScope:
+        - 97
+        - 98
+        - 99
+  global_chart_configuration:
+    scope:
+      rootPath:
+      - ROOT_ID
+      excluded: []
+    chartsInScope:
+    - 97
+    - 98
+    - 99
+    - 100
+  color_scheme: bnbColors
+  refresh_frequency: 0
+  expanded_slices: {}
+  label_colors: {}
+  timed_refresh_immune_slices: []
+  cross_filters_enabled: true
+  default_filters: '{}'
+  shared_label_colors:
+    California: '#29696B'
+    Arizona: '#F4B02A'
+    Kansas: '#792EB2'
+    Florida: '#921E50'
+    Illinois: '#9C3498'
+    Virginia: '#C32F0E'
+    Georgia: '#5BCACE'
+    New Mexico: '#B27700'
+    Indiana: '#F1826A'
+    Pennsylvania: '#C96EC6'
+    Hawaii: '#E4679D'
+    Ohio: '#9D63CA'
+    Missouri: '#9D63CA'
+    Kentucky: '#29696B'
+    Wyoming: '#5BCACE'
+  color_scheme_domain:
+  - '#29696B'
+  - '#5BCACE'
+  - '#F4B02A'
+  - '#F1826A'
+  - '#792EB2'
+  - '#C96EC6'
+  - '#921E50'
+  - '#B27700'
+  - '#9C3498'
+  - '#9C3498'
+  - '#E4679D'
+  - '#C32F0E'
+  - '#9D63CA'
+version: 1.0.0
