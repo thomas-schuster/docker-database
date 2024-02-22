@@ -63,7 +63,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="article" layers="0" collapse-mode="2" max-obj-count="20" z-value="0">
 	<schema name="warehouse"/>
 	<role name="mondial"/>
-	<position x="620" y="600"/>
+	<position x="640" y="620"/>
 	<column name="ArticleId" not-null="true">
 		<type name="character varying" length="8"/>
 	</column>
@@ -123,7 +123,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="sales" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
 	<schema name="warehouse"/>
 	<role name="mondial"/>
-	<position x="1140" y="680"/>
+	<position x="1160" y="700"/>
 	<column name="ArticleId" not-null="true">
 		<type name="character varying" length="8"/>
 	</column>
@@ -150,7 +150,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="time" layers="0" collapse-mode="2" max-obj-count="34" z-value="0">
 	<schema name="warehouse"/>
 	<role name="mondial"/>
-	<position x="1100" y="0"/>
+	<position x="1120" y="20"/>
 	<column name="TimeId" not-null="true">
 		<type name="character varying" length="8"/>
 	</column>
@@ -246,7 +246,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="customer" layers="0" collapse-mode="2" max-obj-count="33" z-value="0">
 	<schema name="warehouse"/>
 	<role name="mondial"/>
-	<position x="1640" y="500"/>
+	<position x="1660" y="520"/>
 	<column name="CustomerId" not-null="true">
 		<type name="character varying" length="8"/>
 	</column>
@@ -339,7 +339,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="location" layers="0" collapse-mode="2" max-obj-count="26" z-value="0">
 	<schema name="warehouse"/>
 	<role name="mondial"/>
-	<position x="1080" y="1060"/>
+	<position x="1100" y="1080"/>
 	<column name="StoreId" not-null="true">
 		<type name="character varying" length="8"/>
 	</column>

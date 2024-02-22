@@ -1,0 +1,806 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+ Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="1.0.2" use-changelog="false" last-position="0,270" last-zoom="0.6" max-obj-count="24"
+	 default-schema="public" default-owner="postgres"
+	 layers="Default layer"
+	 active-layers="0"
+	 layer-name-colors="#000000"
+	 layer-rect-colors="#b4b4b4"
+	 show-layer-names="false" show-layer-rects="false">
+<role name="pg_database_owner"
+ inherit="true"
+ password="********"
+ sql-disabled="true">
+</role>
+
+<role name="mondial"
+ inherit="true"
+ login="true"
+ password="********">
+</role>
+
+<role name="mondialuser"
+ inherit="true"
+ login="true"
+ password="********">
+</role>
+
+<database name="mondial" encoding="UTF8" lc-collate="en_US.utf8" lc-ctype="en_US.utf8" is-template="false" allow-conns="true">
+	<role name="mondial"/>
+	<tablespace name="pg_default"/>
+</database>
+
+<schema name="public" layers="0" rect-visible="true" fill-color="#ffffff" sql-disabled="true">
+</schema>
+
+<schema name="warehouse" layers="0" rect-visible="true" fill-color="#ffffff">
+	<role name="mondial"/>
+</schema>
+
+<extension name="plperl" cur-version="1.0">
+	<schema name="pg_catalog"/>
+	<comment> <![CDATA[PL/Perl procedural language]]> </comment>
+</extension>
+
+<extension name="bool_plperl" cur-version="1.0">
+	<schema name="public"/>
+	<comment> <![CDATA[transform between bool and plperl]]> </comment>
+</extension>
+
+<extension name="plpython3u" cur-version="1.0">
+	<schema name="pg_catalog"/>
+	<comment> <![CDATA[PL/Python3U untrusted procedural language]]> </comment>
+</extension>
+
+<extension name="pgcrypto" cur-version="1.3">
+	<schema name="public"/>
+	<comment> <![CDATA[cryptographic functions]]> </comment>
+</extension>
+
+<table name="article" layers="0" collapse-mode="2" max-obj-count="20" z-value="0">
+	<schema name="warehouse"/>
+	<role name="mondial"/>
+	<position x="700" y="620"/>
+	<column name="ArticleId" not-null="true">
+		<type name="character varying" length="8"/>
+	</column>
+	<column name="GTIN">
+		<type name="text" length="0"/>
+	</column>
+	<column name="Name">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="Description">
+		<type name="character varying" length="256"/>
+	</column>
+	<column name="ManufacturerId" not-null="true">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="BrandId" not-null="true">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="ProductGroupId" not-null="true">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="Weight">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="Width">
+		<type name="numeric" length="16" precision="0"/>
+	</column>
+	<column name="Length">
+		<type name="numeric" length="16" precision="0"/>
+	</column>
+	<column name="Height">
+		<type name="numeric" length="16" precision="0"/>
+	</column>
+	<column name="Volume" default-value="(&quot;Width&quot; * &quot;Length&quot;) * &quot;Height&quot;" generated="true">
+		<type name="numeric" length="16" precision="0"/>
+	</column>
+	<column name="MeasurementId" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="UnitCost">
+		<type name="numeric" length="16" precision="0"/>
+	</column>
+	<column name="UnitPrice">
+		<type name="numeric" length="16" precision="0"/>
+	</column>
+	<column name="AvailableSince">
+		<type name="date" length="0"/>
+	</column>
+	<column name="SaleStoppedSince">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="ArticleId_pk" type="pk-constr" table="warehouse.article">
+		<columns names="ArticleId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="sales" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="warehouse"/>
+	<role name="mondial"/>
+	<position x="1220" y="700"/>
+	<column name="ArticleId" not-null="true">
+		<type name="character varying" length="8"/>
+	</column>
+	<column name="DayId" not-null="true">
+		<type name="character varying" length="8"/>
+	</column>
+	<column name="StoreId" not-null="true">
+		<type name="character varying" length="8"/>
+	</column>
+	<column name="CustomerId" not-null="true">
+		<type name="character varying" length="8"/>
+	</column>
+	<column name="SalesVolume">
+		<type name="numeric" length="24" precision="0"/>
+	</column>
+	<column name="Amount">
+		<type name="smallint" length="0"/>
+	</column>
+	<constraint name="Sales_pk" type="pk-constr" table="warehouse.sales">
+		<columns names="ArticleId,DayId,StoreId,CustomerId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="customer" layers="0" collapse-mode="2" max-obj-count="34" z-value="0">
+	<schema name="warehouse"/>
+	<role name="mondial"/>
+	<position x="1720" y="520"/>
+	<column name="CustomerId" not-null="true">
+		<type name="character varying" length="8"/>
+	</column>
+	<column name="Group">
+		<type name="character varying" length="16"/>
+	</column>
+	<column name="Title">
+		<type name="character varying" length="6"/>
+	</column>
+	<column name="FirstName">
+		<type name="text" length="0"/>
+	</column>
+	<column name="MiddleName">
+		<type name="text" length="0"/>
+	</column>
+	<column name="LastName">
+		<type name="text" length="0"/>
+	</column>
+	<column name="BirthDate">
+		<type name="date" length="0"/>
+	</column>
+	<column name="Age">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="Gender">
+		<type name="character varying" length="1"/>
+	</column>
+	<column name="EductationLevel">
+		<type name="text" length="0"/>
+	</column>
+	<column name="MartialStatus">
+		<type name="bit" length="1"/>
+	</column>
+	<column name="Children">
+		<type name="bit" length="1"/>
+	</column>
+	<column name="NumberOfChildren">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="NumberOfChildrenAtHome">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="YearlyIncome">
+		<type name="numeric" length="16" precision="0"/>
+	</column>
+	<column name="Occupation">
+		<type name="text" length="0"/>
+	</column>
+	<column name="HouseOwnerFlag">
+		<type name="bit" length="1"/>
+	</column>
+	<column name="CarOwnerFlag">
+		<type name="bit" length="1"/>
+	</column>
+	<column name="EmailAdress">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="Phone">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="AdressLine1">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="AdressLine2">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="ZIP">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="City">
+		<type name="text" length="0"/>
+	</column>
+	<column name="FirstPurchaseDate">
+		<type name="date" length="0"/>
+	</column>
+	<column name="LastPurchaseDate">
+		<type name="date" length="0"/>
+	</column>
+	<column name="TotalSpent">
+		<type name="numeric" length="16" precision="0"/>
+	</column>
+	<column name="CustomerGroupId">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="CustomerTypeId">
+		<type name="varchar" length="8"/>
+	</column>
+	<constraint name="CustomerId_pk" type="pk-constr" table="warehouse.customer">
+		<columns names="CustomerId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="location" layers="0" collapse-mode="2" max-obj-count="24" z-value="0">
+	<schema name="warehouse"/>
+	<role name="mondial"/>
+	<position x="1160" y="1080"/>
+	<column name="StoreId" not-null="true">
+		<type name="character varying" length="8"/>
+	</column>
+	<column name="StoreManagerId">
+		<type name="character varying" length="8"/>
+	</column>
+	<column name="StoreManagerName">
+		<type name="text" length="0"/>
+	</column>
+	<column name="StoreType">
+		<type name="text" length="0"/>
+	</column>
+	<column name="StoreName">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="Status">
+		<type name="text" length="0"/>
+	</column>
+	<column name="OpenDate">
+		<type name="date" length="0"/>
+	</column>
+	<column name="CloseDate">
+		<type name="date" length="0"/>
+	</column>
+	<column name="StorePhone">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="StoreFax">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="AdressLine1">
+		<type name="text" length="0"/>
+	</column>
+	<column name="AdressLine2">
+		<type name="text" length="0"/>
+	</column>
+	<column name="ZIP">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="City">
+		<type name="character varying" length="8"/>
+	</column>
+	<column name="CloseReason">
+		<type name="text" length="0"/>
+	</column>
+	<column name="EmployeeCount">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="SellingSizeArea">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="LastRemodelDate">
+		<type name="date" length="0"/>
+	</column>
+	<column name="MaxDailyCustomerCountRecorded">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="AvgDailyCustomerCountRecorded">
+		<type name="smallint" length="0"/>
+	</column>
+	<constraint name="StoreId_pk" type="pk-constr" table="warehouse.location">
+		<columns names="StoreId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="manufacturer" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="warehouse"/>
+	<role name="postgres"/>
+	<position x="460" y="360"/>
+	<column name="ManufacturerId" not-null="true">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="Name" not-null="true">
+		<type name="varchar" length="64"/>
+	</column>
+	<column name="Description">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="ManufacturerId_pk" type="pk-constr" table="warehouse.manufacturer">
+		<columns names="ManufacturerId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="brand" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="warehouse"/>
+	<role name="postgres"/>
+	<position x="320" y="580"/>
+	<column name="BrandId" not-null="true">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="Name" not-null="true">
+		<type name="varchar" length="64"/>
+	</column>
+	<column name="Description">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="BrandId_pk" type="pk-constr" table="warehouse.brand">
+		<columns names="BrandId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="productgroup" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="warehouse"/>
+	<role name="postgres"/>
+	<position x="320" y="1020"/>
+	<column name="ProductGroupId" not-null="true">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="Name" not-null="true">
+		<type name="varchar" length="64"/>
+	</column>
+	<column name="Description">
+		<type name="text" length="0"/>
+	</column>
+	<column name="ProductCategoryId" not-null="true">
+		<type name="varchar" length="8"/>
+	</column>
+	<constraint name="ProductGroupId_pk" type="pk-constr" table="warehouse.productgroup">
+		<columns names="ProductGroupId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="productcategory" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="warehouse"/>
+	<role name="postgres"/>
+	<position x="320" y="1260"/>
+	<column name="ProductCategoryId" not-null="true">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="Name" not-null="true">
+		<type name="varchar" length="64"/>
+	</column>
+	<constraint name="ProductCategoryId_pk" type="pk-constr" table="warehouse.productcategory">
+		<columns names="ProductCategoryId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="measurement" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="warehouse"/>
+	<role name="postgres"/>
+	<position x="320" y="820"/>
+	<column name="MeasureId" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="Measure" not-null="true">
+		<type name="varchar" length="2"/>
+	</column>
+	<constraint name="MeasureId_pk" type="pk-constr" table="warehouse.measurement">
+		<columns names="MeasureId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="city" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1800" y="1340"/>
+	<column name="city" not-null="true">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="name">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="province">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="population">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="latitude">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="longitude">
+		<type name="numeric" length="0"/>
+	</column>
+	<column name="elevation">
+		<type name="numeric" length="0"/>
+	</column>
+	<constraint name="city_pk" type="pk-constr" table="public.city">
+		<columns names="city" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="country" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1820" y="1940"/>
+	<column name="country" not-null="true">
+		<type name="varchar" length="4"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="varchar" length="64"/>
+	</column>
+	<constraint name="CountryId_pk" type="pk-constr" table="public.country">
+		<columns names="country" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="province" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1840" y="1660"/>
+	<column name="province" not-null="true">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="country">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="name">
+		<type name="varchar" length="64"/>
+	</column>
+	<constraint name="province_pk" type="pk-constr" table="public.province">
+		<columns names="province" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="customergroup" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="warehouse"/>
+	<role name="postgres"/>
+	<position x="2200" y="580"/>
+	<column name="CustomerGroupId" not-null="true">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="Name" not-null="true">
+		<type name="varchar" length="64"/>
+	</column>
+	<column name="CustomerGroupCategoryId" not-null="true">
+		<type name="varchar" length="8"/>
+	</column>
+	<constraint name="CustomerGroupId_pk" type="pk-constr" table="warehouse.customergroup">
+		<columns names="CustomerGroupId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="customertypes" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="warehouse"/>
+	<role name="postgres"/>
+	<position x="2240" y="920"/>
+	<column name="CustomerTypeId" not-null="true">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="Name" not-null="true">
+		<type name="varchar" length="64"/>
+	</column>
+	<column name="Description">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="CustomerTypeId_pk" type="pk-constr" table="warehouse.customertypes">
+		<columns names="CustomerTypeId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="day" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="warehouse"/>
+	<role name="postgres"/>
+	<position x="1240" y="420"/>
+	<column name="DayId" not-null="true">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="WeekId">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="MonthId">
+		<type name="varchar" length="8"/>
+	</column>
+	<constraint name="DayId_pk" type="pk-constr" table="warehouse.day">
+		<columns names="DayId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="week" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="warehouse"/>
+	<role name="postgres"/>
+	<position x="1240" y="200"/>
+	<column name="WeekId" not-null="true">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="YearId" not-null="true">
+		<type name="varchar" length="8"/>
+	</column>
+	<constraint name="WeekId_pk" type="pk-constr" table="warehouse.week">
+		<columns names="WeekId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="year" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="warehouse"/>
+	<role name="postgres"/>
+	<position x="1260" y="20"/>
+	<column name="YearId" not-null="true">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="Name">
+		<type name="text" length="0"/>
+	</column>
+</table>
+
+<table name="quarter" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="warehouse"/>
+	<role name="postgres"/>
+	<position x="1780" y="80"/>
+	<column name="QuarterId" not-null="true">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="YearId">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="Name">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="QuarterId_pk" type="pk-constr" table="warehouse.quarter">
+		<columns names="QuarterId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="month" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="warehouse"/>
+	<role name="postgres"/>
+	<position x="1780" y="320"/>
+	<column name="MonthId" not-null="true">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="QuarterId">
+		<type name="varchar" length="8"/>
+	</column>
+	<column name="Name">
+		<type name="text" length="0"/>
+	</column>
+	<constraint name="MonthId_pk" type="pk-constr" table="warehouse.month">
+		<columns names="MonthId" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<constraint name="ManufacturerId_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="warehouse.manufacturer" table="warehouse.article">
+	<columns names="ManufacturerId" ref-type="src-columns"/>
+	<columns names="ManufacturerId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="BrandId_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="warehouse.brand" table="warehouse.article">
+	<columns names="BrandId" ref-type="src-columns"/>
+	<columns names="BrandId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="ProductGroupId_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="warehouse.productgroup" table="warehouse.article">
+	<columns names="ProductGroupId" ref-type="src-columns"/>
+	<columns names="ProductGroupId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="MeasurementId_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="warehouse.measurement" table="warehouse.article">
+	<columns names="MeasurementId" ref-type="src-columns"/>
+	<columns names="MeasureId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="ArticleId_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="warehouse.article" table="warehouse.sales">
+	<columns names="ArticleId" ref-type="src-columns"/>
+	<columns names="ArticleId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="DayId" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="warehouse.day" table="warehouse.sales">
+	<columns names="DayId" ref-type="src-columns"/>
+	<columns names="DayId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="StoreId_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="warehouse.location" table="warehouse.sales">
+	<columns names="StoreId" ref-type="src-columns"/>
+	<columns names="StoreId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="CustomerId_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="warehouse.customer" table="warehouse.sales">
+	<columns names="CustomerId" ref-type="src-columns"/>
+	<columns names="CustomerId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="CustomerGroupId_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="warehouse.customergroup" table="warehouse.customer">
+	<columns names="CustomerGroupId" ref-type="src-columns"/>
+	<columns names="CustomerGroupId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="CustomerTypeId_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="warehouse.customertypes" table="warehouse.customer">
+	<columns names="CustomerTypeId" ref-type="src-columns"/>
+	<columns names="CustomerTypeId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="CityId_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.city" table="warehouse.location">
+	<columns names="City" ref-type="src-columns"/>
+	<columns names="city" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="ProductCategory_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="warehouse.productcategory" table="warehouse.productgroup">
+	<columns names="ProductCategoryId" ref-type="src-columns"/>
+	<columns names="ProductCategoryId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="province_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.province" table="public.city">
+	<columns names="province" ref-type="src-columns"/>
+	<columns names="province" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="country_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.country" table="public.province">
+	<columns names="country" ref-type="src-columns"/>
+	<columns names="country" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="WeekId_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="warehouse.week" table="warehouse.day">
+	<columns names="WeekId" ref-type="src-columns"/>
+	<columns names="WeekId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="MonthId_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="warehouse.month" table="warehouse.day">
+	<columns names="MonthId" ref-type="src-columns"/>
+	<columns names="MonthId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="YearId_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="warehouse.year" table="warehouse.week">
+	<columns names="YearId" ref-type="src-columns"/>
+	<columns names="YearId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="YearId_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="warehouse.year" table="warehouse.quarter">
+	<columns names="YearId" ref-type="src-columns"/>
+	<columns names="YearId" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="QuarterId_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="warehouse.quarter" table="warehouse.month">
+	<columns names="QuarterId" ref-type="src-columns"/>
+	<columns names="QuarterId" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_sales_article" type="relfk" layers="0"
+	 custom-color="#370ed0"
+	 src-table="warehouse.sales"
+	 dst-table="warehouse.article" reference-fk="ArticleId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_article_manufacturer" type="relfk" layers="0"
+	 src-table="warehouse.article"
+	 dst-table="warehouse.manufacturer" reference-fk="ManufacturerId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_article_brand" type="relfk" layers="0"
+	 src-table="warehouse.article"
+	 dst-table="warehouse.brand" reference-fk="BrandId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="&quot;rel_article_ProductGroup&quot;" type="relfk" layers="0"
+	 src-table="warehouse.article"
+	 dst-table="warehouse.productgroup" reference-fk="ProductGroupId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_productgroup_productcategorz" type="relfk" layers="0"
+	 src-table="warehouse.productgroup"
+	 dst-table="warehouse.productcategory" reference-fk="ProductCategory_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_article_measurement" type="relfk" layers="0"
+	 src-table="warehouse.article"
+	 dst-table="warehouse.measurement" reference-fk="MeasurementId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_location_city" type="relfk" layers="0"
+	 src-table="warehouse.location"
+	 dst-table="public.city" reference-fk="CityId_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_city_province" type="relfk" layers="0"
+	 src-table="public.city"
+	 dst-table="public.province" reference-fk="province_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_province_country" type="relfk" layers="0"
+	 src-table="public.province"
+	 dst-table="public.country" reference-fk="country_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_customer_customergroup" type="relfk" layers="0"
+	 src-table="warehouse.customer"
+	 dst-table="warehouse.customergroup" reference-fk="CustomerGroupId_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_customer_customertypes" type="relfk" layers="0"
+	 src-table="warehouse.customer"
+	 dst-table="warehouse.customertypes" reference-fk="CustomerTypeId_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="&quot;rel_Day_Week&quot;" type="relfk" layers="0"
+	 src-table="warehouse.day"
+	 dst-table="warehouse.week" reference-fk="WeekId_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_week_year" type="relfk" layers="0"
+	 src-table="warehouse.week"
+	 dst-table="warehouse.year" reference-fk="YearId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_quarter_year" type="relfk" layers="0"
+	 src-table="warehouse.quarter"
+	 dst-table="warehouse.year" reference-fk="YearId_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_month_quarter" type="relfk" layers="0"
+	 src-table="warehouse.month"
+	 dst-table="warehouse.quarter" reference-fk="QuarterId_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_day_month" type="relfk" layers="0"
+	 src-table="warehouse.day"
+	 dst-table="warehouse.month" reference-fk="MonthId_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_sales_article1" type="relfk" layers="0"
+	 src-table="warehouse.sales"
+	 dst-table="warehouse.article" reference-fk="ArticleId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_sales_day" type="relfk" layers="0"
+	 src-table="warehouse.sales"
+	 dst-table="warehouse.day" reference-fk="DayId"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_sales_location" type="relfk" layers="0"
+	 src-table="warehouse.sales"
+	 dst-table="warehouse.location" reference-fk="StoreId_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_sales_customer" type="relfk" layers="0"
+	 src-table="warehouse.sales"
+	 dst-table="warehouse.customer" reference-fk="CustomerId_fk"
+	 src-required="false" dst-required="true"/>
+
+<permission>
+	<object name="mondial" type="database"/>
+	<privileges connect="true" temporary="true"/>
+</permission>
+<permission>
+	<object name="mondial" type="database"/>
+	<roles names="mondial"/>
+	<privileges create="true" connect="true" temporary="true"/>
+</permission>
+</dbmodel>
