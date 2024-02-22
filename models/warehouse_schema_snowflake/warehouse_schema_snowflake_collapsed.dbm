@@ -60,10 +60,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<comment> <![CDATA[cryptographic functions]]> </comment>
 </extension>
 
-<table name="article" layers="0" collapse-mode="2" max-obj-count="20" z-value="0">
+<table name="article" layers="0" collapse-mode="0" max-obj-count="20" z-value="0">
 	<schema name="warehouse"/>
 	<role name="mondial"/>
-	<position x="700" y="620"/>
+	<position x="400" y="520"/>
 	<column name="ArticleId" not-null="true">
 		<type name="character varying" length="8"/>
 	</column>
@@ -120,10 +120,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="sales" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+<table name="sales" layers="0" collapse-mode="0" max-obj-count="7" z-value="0">
 	<schema name="warehouse"/>
 	<role name="mondial"/>
-	<position x="1220" y="700"/>
+	<position x="700" y="520"/>
 	<column name="ArticleId" not-null="true">
 		<type name="character varying" length="8"/>
 	</column>
@@ -147,10 +147,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="customer" layers="0" collapse-mode="2" max-obj-count="34" z-value="0">
+<table name="customer" layers="0" collapse-mode="0" max-obj-count="34" z-value="0">
 	<schema name="warehouse"/>
 	<role name="mondial"/>
-	<position x="1720" y="520"/>
+	<position x="960" y="520"/>
 	<column name="CustomerId" not-null="true">
 		<type name="character varying" length="8"/>
 	</column>
@@ -243,10 +243,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="location" layers="0" collapse-mode="2" max-obj-count="24" z-value="0">
+<table name="location" layers="0" collapse-mode="0" max-obj-count="24" z-value="0">
 	<schema name="warehouse"/>
 	<role name="mondial"/>
-	<position x="1160" y="1080"/>
+	<position x="700" y="660"/>
 	<column name="StoreId" not-null="true">
 		<type name="character varying" length="8"/>
 	</column>
@@ -312,10 +312,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="manufacturer" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+<table name="manufacturer" layers="0" collapse-mode="0" max-obj-count="3" z-value="0">
 	<schema name="warehouse"/>
 	<role name="postgres"/>
-	<position x="460" y="360"/>
+	<position x="380" y="340"/>
 	<column name="ManufacturerId" not-null="true">
 		<type name="varchar" length="8"/>
 	</column>
@@ -330,10 +330,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="brand" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+<table name="brand" layers="0" collapse-mode="0" max-obj-count="3" z-value="0">
 	<schema name="warehouse"/>
 	<role name="postgres"/>
-	<position x="320" y="580"/>
+	<position x="40" y="440"/>
 	<column name="BrandId" not-null="true">
 		<type name="varchar" length="8"/>
 	</column>
@@ -348,10 +348,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="productgroup" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+<table name="productgroup" layers="0" collapse-mode="0" max-obj-count="4" z-value="0">
 	<schema name="warehouse"/>
 	<role name="postgres"/>
-	<position x="320" y="1020"/>
+	<position x="360" y="660"/>
 	<column name="ProductGroupId" not-null="true">
 		<type name="varchar" length="8"/>
 	</column>
@@ -369,10 +369,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="productcategory" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+<table name="productcategory" layers="0" collapse-mode="0" max-obj-count="2" z-value="0">
 	<schema name="warehouse"/>
 	<role name="postgres"/>
-	<position x="320" y="1260"/>
+	<position x="340" y="820"/>
 	<column name="ProductCategoryId" not-null="true">
 		<type name="varchar" length="8"/>
 	</column>
@@ -384,10 +384,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="measurement" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+<table name="measurement" layers="0" collapse-mode="0" max-obj-count="2" z-value="0">
 	<schema name="warehouse"/>
 	<role name="postgres"/>
-	<position x="320" y="820"/>
+	<position x="20" y="600"/>
 	<column name="MeasureId" not-null="true">
 		<type name="smallint" length="0"/>
 	</column>
@@ -399,10 +399,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="city" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+<table name="city" layers="0" collapse-mode="0" max-obj-count="8" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1840" y="1320"/>
+	<position x="740" y="820"/>
 	<column name="city" not-null="true">
 		<type name="varchar" length="8"/>
 	</column>
@@ -429,10 +429,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="country" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+<table name="country" layers="0" collapse-mode="0" max-obj-count="2" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="2220" y="1420"/>
+	<position x="1080" y="820"/>
 	<column name="country" not-null="true">
 		<type name="varchar" length="4"/>
 	</column>
@@ -444,10 +444,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="province" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+<table name="province" layers="0" collapse-mode="0" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="2220" y="1220"/>
+	<position x="900" y="820"/>
 	<column name="province" not-null="true">
 		<type name="varchar" length="8"/>
 	</column>
@@ -462,10 +462,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="customergroup" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+<table name="customergroup" layers="0" collapse-mode="0" max-obj-count="3" z-value="0">
 	<schema name="warehouse"/>
 	<role name="postgres"/>
-	<position x="2200" y="580"/>
+	<position x="1180" y="360"/>
 	<column name="CustomerGroupId" not-null="true">
 		<type name="varchar" length="8"/>
 	</column>
@@ -480,10 +480,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="customertypes" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+<table name="customertypes" layers="0" collapse-mode="0" max-obj-count="3" z-value="0">
 	<schema name="warehouse"/>
 	<role name="postgres"/>
-	<position x="2240" y="920"/>
+	<position x="1140" y="700"/>
 	<column name="CustomerTypeId" not-null="true">
 		<type name="varchar" length="8"/>
 	</column>
@@ -498,10 +498,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="day" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+<table name="day" layers="0" collapse-mode="0" max-obj-count="3" z-value="0">
 	<schema name="warehouse"/>
 	<role name="postgres"/>
-	<position x="1240" y="420"/>
+	<position x="700" y="360"/>
 	<column name="DayId" not-null="true">
 		<type name="varchar" length="8"/>
 	</column>
@@ -516,10 +516,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="week" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+<table name="week" layers="0" collapse-mode="0" max-obj-count="2" z-value="0">
 	<schema name="warehouse"/>
 	<role name="postgres"/>
-	<position x="1240" y="200"/>
+	<position x="700" y="180"/>
 	<column name="WeekId" not-null="true">
 		<type name="varchar" length="8"/>
 	</column>
@@ -531,10 +531,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="year" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+<table name="year" layers="0" collapse-mode="0" max-obj-count="2" z-value="0">
 	<schema name="warehouse"/>
 	<role name="postgres"/>
-	<position x="1260" y="20"/>
+	<position x="700" y="40"/>
 	<column name="YearId" not-null="true">
 		<type name="varchar" length="8"/>
 	</column>
@@ -543,10 +543,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 </table>
 
-<table name="quarter" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+<table name="quarter" layers="0" collapse-mode="0" max-obj-count="3" z-value="0">
 	<schema name="warehouse"/>
 	<role name="postgres"/>
-	<position x="1780" y="80"/>
+	<position x="1040" y="40"/>
 	<column name="QuarterId" not-null="true">
 		<type name="varchar" length="8"/>
 	</column>
@@ -561,10 +561,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="month" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+<table name="month" layers="0" collapse-mode="0" max-obj-count="3" z-value="0">
 	<schema name="warehouse"/>
 	<role name="postgres"/>
-	<position x="1780" y="320"/>
+	<position x="1040" y="180"/>
 	<column name="MonthId" not-null="true">
 		<type name="varchar" length="8"/>
 	</column>
@@ -746,7 +746,11 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <relationship name="rel_location_city" type="relfk" layers="0"
 	 src-table="warehouse.location"
 	 dst-table="public.city" reference-fk="CityId_fk"
-	 src-required="false" dst-required="false"/>
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="-4.98849" y="-34.853"/>
+	</label>
+</relationship>
 
 <relationship name="rel_productgroup_productcategory" type="relfk" layers="0"
 	 src-table="warehouse.productgroup"
@@ -758,7 +762,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 dst-table="public.province" reference-fk="province_fk"
 	 src-required="false" dst-required="false">
 	<label ref-type="name-label">
-		<position x="-40.5455" y="-95.278"/>
+		<position x="46.3185" y="-59.353"/>
 	</label>
 </relationship>
 
@@ -767,7 +771,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 dst-table="public.country" reference-fk="country_fk"
 	 src-required="false" dst-required="false">
 	<label ref-type="name-label">
-		<position x="81.0586" y="-35.353"/>
+		<position x="27.8185" y="20.647"/>
 	</label>
 </relationship>
 
