@@ -1,0 +1,29 @@
+slice_name: Store Distribution
+description: null
+certified_by: null
+certification_details: null
+viz_type: country_map
+params:
+  datasource: 27__table
+  viz_type: country_map
+  select_country: usa
+  entity: Province
+  metric: count
+  adhoc_filters:
+  - clause: WHERE
+    subject: OpenDate
+    operator: TEMPORAL_RANGE
+    comparator: No filter
+    expressionType: SIMPLE
+  number_format: SMART_NUMBER
+  linear_color_scheme: superset_seq_1
+  extra_form_data: {}
+  dashboards:
+  - 11
+query_context: '{"datasource":{"id":27,"type":"table"},"force":false,"queries":[{"filters":[{"col":"OpenDate","op":"TEMPORAL_RANGE","val":"No
+  filter"}],"extras":{"having":"","where":""},"applied_time_extras":{},"columns":[],"metrics":["count"],"annotation_layers":[],"series_limit":0,"order_desc":true,"url_params":{},"custom_params":{},"custom_form_data":{}}],"form_data":{"datasource":"27__table","viz_type":"country_map","select_country":"usa","entity":"Province","metric":"count","adhoc_filters":[{"clause":"WHERE","subject":"OpenDate","operator":"TEMPORAL_RANGE","comparator":"No
+  filter","expressionType":"SIMPLE"}],"number_format":"SMART_NUMBER","linear_color_scheme":"superset_seq_1","extra_form_data":{},"dashboards":[11],"force":false,"result_format":"json","result_type":"full"},"result_format":"json","result_type":"full"}'
+cache_timeout: null
+uuid: d1bb1449-9fc7-4b2c-8276-3da8d9b3b38a
+version: 1.0.0
+dataset_uuid: ca1058a5-6a85-482a-a235-f198a89c72cb

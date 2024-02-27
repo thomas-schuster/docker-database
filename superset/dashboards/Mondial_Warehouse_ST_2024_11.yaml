@@ -21,7 +21,7 @@ position:
       height: 27
       sliceName: Birth Years of Customers
       uuid: 4f1b2f66-3704-4121-abf7-26bb3c3285e4
-      width: 6
+      width: 4
     parents:
     - ROOT_ID
     - GRID_ID
@@ -32,7 +32,7 @@ position:
     id: CHART-explore-100-1
     meta:
       chartId: 100
-      height: 50
+      height: 28
       sliceName: Distribution across US-States
       uuid: 19b1f55a-42f7-453e-b4fd-3cd266886a66
       width: 5
@@ -40,6 +40,20 @@ position:
     - ROOT_ID
     - GRID_ID
     - ROW-87HJeiAkNd
+    type: CHART
+  CHART-explore-101-1:
+    children: []
+    id: CHART-explore-101-1
+    meta:
+      chartId: 101
+      height: 50
+      sliceName: Store Distribution
+      uuid: d1bb1449-9fc7-4b2c-8276-3da8d9b3b38a
+      width: 7
+    parents:
+    - ROOT_ID
+    - GRID_ID
+    - ROW-4usasJjemV
     type: CHART
   CHART-explore-98-1:
     children: []
@@ -63,7 +77,7 @@ position:
       height: 49
       sliceName: Overview of Products by Brand (in Groups)
       uuid: 959ca9ce-1094-4315-be0b-3130cc181865
-      width: 4
+      width: 5
     parents:
     - ROOT_ID
     - GRID_ID
@@ -103,7 +117,7 @@ position:
   ROW-87HJeiAkNd:
     children:
     - CHART-explore-99-1
-    - CHART-explore-100-1
+    - CHART-explore-101-1
     id: ROW-87HJeiAkNd
     meta:
       '0': ROOT_ID
@@ -116,6 +130,7 @@ position:
     children:
     - CHART-explore-98-1
     - CHART-KwCpk5bwVT
+    - CHART-explore-100-1
     id: ROW-otoWuydLq
     meta:
       background: BACKGROUND_TRANSPARENT
@@ -133,6 +148,7 @@ metadata:
         - 97
         - 98
         - 100
+        - 101
     '100':
       id: 100
       crossFilters:
@@ -141,6 +157,7 @@ metadata:
         - 97
         - 98
         - 99
+        - 101
   global_chart_configuration:
     scope:
       rootPath:
@@ -151,6 +168,7 @@ metadata:
     - 98
     - 99
     - 100
+    - 101
   color_scheme: bnbColors
   refresh_frequency: 0
   expanded_slices: {}
@@ -159,21 +177,21 @@ metadata:
   cross_filters_enabled: true
   default_filters: '{}'
   shared_label_colors:
-    California: '#29696B'
+    Hawaii: '#E4679D'
+    New Mexico: '#B27700'
+    Missouri: '#9D63CA'
+    Ohio: '#9D63CA'
+    Kentucky: '#29696B'
     Arizona: '#F4B02A'
-    Kansas: '#792EB2'
+    Wyoming: '#5BCACE'
     Florida: '#921E50'
+    Indiana: '#F1826A'
+    Pennsylvania: '#C96EC6'
     Illinois: '#9C3498'
     Virginia: '#C32F0E'
     Georgia: '#5BCACE'
-    New Mexico: '#B27700'
-    Indiana: '#F1826A'
-    Pennsylvania: '#C96EC6'
-    Hawaii: '#E4679D'
-    Ohio: '#9D63CA'
-    Missouri: '#9D63CA'
-    Kentucky: '#29696B'
-    Wyoming: '#5BCACE'
+    California: '#29696B'
+    Kansas: '#792EB2'
   color_scheme_domain:
   - '#29696B'
   - '#5BCACE'
