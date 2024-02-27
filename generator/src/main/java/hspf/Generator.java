@@ -40,38 +40,45 @@ public class Generator implements IGeneratorService {
     }
   }
 
-  public void generate(int amount) {
+
+  public void generate(int amount, int lowerBound, int upperBound) {
+    if(lowerBound > upperBound) {
+      throw new RuntimeException("LowerBound cannot exceed upperBound");
+    }
+
     for (int i = 0; i < amount; i++) {
-      Row row = generateRow();
+      Row row = generateRow(lowerBound, upperBound);
       addRow(i, row);
     }
   }
 
-  public Row generateRow() {
+  // is PoC
+  // TODO Generalization for Fields
+  public Row generateRow(int lowerBound, int upperBound) {
     Row row = new Row(table);
     Collections.sort(table.getFields());
     for (Field field : table.getFields()) {
       switch (field.getName()) {
         case "ArticleId":
-          String articleId = generateArticleId(field);
+          String articleId = generateArticleId();
           int amount = pickAmount();
           row.putValue(field.getName(), articleId);
           row.putValue("Amount", String.valueOf(amount));
           row.putValue(
-            "SalesVolume",
-            String.valueOf(amount * articlePriceMap.get(articleId))
+                  "SalesVolume",
+                  String.valueOf(amount * articlePriceMap.get(articleId))
           );
           break;
         case "CustomerId":
-          row.putValue(field.getName(), generateCustomerId(field));
+          row.putValue(field.getName(), generateCustomerId());
           break;
         case "TimeId":
-          row.putValue(field.getName(), generateTimeId(field));
+          row.putValue(field.getName(), generateTimeId(lowerBound, upperBound));
           break;
         case "StoreId":
           row.putValue(
-            field.getName(),
-            pickStoreId(row.getValue("CustomerId"))
+                  field.getName(),
+                  pickStoreId(row.getValue("CustomerId"))
           );
       }
     }
@@ -93,21 +100,22 @@ public class Generator implements IGeneratorService {
     return customerStoreMap.get(customerId);
   }
 
-  private String generateTimeId(Field field) {
+  private String generateTimeId(int lowerBound, int upperBound) {
     Random random = new Random();
-    int randomNumber = random.nextInt(1157) + 1;
+    int range = upperBound - lowerBound + 1;
+    int randomNumber = random.nextInt(range) + lowerBound;
 
     return String.format("T-%04d", randomNumber);
   }
 
-  private String generateCustomerId(Field field) {
+  private String generateCustomerId() {
     Random random = new Random();
     int randomNumber = random.nextInt(60) + 1;
 
     return String.format("C-%03d", randomNumber);
   }
 
-  private String generateArticleId(Field field) {
+  private String generateArticleId() {
     Random random = new Random();
     int randomNumber;
 
@@ -122,8 +130,9 @@ public class Generator implements IGeneratorService {
     return String.format("A-%03d", randomNumber);
   }
 
+
   private void setCustomerStores() {
-    customerStoreMap = new HashMap<String, String>();
+    customerStoreMap = new HashMap<>();
     customerStoreMap.put("C-001", "S-001");
     customerStoreMap.put("C-002", "S-002");
     customerStoreMap.put("C-003", "S-011");
@@ -187,7 +196,7 @@ public class Generator implements IGeneratorService {
   }
 
   private void setArticlePriceMap() {
-    articlePriceMap = new HashMap<String, Integer>();
+    articlePriceMap = new HashMap<>();
     articlePriceMap.put("A-001", 1200);
     articlePriceMap.put("A-002", 500);
     articlePriceMap.put("A-003", 80);

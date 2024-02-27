@@ -3,6 +3,7 @@ package hspf;
 import hspf.domain.models.Field;
 import hspf.domain.models.FieldType;
 import hspf.domain.models.Table;
+import hspf.domain.services.IGeneratorService;
 
 public class App {
 
@@ -36,9 +37,9 @@ public class App {
       .addField(amount)
       .getPrimaryKeyConstraint("Sales_pk");
 
-    Generator generator = new Generator().addTable(sales);
+    IGeneratorService generator = new Generator().addTable(sales);
 
-    generator.generate(5000);
+    generator.generate(250, 762, 813);
     generator.print();
   }
 }

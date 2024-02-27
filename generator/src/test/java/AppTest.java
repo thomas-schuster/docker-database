@@ -48,7 +48,7 @@ public class AppTest extends TestCase {
 
     Generator generator = new Generator().addTable(sales);
 
-    generator.generate(5000);
+    generator.generate(5000, 0, 500);
     generator.print();
   }
 }
