@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
  Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="1.0.2" use-changelog="false" last-position="811,0" last-zoom="1" max-obj-count="80"
+<dbmodel pgmodeler-ver="1.0.2" use-changelog="false" last-position="0,0" last-zoom="0.6" max-obj-count="80"
 	 default-schema="public" default-owner="postgres"
 	 layers="Default layer"
 	 active-layers="0"
@@ -1148,7 +1148,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="article" layers="0" collapse-mode="2" max-obj-count="20" z-value="0">
 	<schema name="warehouse"/>
 	<role name="mondial"/>
-	<position x="1400" y="800"/>
+	<position x="1460" y="560"/>
 	<column name="ArticleId" not-null="true">
 		<type name="character varying" length="8"/>
 	</column>
@@ -1208,7 +1208,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="sales" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
 	<schema name="warehouse"/>
 	<role name="mondial"/>
-	<position x="1800" y="640"/>
+	<position x="1900" y="620"/>
 	<column name="ArticleId" not-null="true">
 		<type name="character varying" length="8"/>
 	</column>
@@ -1235,7 +1235,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="time" layers="0" collapse-mode="2" max-obj-count="34" z-value="0">
 	<schema name="warehouse"/>
 	<role name="mondial"/>
-	<position x="2180" y="60"/>
+	<position x="2340" y="460"/>
 	<column name="TimeId" not-null="true">
 		<type name="character varying" length="8"/>
 	</column>
@@ -1331,7 +1331,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="customer" layers="0" collapse-mode="2" max-obj-count="33" z-value="0">
 	<schema name="warehouse"/>
 	<role name="mondial"/>
-	<position x="2180" y="780"/>
+	<position x="1860" y="1000"/>
 	<column name="CustomerId" not-null="true">
 		<type name="character varying" length="8"/>
 	</column>
@@ -1424,7 +1424,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="location" layers="0" collapse-mode="2" max-obj-count="26" z-value="0">
 	<schema name="warehouse"/>
 	<role name="mondial"/>
-	<position x="1400" y="60"/>
+	<position x="1840" y="40"/>
 	<column name="StoreId" not-null="true">
 		<type name="character varying" length="8"/>
 	</column>
