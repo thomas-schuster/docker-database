@@ -10,10 +10,8 @@ A Docker image is also used in classroom environment at Hochschule Pforzheim. Th
 
 This project delivers different database models. All of them are implemented as PostgreSQL schema including corresponding data. Besides that all models also provide SQL instructions to delete (drop) the schema. Currently the project includes these schemas:
 
-- Mondial
-- Warehouse (old)
-- Warehouse (new)
-- Bundesliga
+- Mondial (`public`)
+- Warehouse (`warehouse`)
 
 ## Get Ready
 
