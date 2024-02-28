@@ -1,0 +1,13 @@
+database_name: Mondial DB
+sqlalchemy_uri: postgresql+psycopg2://mondial:XXXXXXXXXX@172.22.0.4:5432/mondial
+cache_timeout: null
+expose_in_sqllab: true
+allow_run_async: false
+allow_ctas: false
+allow_cvas: false
+allow_dml: false
+allow_file_upload: false
+extra:
+  allows_virtual_table_explore: true
+uuid: 7d0688c7-952a-422a-9f3b-1c86a78aa2e2
+version: 1.0.0

@@ -1,0 +1,45 @@
+slice_name: Overview of Products by Brand (in Groups)
+description: null
+certified_by: null
+certification_details: null
+viz_type: pivot_table_v2
+params:
+  datasource: 24__table
+  viz_type: pivot_table_v2
+  groupbyColumns:
+  - ProductGroup
+  groupbyRows:
+  - Brand
+  time_grain_sqla: P1D
+  temporal_columns_lookup:
+    AvailableSince: true
+    SaleStoppedSince: true
+  metrics:
+  - count
+  metricsLayout: COLUMNS
+  adhoc_filters:
+  - clause: WHERE
+    subject: AvailableSince
+    operator: TEMPORAL_RANGE
+    comparator: No filter
+    expressionType: SIMPLE
+  row_limit: 10000
+  order_desc: true
+  aggregateFunction: Sum
+  rowTotals: false
+  rowSubTotals: false
+  colTotals: true
+  valueFormat: SMART_NUMBER
+  date_format: smart_date
+  rowOrder: key_a_to_z
+  colOrder: key_a_to_z
+  extra_form_data: {}
+  dashboards:
+  - 11
+query_context: '{"datasource":{"id":24,"type":"table"},"force":false,"queries":[{"filters":[{"col":"AvailableSince","op":"TEMPORAL_RANGE","val":"No
+  filter"}],"extras":{"time_grain_sqla":"P1D","having":"","where":""},"applied_time_extras":{},"columns":["ProductGroup","Brand"],"metrics":["count"],"orderby":[["count",false]],"annotation_layers":[],"row_limit":10000,"series_limit":0,"order_desc":true,"url_params":{},"custom_params":{},"custom_form_data":{}}],"form_data":{"datasource":"24__table","viz_type":"pivot_table_v2","groupbyColumns":["ProductGroup"],"groupbyRows":["Brand"],"time_grain_sqla":"P1D","temporal_columns_lookup":{"AvailableSince":true,"SaleStoppedSince":true},"metrics":["count"],"metricsLayout":"COLUMNS","adhoc_filters":[{"clause":"WHERE","subject":"AvailableSince","operator":"TEMPORAL_RANGE","comparator":"No
+  filter","expressionType":"SIMPLE"}],"row_limit":10000,"order_desc":true,"aggregateFunction":"Sum","rowTotals":false,"rowSubTotals":false,"colTotals":true,"valueFormat":"SMART_NUMBER","date_format":"smart_date","rowOrder":"key_a_to_z","colOrder":"key_a_to_z","extra_form_data":{},"dashboards":[11],"force":false,"result_format":"json","result_type":"full"},"result_format":"json","result_type":"full"}'
+cache_timeout: null
+uuid: 959ca9ce-1094-4315-be0b-3130cc181865
+version: 1.0.0
+dataset_uuid: 688393d8-8aba-4f69-8f8a-00660b35f401

@@ -1,21 +1,19 @@
-version: "3.7"
+version: "3.8"
 services:
+  db:
+    image: ngmondial
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: admin
 
- db:
-   image: ngmondial
-   ports:
-    - "5432:5432"
-   environment:
-     POSTGRES_PASSWORD: admin
-
- pgadmin:
+  pgadmin:
     image: dpage/pgadmin4:latest
     ports:
-     - "5050:80"
+      - "5050:80"
     environment:
-     PGADMIN_DEFAULT_EMAIL: user@example.com
-     PGADMIN_DEFAULT_PASSWORD: secret
-    volumes: 
+      PGADMIN_DEFAULT_EMAIL: user@hs-pforzheim.de
+      PGADMIN_DEFAULT_PASSWORD: secret
+    volumes:
       - ./servers.json:/pgadmin4/servers.json
-    
- 
+      - pgadmin-data:/var/lib/pgadmin
