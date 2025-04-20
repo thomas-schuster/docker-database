@@ -32,6 +32,13 @@ jobs:
 
       - name: Build Docker image
         run: |
+          if [ -z "${{ env.POSTGRES_PASSWORD }}" ]; then
+            echo "ERROR: Secret POSTGRES_PASSWORD not set or empty."
+            echo "Please create a non-empty secret POSTGRES_PASSWORD in your repository settings."
+            exit 1
+          fi
+
+          # Build Docker image
           docker build . --file Dockerfile --tag $IMAGE_NAME \
             --build-arg MONDIALDB_ARG=${{ env.MONDIAL_DB_NAME }} \
             --build-arg MONDIALUSER_ARG=${{ env.MONDIAL_DB_USER }} \
