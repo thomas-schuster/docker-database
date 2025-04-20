@@ -13,3 +13,4 @@
 /generator/buildNumber.properties
 /generator/.mvn/timing.properties
 /generator/.mvn/wrapper/maven-wrapper.jar
+.quarkus/
