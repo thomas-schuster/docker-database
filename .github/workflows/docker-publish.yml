@@ -15,6 +15,11 @@ on:
 
 env:
   IMAGE_NAME: mondial
+  MONDIAL_DB_NAME: ${{ secrets.MONDIALDB }}
+  MONDIAL_DB_USER: ${{ secrets.MONDIALUSER }}
+  MONDIAL_DB_PASSWORD: ${{ secrets.USERPASSWORD }}
+  POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+  POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
 
 jobs:
   # Run tests.
@@ -25,21 +30,66 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run tests
+      - name: Build Docker image
         run: |
-          if [ -f docker-compose.test.yml ]; then
-            docker-compose --file docker-compose.test.yml build
-            docker-compose --file docker-compose.test.yml run sut
-          else
-            docker build . --file Dockerfile
-          fi
+          docker build . --file Dockerfile --tag $IMAGE_NAME \
+            --build-arg MONDIALDB_ARG=${{ env.MONDIAL_DB_NAME }} \
+            --build-arg MONDIALUSER_ARG=${{ env.MONDIAL_DB_USER }} \
+            --build-arg USERPASSWORD_ARG=${{ env.MONDIAL_DB_PASSWORD }} \
+            --build-arg POSTGRES_PASSWORD_ARG=${{ env.POSTGRES_PASSWORD }}
+
+      - name: Run container and wait for DB
+        run: |
+          # Start container in background
+          docker run -d --name test-db-container \
+            # Diese ENV-Variablen werden vom Postgres-Entrypoint und Ihren Skripten verwendet
+            -e POSTGRES_PASSWORD=${{ env.POSTGRES_PASSWORD }} \
+            -e MONDIALDB=${{ env.MONDIAL_DB_NAME }} \
+            -e MONDIALUSER=${{ env.MONDIAL_DB_USER }} \
+            -e USERPASSWORD=${{ env.MONDIAL_DB_PASSWORD }} \
+            -p 5432:5432 \
+            ${{ env.IMAGE_NAME }}
+
+          # Wait for PostgreSQL to be ready (using the admin user)
+          echo "Waiting for database to start..."
+          timeout 60 bash -c 'until docker exec test-db-container pg_isready -U ${{ env.POSTGRES_USER }} -q; do sleep 1; done' \
+            || (echo "Database failed to start in time!" && docker logs test-db-container && exit 1)
+          echo "Database is ready!"
+          sleep 10
+
+      - name: Run database tests
+        run: |
+          echo "Running database queries..."
+          # Test database connection with the Mondial user
+          docker exec -e PGPASSWORD=${{ env.MONDIAL_DB_PASSWORD }} test-db-container \
+            psql -h localhost -U ${{ env.MONDIAL_DB_USER }} -d ${{ env.MONDIAL_DB_NAME }} \
+            -c "SELECT COUNT(*) FROM country;" \
+            --tuples-only --no-align | grep -Eq '^[1-9][0-9]*$' || (echo "Failed: Count from country" && exit 1)
+
+          docker exec -e PGPASSWORD=${{ env.MONDIAL_DB_PASSWORD }} test-db-container \
+            psql -h localhost -U ${{ env.MONDIAL_DB_USER }} -d ${{ env.MONDIAL_DB_NAME }} \
+            -c "SELECT name FROM city WHERE name = 'Paris';" \
+            --tuples-only --no-align | grep -q "Paris" || (echo "Failed: Select Paris from city" && exit 1)
+
+          docker exec -e PGPASSWORD=${{ env.MONDIAL_DB_PASSWORD }} test-db-container \
+            psql -h localhost -U ${{ env.MONDIAL_DB_USER }} -d ${{ env.MONDIAL_DB_NAME }} \
+            -c "SELECT COUNT(*) FROM airport;" \
+            --tuples-only --no-align | grep -Eq '^1320$' || (echo "Failed: Count from airport is not 1320" && exit 1)
+
+          echo "Database tests passed!"
+
+      - name: Stop and remove container
+        if: always()
+        run: |
+          docker logs test-db-container || true
+          docker stop test-db-container || true
+          docker rm test-db-container || true
 
   # Push image to GitHub Packages.
   # See also https://docs.docker.com/docker-hub/builds/
   push:
     # Ensure test job passes before pushing image.
     needs: test
-
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
 
