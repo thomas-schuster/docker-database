@@ -1,746 +1,762 @@
-CREATE USER MONDIALUSER WITH PASSWORD 'MONDIALUSERPASSWORD';
-DROP DATABASE IF EXISTS mondial;
-CREATE DATABASE mondial
-   ENCODING = 'UTF8'
-   LC_COLLATE = 'en_US.utf8'
-   LC_CTYPE = 'en_US.utf8'
-   TABLESPACE = pg_default
-   OWNER = MONDIALUSER;
-GRANT ALL PRIVILEGES ON DATABASE mondial TO mondial;
-\c mondial
-
-CREATE TABLE Country
-(Name VARCHAR(50) NOT NULL UNIQUE,
- Code VARCHAR(4) CONSTRAINT CountryKey PRIMARY KEY,
- Capital VARCHAR(50),
- Province VARCHAR(50),
- Area DECIMAL CONSTRAINT CountryArea
-   CHECK (Area >= 0),
- Population DECIMAL CONSTRAINT CountryPop
-   CHECK (Population >= 0));
-
-CREATE TABLE City
-(Name VARCHAR(50),
- Country VARCHAR(4),
- Province VARCHAR(50),
- Population DECIMAL CONSTRAINT CityPop
-   CHECK (Population >= 0),
- Latitude DECIMAL CONSTRAINT CityLat
-   CHECK ((Latitude >= -90) AND (Latitude <= 90)) ,
- Longitude DECIMAL CONSTRAINT CityLon
-   CHECK ((Longitude >= -180) AND (Longitude <= 180)) ,
- Elevation DECIMAL ,
- CONSTRAINT CityKey PRIMARY KEY (Name, Country, Province));
-
-CREATE TABLE Province
-(Name VARCHAR(50) CONSTRAINT PrName NOT NULL ,
- Country  VARCHAR(4) CONSTRAINT PrCountry NOT NULL ,
- Population DECIMAL CONSTRAINT PrPop
-   CHECK (Population >= 0),
- Area DECIMAL CONSTRAINT PrAr
-   CHECK (Area >= 0),
- Capital VARCHAR(50),
- CapProv VARCHAR(50),
- CONSTRAINT PrKey PRIMARY KEY (Name, Country));
-
-CREATE TABLE Economy
-(Country VARCHAR(4) CONSTRAINT EconomyKey PRIMARY KEY,
- GDP DECIMAL CONSTRAINT EconomyGDP
-   CHECK (GDP >= 0),
- Agriculture DECIMAL,
- Service DECIMAL,
- Industry DECIMAL,
- Inflation DECIMAL,
- Unemployment DECIMAL);
-
-CREATE TABLE Population
-(Country VARCHAR(4) CONSTRAINT PopKey PRIMARY KEY,
- Population_Growth DECIMAL,
- Infant_Mortality DECIMAL);
-
-CREATE TABLE Politics
-(Country VARCHAR(4) CONSTRAINT PoliticsKey PRIMARY KEY,
- Independence DATE,
- WasDependent VARCHAR(50),
- Dependent  VARCHAR(4),
- Government VARCHAR(120));
-
-CREATE TABLE Religion
-(Country VARCHAR(4),
- Name VARCHAR(50),
- Percentage DECIMAL CONSTRAINT ReligionPercent 
-   CHECK ((Percentage > 0) AND (Percentage <= 100)),
- CONSTRAINT ReligionKey PRIMARY KEY (Name, Country));
-
-CREATE TABLE EthnicGroup
-(Country VARCHAR(4),
- Name VARCHAR(50),
- Percentage DECIMAL CONSTRAINT EthnicPercent 
-   CHECK ((Percentage > 0) AND (Percentage <= 100)),
- CONSTRAINT EthnicKey PRIMARY KEY (Name, Country));
-
-CREATE TABLE Language
-(Country VARCHAR(4),
- Name VARCHAR(50),
- Percentage DECIMAL CONSTRAINT LanguagePercent 
-   CHECK ((Percentage > 0) AND (Percentage <= 100)),
- CONSTRAINT LanguageKey PRIMARY KEY (Name, Country));
-
-CREATE TABLE Countrypops
-(Country VARCHAR(4),
- Year DECIMAL CONSTRAINT CountryPopsYear
-   CHECK (Year >= 0),
- Population DECIMAL CONSTRAINT CountryPopsPop
-   CHECK (Population >= 0),
- CONSTRAINT CountryPopsKey PRIMARY KEY (Country, Year));
-
-CREATE TABLE Countryothername
-(Country VARCHAR(4),
- othername VARCHAR(50),
- CONSTRAINT CountryOthernameKey PRIMARY KEY (Country, othername));
-
-CREATE TABLE Countrylocalname
-(Country VARCHAR(4),
- localname VARCHAR(300),
- CONSTRAINT CountrylocalnameKey PRIMARY KEY (Country));
-
-CREATE TABLE Provpops
-(Province VARCHAR(50),
- Country VARCHAR(4),
- Year DECIMAL CONSTRAINT ProvPopsYear
-   CHECK (Year >= 0),
- Population DECIMAL CONSTRAINT ProvPopsPop
-   CHECK (Population >= 0),
- CONSTRAINT ProvPopKey PRIMARY KEY (Country, Province, Year));
-
-CREATE TABLE Provinceothername
-(Province VARCHAR(50),
- Country VARCHAR(4),
- othername VARCHAR(50),
- CONSTRAINT ProvOthernameKey PRIMARY KEY (Country, Province, othername));
-
-CREATE TABLE Provincelocalname
-(Province VARCHAR(50),
- Country VARCHAR(4),
- localname VARCHAR(300),
- CONSTRAINT ProvlocalnameKey PRIMARY KEY (Country, Province));
-
-CREATE TABLE Citypops
-(City VARCHAR(50),
- Country VARCHAR(4),
- Province VARCHAR(50),
- Year DECIMAL CONSTRAINT CityPopsYear
-   CHECK (Year >= 0),
- Population DECIMAL CONSTRAINT CityPopsPop
-   CHECK (Population >= 0),
- CONSTRAINT CityPopKey PRIMARY KEY (Country, Province, City, Year));
-
-CREATE TABLE Cityothername
-(City VARCHAR(50),
- Country VARCHAR(4),
- Province VARCHAR(50),
- othername VARCHAR(50),
- CONSTRAINT CityOthernameKey PRIMARY KEY (Country, Province, City, othername));
-
-CREATE TABLE Citylocalname
-(City VARCHAR(50),
- Country VARCHAR(4),
- Province VARCHAR(50),
- localname VARCHAR(300),
- CONSTRAINT CitylocalnameKey PRIMARY KEY (Country, Province, City));
-
-CREATE TABLE Continent
-(Name VARCHAR(20) CONSTRAINT ContinentKey PRIMARY KEY,
- Area DECIMAL(10));
-
-CREATE TABLE borders
-(Country1 VARCHAR(4),
- Country2 VARCHAR(4),
- Length DECIMAL 
-   CHECK (Length > 0),
- CONSTRAINT BorderKey PRIMARY KEY (Country1,Country2) );
-
-CREATE TABLE encompasses
-(Country VARCHAR(4) NOT NULL,
- Continent VARCHAR(20) NOT NULL,
- Percentage DECIMAL,
-   CHECK ((Percentage > 0) AND (Percentage <= 100)),
- CONSTRAINT EncompassesKey PRIMARY KEY (Country,Continent));
-
-CREATE TABLE Organization
-(Abbreviation VARCHAR(12) Constraint OrgKey PRIMARY KEY,
- Name VARCHAR(100) NOT NULL,
- City VARCHAR(50) ,
- Country VARCHAR(4) , 
- Province VARCHAR(50) ,
- Established DATE,
- CONSTRAINT OrgNameUnique UNIQUE (Name));
-
-CREATE TABLE isMember
-(Country VARCHAR(4),
- Organization VARCHAR(12),
- Type VARCHAR(60) DEFAULT 'member',
- CONSTRAINT MemberKey PRIMARY KEY (Country,Organization) );
-
-CREATE TYPE GeoCoord AS
-(Latitude DECIMAL,
- Longitude DECIMAL);
-
-
-CREATE TABLE Mountain
-(Name VARCHAR(50) CONSTRAINT MountainKey PRIMARY KEY,
- Mountains VARCHAR(50),
- Elevation DECIMAL,
- Type VARCHAR(10),
- Coordinates GeoCoord CONSTRAINT MountainCoord
-     CHECK (((Coordinates).Latitude >= -90) AND 
-            ((Coordinates).Latitude <= 90) AND
-            ((Coordinates).Longitude > -180) AND
-            ((Coordinates).Longitude <= 180)));
-
-CREATE TABLE Desert
-(Name VARCHAR(50) CONSTRAINT DesertKey PRIMARY KEY,
- Area DECIMAL,
- Coordinates GeoCoord CONSTRAINT DesCoord
-     CHECK (((Coordinates).Latitude >= -90) AND 
-            ((Coordinates).Latitude <= 90) AND
-            ((Coordinates).Longitude > -180) AND
-            ((Coordinates).Longitude <= 180)));
-
-CREATE TABLE Island
-(Name VARCHAR(50) CONSTRAINT IslandKey PRIMARY KEY,
- Islands VARCHAR(50),
- Area DECIMAL CONSTRAINT IslandAr check (Area >= 0),
- Elevation DECIMAL,
- Type VARCHAR(12),
- Coordinates GeoCoord CONSTRAINT IslandCoord
-     CHECK (((Coordinates).Latitude >= -90) AND 
-            ((Coordinates).Latitude <= 90) AND
-            ((Coordinates).Longitude > -180) AND
-            ((Coordinates).Longitude <= 180)));
-
-CREATE TABLE Lake
-(Name VARCHAR(50) CONSTRAINT LakeKey PRIMARY KEY,
- River VARCHAR(50),
- Area DECIMAL CONSTRAINT LakeAr CHECK (Area >= 0),
- Elevation DECIMAL,
- Depth DECIMAL CONSTRAINT LakeDpth CHECK (Depth >= 0),
- Height DECIMAL CONSTRAINT DamHeight CHECK (Height > 0),
- Type VARCHAR(12),
- Coordinates GeoCoord CONSTRAINT LakeCoord
-     CHECK (((Coordinates).Latitude >= -90) AND 
-            ((Coordinates).Latitude <= 90) AND
-            ((Coordinates).Longitude > -180) AND
-            ((Coordinates).Longitude <= 180)));
-
-CREATE TABLE Sea
-(Name VARCHAR(50) CONSTRAINT SeaKey PRIMARY KEY,
- Area DECIMAL CONSTRAINT SeaAr CHECK (Area >= 0),
- Depth DECIMAL CONSTRAINT SeaDepth CHECK (Depth >= 0));
-
-CREATE TABLE River
-(Name VARCHAR(50) CONSTRAINT RiverKey PRIMARY KEY,
- River VARCHAR(50),
- Lake VARCHAR(50),
- Sea VARCHAR(50),
- Length DECIMAL CONSTRAINT RiverLength
-   CHECK (Length >= 0),
- Area DECIMAL CONSTRAINT RiverArea
-   CHECK (Area >= 0),
- Source GeoCoord CONSTRAINT SourceCoord
-     CHECK (((Source).Latitude >= -90) AND 
-            ((Source).Latitude <= 90) AND
-            ((Source).Longitude > -180) AND
-            ((Source).Longitude <= 180)),
- Mountains VARCHAR(50),
- SourceElevation DECIMAL,
- Estuary GeoCoord CONSTRAINT EstCoord
-     CHECK (((Estuary).Latitude >= -90) AND 
-            ((Estuary).Latitude <= 90) AND
-            ((Estuary).Longitude > -180) AND
-            ((Estuary).Longitude <= 180)),
- EstuaryElevation DECIMAL,
- CONSTRAINT RivFlowsInto 
-     CHECK ((River IS NULL AND Lake IS NULL)
-            OR (River IS NULL AND Sea IS NULL)
-            OR (Lake IS NULL AND Sea is NULL)));
-
-CREATE TABLE RiverThrough
-(River VARCHAR(50),
- Lake  VARCHAR(50),
- CONSTRAINT RThroughKey PRIMARY KEY (River,Lake) );
-
-CREATE TABLE geo_Mountain
-(Mountain VARCHAR(50) ,
- Country VARCHAR(4) ,
- Province VARCHAR(50) ,
- CONSTRAINT GMountainKey PRIMARY KEY (Province,Country,Mountain) );
-
-CREATE TABLE geo_Desert
-(Desert VARCHAR(50) ,
- Country VARCHAR(4) ,
- Province VARCHAR(50) ,
- CONSTRAINT GDesertKey PRIMARY KEY (Province, Country, Desert) );
-
-CREATE TABLE geo_Island
-(Island VARCHAR(50) , 
- Country VARCHAR(4) ,
- Province VARCHAR(50) ,
- CONSTRAINT GIslandKey PRIMARY KEY (Province, Country, Island) );
-
-CREATE TABLE geo_River
-(River VARCHAR(50) , 
- Country VARCHAR(4) ,
- Province VARCHAR(50) ,
- CONSTRAINT GRiverKey PRIMARY KEY (Province ,Country, River) );
-
-CREATE TABLE geo_Sea
-(Sea VARCHAR(50) ,
- Country VARCHAR(4)  ,
- Province VARCHAR(50) ,
- CONSTRAINT GSeaKey PRIMARY KEY (Province, Country, Sea) );
-
-CREATE TABLE geo_Lake
-(Lake VARCHAR(50) ,
- Country VARCHAR(4) ,
- Province VARCHAR(50) ,
- CONSTRAINT GLakeKey PRIMARY KEY (Province, Country, Lake) );
-
-CREATE TABLE geo_Source
-(River VARCHAR(50) ,
- Country VARCHAR(4) ,
- Province VARCHAR(50) ,
- CONSTRAINT GSourceKey PRIMARY KEY (Province, Country, River) );
-
-CREATE TABLE geo_Estuary
-(River VARCHAR(50) ,
- Country VARCHAR(4) ,
- Province VARCHAR(50) ,
- CONSTRAINT GEstuaryKey PRIMARY KEY (Province, Country, River) );
-
-CREATE TABLE mergesWith
-(Sea1 VARCHAR(50) ,
- Sea2 VARCHAR(50) ,
- CONSTRAINT MergesWithKey PRIMARY KEY (Sea1, Sea2) );
-
-CREATE TABLE located
-(City VARCHAR(50) ,
- Province VARCHAR(50) ,
- Country VARCHAR(4) ,
- River VARCHAR(50),
- Lake VARCHAR(50),
- Sea VARCHAR(50) );
-
-CREATE TABLE locatedOn
-(City VARCHAR(50) ,
- Province VARCHAR(50) ,
- Country VARCHAR(4) ,
- Island VARCHAR(50) ,
- CONSTRAINT locatedOnKey PRIMARY KEY (City, Province, Country, Island) );
-
-CREATE TABLE islandIn
-(Island VARCHAR(50) ,
- Sea VARCHAR(50) ,
- Lake VARCHAR(50) ,
- River VARCHAR(50) );
-
-CREATE TABLE MountainOnIsland
-(Mountain VARCHAR(50),
- Island   VARCHAR(50),
- CONSTRAINT MountainIslKey PRIMARY KEY (Mountain, Island) );
-
-CREATE TABLE LakeOnIsland
-(Lake    VARCHAR(50),
- Island  VARCHAR(50),
- CONSTRAINT LakeIslKey PRIMARY KEY (Lake, Island) );
-
-CREATE TABLE RiverOnIsland
-(River   VARCHAR(50),
- Island  VARCHAR(50),
- CONSTRAINT RiverIslKey PRIMARY KEY (River, Island) );
-
-CREATE TABLE Airport
-(IATACode VARCHAR(3) PRIMARY KEY,
- Name VARCHAR(100) ,
- Country VARCHAR(4) ,
- City VARCHAR(50) ,
- Province VARCHAR(50) ,
- Island VARCHAR(50) ,
- Latitude DECIMAL CONSTRAINT AirpLat
-   CHECK ((Latitude >= -90) AND (Latitude <= 90)) ,
- Longitude DECIMAL CONSTRAINT AirpLon
-   CHECK ((Longitude >= -180) AND (Longitude <= 180)) ,
- Elevation DECIMAL ,
- gmtOffset DECIMAL );
-
-ALTER TABLE organization 
-ADD CONSTRAINT fk_capital 
-FOREIGN KEY (city, country, province) 
-REFERENCES city (name, country, province)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE country 
-ADD CONSTRAINT fk_capital 
-FOREIGN KEY (capital, code, province) 
-REFERENCES city (name, country, province)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE airport 
-ADD CONSTRAINT fk_airportcity
-FOREIGN KEY (city, country, province) 
-REFERENCES city (name, country, province)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE airport 
-ADD CONSTRAINT fk_airportisland
-FOREIGN KEY (island) 
-REFERENCES island (name )
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE citypops 
-ADD CONSTRAINT fk_citypops 
-FOREIGN KEY (city, country, province) 
-REFERENCES city (name, country, province)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE province 
-ADD CONSTRAINT fk_citycapital 
-FOREIGN KEY (capital, country, capprov) 
-REFERENCES city (name, country, province)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE located 
-ADD CONSTRAINT fk_locatedcity 
-FOREIGN KEY (city, country, province) 
-REFERENCES city (name, country, province)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE located 
-ADD CONSTRAINT fk_locsea
-FOREIGN KEY (sea) 
-REFERENCES sea (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE located 
-ADD CONSTRAINT fk_locriver
-FOREIGN KEY (river) 
-REFERENCES river (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE located 
-ADD CONSTRAINT fk_loclake
-FOREIGN KEY (lake) 
-REFERENCES lake (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE locatedOn 
-ADD CONSTRAINT fk_locatedcityOn 
-FOREIGN KEY (city, country, province) 
-REFERENCES city (name, country, province)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE locatedOn
-ADD CONSTRAINT fk_onisland
-FOREIGN KEY (island) 
-REFERENCES island (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE isMember 
-ADD CONSTRAINT fk_ismember 
-FOREIGN KEY (organization) 
-REFERENCES organization (abbreviation)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE isMember 
-ADD CONSTRAINT fk_country 
-FOREIGN KEY (country) 
-REFERENCES country (code)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE province 
-ADD CONSTRAINT fk_provcountry 
-FOREIGN KEY (country) 
-REFERENCES country (code)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE borders 
-ADD CONSTRAINT fk_border1 
-FOREIGN KEY (country1) 
-REFERENCES country (code)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE borders 
-ADD CONSTRAINT fk_border2 
-FOREIGN KEY (country2) 
-REFERENCES country (code)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE countrypops 
-ADD CONSTRAINT fk_popscountry 
-FOREIGN KEY (country) 
-REFERENCES country (code)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE economy 
-ADD CONSTRAINT fk_ecoscountry 
-FOREIGN KEY (country) 
-REFERENCES country (code)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE politics 
-ADD CONSTRAINT fk_polscountry1 
-FOREIGN KEY (country) 
-REFERENCES country (code)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE politics 
-ADD CONSTRAINT fk_polscountry2 
-FOREIGN KEY (dependent) 
-REFERENCES country (code)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE population 
-ADD CONSTRAINT fk_popcountry 
-FOREIGN KEY (country) 
-REFERENCES country (code)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE language 
-ADD CONSTRAINT fk_langcountry 
-FOREIGN KEY (country) 
-REFERENCES country (code)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE religion 
-ADD CONSTRAINT fk_popcountry 
-FOREIGN KEY (country) 
-REFERENCES country (code)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE ethnicgroup 
-ADD CONSTRAINT fk_popcountry 
-FOREIGN KEY (country) 
-REFERENCES country (code)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE encompasses 
-ADD CONSTRAINT fk_enccountry 
-FOREIGN KEY (country) 
-REFERENCES country (code)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE encompasses 
-ADD CONSTRAINT fk_enccontinent 
-FOREIGN KEY (continent) 
-REFERENCES continent (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE geo_desert 
-ADD CONSTRAINT fk_desert 
-FOREIGN KEY (desert) 
-REFERENCES desert (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE geo_desert 
-ADD CONSTRAINT fk_desertprovince 
-FOREIGN KEY (country, province) 
-REFERENCES province (country, name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE geo_mountain
-ADD CONSTRAINT fk_mountainprovince 
-FOREIGN KEY (country, province) 
-REFERENCES province (country, name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE geo_mountain
-ADD CONSTRAINT fk_geomountain 
-FOREIGN KEY (mountain) 
-REFERENCES mountain (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE geo_island
-ADD CONSTRAINT fk_islandprovince 
-FOREIGN KEY (country, province) 
-REFERENCES province (country, name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE geo_island
-ADD CONSTRAINT fk_geoisland
-FOREIGN KEY (island) 
-REFERENCES island (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE geo_sea
-ADD CONSTRAINT fk_seaprovince 
-FOREIGN KEY (country, province) 
-REFERENCES province (country, name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE geo_sea
-ADD CONSTRAINT fk_geosea
-FOREIGN KEY (sea) 
-REFERENCES sea (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE geo_estuary
-ADD CONSTRAINT fk_gestprovince 
-FOREIGN KEY (country, province) 
-REFERENCES province (country, name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE geo_estuary
-ADD CONSTRAINT fk_gestriver 
-FOREIGN KEY (river) 
-REFERENCES river (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE geo_source
-ADD CONSTRAINT fk_gsrcprovince 
-FOREIGN KEY (country, province) 
-REFERENCES province (country, name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE geo_source
-ADD CONSTRAINT fk_gsrcriver 
-FOREIGN KEY (river) 
-REFERENCES river (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE geo_river
-ADD CONSTRAINT fk_griverprovince 
-FOREIGN KEY (country, province) 
-REFERENCES province (country, name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE geo_river
-ADD CONSTRAINT fk_georiver 
-FOREIGN KEY (river) 
-REFERENCES river (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE geo_lake
-ADD CONSTRAINT fk_lakeprovince 
-FOREIGN KEY (country, province) 
-REFERENCES province (country, name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE geo_lake
-ADD CONSTRAINT fk_geolake 
-FOREIGN KEY (lake) 
-REFERENCES lake (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE city
-ADD CONSTRAINT fk_cityprovince 
-FOREIGN KEY (country, province) 
-REFERENCES province (country, name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE provpops
-ADD CONSTRAINT fk_ppopsprovince 
-FOREIGN KEY (country, province) 
-REFERENCES province (country, name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE MountainOnIsland
-ADD CONSTRAINT fk_mtimountain 
-FOREIGN KEY (mountain) 
-REFERENCES mountain (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE islandin
-ADD CONSTRAINT fk_islandin
-FOREIGN KEY (island) 
-REFERENCES island (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE islandin
-ADD CONSTRAINT fk_insea
-FOREIGN KEY (sea) 
-REFERENCES sea (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE mergeswith
-ADD CONSTRAINT fk_sea1
-FOREIGN KEY (sea1) 
-REFERENCES sea (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE mergeswith
-ADD CONSTRAINT fk_sea2
-FOREIGN KEY (sea2) 
-REFERENCES sea (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE river
-ADD CONSTRAINT fk_riversea
-FOREIGN KEY (sea) 
-REFERENCES sea (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE river
-ADD CONSTRAINT fk_riverriver
-FOREIGN KEY (river) 
-REFERENCES river (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE river
-ADD CONSTRAINT fk_riverlake
-FOREIGN KEY (lake) 
-REFERENCES lake (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE riverthrough
-ADD CONSTRAINT fk_thriver
-FOREIGN KEY (river) 
-REFERENCES river (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE riverthrough
-ADD CONSTRAINT fk_thlake
-FOREIGN KEY (lake) 
-REFERENCES lake (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE lake
-ADD CONSTRAINT fk_lakeriver
-FOREIGN KEY (river) 
-REFERENCES river (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE lakeonisland
-ADD CONSTRAINT fk_lakeoisland
-FOREIGN KEY (island) 
-REFERENCES island (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE lakeonisland
-ADD CONSTRAINT fk_islandLake
-FOREIGN KEY (lake) 
-REFERENCES lake (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE riveronisland
-ADD CONSTRAINT fk_riveroisland
-FOREIGN KEY (island) 
-REFERENCES island (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE riveronisland
-ADD CONSTRAINT fk_islandRiver
-FOREIGN KEY (river) 
-REFERENCES river (name)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE Provinceothername
-ADD CONSTRAINT fk_provinceother
-FOREIGN KEY (province, country) 
-REFERENCES province (name, country)
-DEFERRABLE INITIALLY DEFERRED;
-
-ALTER TABLE Provincelocalname
-ADD CONSTRAINT fk_provincelocal
-FOREIGN KEY (province, country) 
-REFERENCES province (name, country)
-DEFERRABLE INITIALLY DEFERRED;
+create user MONDIALUSER_PLACEHOLDER with password 'MONDIALUSERPASSWORD';
+drop database if exists MONDIALDB_PLACEHOLDER;
+create database MONDIALDB_PLACEHOLDER
+   encoding = 'UTF8'
+   lc_collate = 'en_US.utf8'
+   lc_ctype = 'en_US.utf8'
+   tablespace = pg_default
+   owner = MONDIALUSER_PLACEHOLDER;
+grant all privileges on database MONDIALDB_PLACEHOLDER to MONDIALUSER_PLACEHOLDER;
+\c MONDIALDB_PLACEHOLDER
+
+create table country
+(name varchar(50) not null unique,
+ code varchar(4) constraint countrykey primary key,
+ capital varchar(50),
+ province varchar(50),
+ area decimal constraint countryarea
+   check (area >= 0),
+ population decimal constraint countrypop
+   check (population >= 0));
+
+create table city
+(name varchar(50),
+ country varchar(4),
+ province varchar(50),
+ population decimal constraint citypop
+   check (population >= 0),
+ latitude decimal constraint citylat
+   check ((latitude >= -90) and (latitude <= 90)) ,
+ longitude decimal constraint citylon
+   check ((longitude >= -180) and (longitude <= 180)) ,
+ elevation decimal ,
+ constraint citykey primary key (name, country, province));
+
+create table province
+(name varchar(50) constraint prname not null ,
+ country  varchar(4) constraint prcountry not null ,
+ population decimal constraint prpop
+   check (population >= 0),
+ area decimal constraint prar
+   check (area >= 0),
+ capital varchar(50),
+ capprov varchar(50),
+ constraint prkey primary key (name, country));
+
+create table economy
+(country varchar(4) constraint economykey primary key,
+ gdp decimal constraint economygdp
+   check (gdp >= 0),
+ agriculture decimal,
+ service decimal,
+ industry decimal,
+ inflation decimal,
+ unemployment decimal);
+
+create table population
+(country varchar(4) constraint popkey primary key,
+ population_growth decimal,
+ infant_mortality decimal);
+
+create table politics
+(country varchar(4) constraint politicskey primary key,
+ independence date,
+ wasdependent varchar(50),
+ dependent  varchar(4),
+ government varchar(120));
+
+create table religion
+(country varchar(4),
+ name varchar(50),
+ percentage decimal constraint religionpercent 
+   check ((percentage > 0) and (percentage <= 100)),
+ constraint religionkey primary key (name, country));
+
+create table ethnicgroup
+(country varchar(4),
+ name varchar(50),
+ percentage decimal constraint ethnicpercent 
+   check ((percentage > 0) and (percentage <= 100)),
+ constraint ethnickey primary key (name, country));
+
+create table spoken
+(country varchar(4),
+ language varchar(50),
+ percentage decimal constraint spokenpercent 
+   check ((percentage > 0) and (percentage <= 100)),
+ constraint spokenkey primary key (country, language));
+
+create table language
+(name varchar(50) constraint languagekey primary key,
+ superlanguage varchar(50));
+
+create table countrypops
+(country varchar(4),
+ year decimal constraint countrypopsyear
+   check (year >= 0),
+ population decimal constraint countrypopspop
+   check (population >= 0),
+ constraint countrypopskey primary key (country, year));
+
+create table countryothername
+(country varchar(4),
+ othername varchar(50),
+ constraint countryothernamekey primary key (country, othername));
+
+create table countrylocalname
+(country varchar(4),
+ localname varchar(300),
+ constraint countrylocalnamekey primary key (country));
+
+create table provpops
+(province varchar(50),
+ country varchar(4),
+ year decimal constraint provpopsyear
+   check (year >= 0),
+ population decimal constraint provpopspop
+   check (population >= 0),
+ constraint provpopkey primary key (country, province, year));
+
+create table provinceothername
+(province varchar(50),
+ country varchar(4),
+ othername varchar(50),
+ constraint provothernamekey primary key (country, province, othername));
+
+create table provincelocalname
+(province varchar(50),
+ country varchar(4),
+ localname varchar(300),
+ constraint provlocalnamekey primary key (country, province));
+
+create table citypops
+(city varchar(50),
+ country varchar(4),
+ province varchar(50),
+ year decimal constraint citypopsyear
+   check (year >= 0),
+ population decimal constraint citypopspop
+   check (population >= 0),
+ constraint citypopkey primary key (country, province, city, year));
+
+create table cityothername
+(city varchar(50),
+ country varchar(4),
+ province varchar(50),
+ othername varchar(50),
+ constraint cityothernamekey primary key (country, province, city, othername));
+
+create table citylocalname
+(city varchar(50),
+ country varchar(4),
+ province varchar(50),
+ localname varchar(300),
+ constraint citylocalnamekey primary key (country, province, city));
+
+create table continent
+(name varchar(20) constraint continentkey primary key,
+ area decimal(10));
+
+create table borders
+(country1 varchar(4),
+ country2 varchar(4),
+ length decimal 
+   check (length > 0),
+ constraint borderkey primary key (country1,country2) );
+
+create table encompasses
+(country varchar(4) not null,
+ continent varchar(20) not null,
+ percentage decimal,
+   check ((percentage > 0) and (percentage <= 100)),
+ constraint encompasseskey primary key (country,continent));
+
+create table organization
+(abbreviation varchar(12) constraint orgkey primary key,
+ name varchar(100) not null,
+ city varchar(50) ,
+ country varchar(4) , 
+ province varchar(50) ,
+ established date,
+ constraint orgnameunique unique (name));
+
+create table ismember
+(country varchar(4),
+ organization varchar(12),
+ type varchar(60) default 'member',
+ constraint memberkey primary key (country,organization) );
+
+create type geocoord as
+(latitude decimal,
+ longitude decimal);
+
+
+create table mountain
+(name varchar(50) constraint mountainkey primary key,
+ mountains varchar(50),
+ elevation decimal,
+ type varchar(10),
+ coordinates geocoord constraint mountaincoord
+     check (((coordinates).latitude >= -90) and 
+            ((coordinates).latitude <= 90) and
+            ((coordinates).longitude > -180) and
+            ((coordinates).longitude <= 180)));
+
+create table desert
+(name varchar(50) constraint desertkey primary key,
+ area decimal,
+ coordinates geocoord constraint descoord
+     check (((coordinates).latitude >= -90) and 
+            ((coordinates).latitude <= 90) and
+            ((coordinates).longitude > -180) and
+            ((coordinates).longitude <= 180)));
+
+create table island
+(name varchar(50) constraint islandkey primary key,
+ islands varchar(50),
+ area decimal constraint islandar check (area >= 0),
+ elevation decimal,
+ type varchar(12),
+ coordinates geocoord constraint islandcoord
+     check (((coordinates).latitude >= -90) and 
+            ((coordinates).latitude <= 90) and
+            ((coordinates).longitude > -180) and
+            ((coordinates).longitude <= 180)));
+
+create table lake
+(name varchar(50) constraint lakekey primary key,
+ river varchar(50),
+ area decimal constraint lakear check (area >= 0),
+ elevation decimal,
+ depth decimal constraint lakedpth check (depth >= 0),
+ height decimal constraint damheight check (height > 0),
+ type varchar(12),
+ coordinates geocoord constraint lakecoord
+     check (((coordinates).latitude >= -90) and 
+            ((coordinates).latitude <= 90) and
+            ((coordinates).longitude > -180) and
+            ((coordinates).longitude <= 180)));
+
+create table sea
+(name varchar(50) constraint seakey primary key,
+ area decimal constraint seaar check (area >= 0),
+ depth decimal constraint seadepth check (depth >= 0));
+
+create table river
+(name varchar(50) constraint riverkey primary key,
+ river varchar(50),
+ lake varchar(50),
+ sea varchar(50),
+ length decimal constraint riverlength
+   check (length >= 0),
+ area decimal constraint riverarea
+   check (area >= 0),
+ source geocoord constraint sourcecoord
+     check (((source).latitude >= -90) and 
+            ((source).latitude <= 90) and
+            ((source).longitude > -180) and
+            ((source).longitude <= 180)),
+ mountains varchar(50),
+ sourceelevation decimal,
+ estuary geocoord constraint estcoord
+     check (((estuary).latitude >= -90) and 
+            ((estuary).latitude <= 90) and
+            ((estuary).longitude > -180) and
+            ((estuary).longitude <= 180)),
+ estuaryelevation decimal,
+ constraint rivflowsinto 
+     check ((river is null and lake is null)
+            or (river is null and sea is null)
+            or (lake is null and sea is null)));
+
+create table riverthrough
+(river varchar(50),
+ lake  varchar(50),
+ constraint rthroughkey primary key (river,lake) );
+
+create table geo_mountain
+(mountain varchar(50) ,
+ country varchar(4) ,
+ province varchar(50) ,
+ constraint gmountainkey primary key (province,country,mountain) );
+
+create table geo_desert
+(desert varchar(50) ,
+ country varchar(4) ,
+ province varchar(50) ,
+ constraint gdesertkey primary key (province, country, desert) );
+
+create table geo_island
+(island varchar(50) , 
+ country varchar(4) ,
+ province varchar(50) ,
+ constraint gislandkey primary key (province, country, island) );
+
+create table geo_river
+(river varchar(50) , 
+ country varchar(4) ,
+ province varchar(50) ,
+ constraint griverkey primary key (province ,country, river) );
+
+create table geo_sea
+(sea varchar(50) ,
+ country varchar(4)  ,
+ province varchar(50) ,
+ constraint gseakey primary key (province, country, sea) );
+
+create table geo_lake
+(lake varchar(50) ,
+ country varchar(4) ,
+ province varchar(50) ,
+ constraint glakekey primary key (province, country, lake) );
+
+create table geo_source
+(river varchar(50) ,
+ country varchar(4) ,
+ province varchar(50) ,
+ constraint gsourcekey primary key (province, country, river) );
+
+create table geo_estuary
+(river varchar(50) ,
+ country varchar(4) ,
+ province varchar(50) ,
+ constraint gestuarykey primary key (province, country, river) );
+
+create table mergeswith
+(sea1 varchar(50) ,
+ sea2 varchar(50) ,
+ constraint mergeswithkey primary key (sea1, sea2) );
+
+create table located
+(city varchar(50) ,
+ province varchar(50) ,
+ country varchar(4) ,
+ river varchar(50),
+ lake varchar(50),
+ sea varchar(50) );
+
+create table locatedon
+(city varchar(50) ,
+ province varchar(50) ,
+ country varchar(4) ,
+ island varchar(50) ,
+ constraint locatedonkey primary key (city, province, country, island) );
+
+create table islandin
+(island varchar(50) ,
+ sea varchar(50) ,
+ lake varchar(50) ,
+ river varchar(50) );
+
+create table mountainonisland
+(mountain varchar(50),
+ island   varchar(50),
+ constraint mountainislkey primary key (mountain, island) );
+
+create table lakeonisland
+(lake    varchar(50),
+ island  varchar(50),
+ constraint lakeislkey primary key (lake, island) );
+
+create table riveronisland
+(river   varchar(50),
+ island  varchar(50),
+ constraint riverislkey primary key (river, island) );
+
+create table airport
+(iatacode varchar(3) primary key,
+ name varchar(100) ,
+ country varchar(4) ,
+ city varchar(50) ,
+ province varchar(50) ,
+ island varchar(50) ,
+ latitude decimal constraint airplat
+   check ((latitude >= -90) and (latitude <= 90)) ,
+ longitude decimal constraint airplon
+   check ((longitude >= -180) and (longitude <= 180)) ,
+ elevation decimal ,
+ gmtoffset decimal );
+
+alter table organization 
+add constraint fk_capital 
+foreign key (city, country, province) 
+references city (name, country, province)
+deferrable initially deferred;
+
+alter table country 
+add constraint fk_capital 
+foreign key (capital, code, province) 
+references city (name, country, province)
+deferrable initially deferred;
+
+alter table airport 
+add constraint fk_airportcity
+foreign key (city, country, province) 
+references city (name, country, province)
+deferrable initially deferred;
+
+alter table airport 
+add constraint fk_airportisland
+foreign key (island) 
+references island (name )
+deferrable initially deferred;
+
+alter table citypops 
+add constraint fk_citypops 
+foreign key (city, country, province) 
+references city (name, country, province)
+deferrable initially deferred;
+
+alter table province 
+add constraint fk_citycapital 
+foreign key (capital, country, capprov) 
+references city (name, country, province)
+deferrable initially deferred;
+
+alter table located 
+add constraint fk_locatedcity 
+foreign key (city, country, province) 
+references city (name, country, province)
+deferrable initially deferred;
+
+alter table located 
+add constraint fk_locsea
+foreign key (sea) 
+references sea (name)
+deferrable initially deferred;
+
+alter table located 
+add constraint fk_locriver
+foreign key (river) 
+references river (name)
+deferrable initially deferred;
+
+alter table located 
+add constraint fk_loclake
+foreign key (lake) 
+references lake (name)
+deferrable initially deferred;
+
+alter table locatedon 
+add constraint fk_locatedcityon 
+foreign key (city, country, province) 
+references city (name, country, province)
+deferrable initially deferred;
+
+alter table locatedon
+add constraint fk_onisland
+foreign key (island) 
+references island (name)
+deferrable initially deferred;
+
+alter table ismember 
+add constraint fk_ismember 
+foreign key (organization) 
+references organization (abbreviation)
+deferrable initially deferred;
+
+alter table ismember 
+add constraint fk_country 
+foreign key (country) 
+references country (code)
+deferrable initially deferred;
+
+alter table province 
+add constraint fk_provcountry 
+foreign key (country) 
+references country (code)
+deferrable initially deferred;
+
+alter table borders 
+add constraint fk_border1 
+foreign key (country1) 
+references country (code)
+deferrable initially deferred;
+
+alter table borders 
+add constraint fk_border2 
+foreign key (country2) 
+references country (code)
+deferrable initially deferred;
+
+alter table countrypops 
+add constraint fk_popscountry 
+foreign key (country) 
+references country (code)
+deferrable initially deferred;
+
+alter table economy 
+add constraint fk_ecoscountry 
+foreign key (country) 
+references country (code)
+deferrable initially deferred;
+
+alter table politics 
+add constraint fk_polscountry1 
+foreign key (country) 
+references country (code)
+deferrable initially deferred;
+
+alter table politics 
+add constraint fk_polscountry2 
+foreign key (dependent) 
+references country (code)
+deferrable initially deferred;
+
+alter table population 
+add constraint fk_popcountry 
+foreign key (country) 
+references country (code)
+deferrable initially deferred;
+
+alter table spoken 
+add constraint fk_spokencountry 
+foreign key (country) 
+references country (code)
+deferrable initially deferred;
+
+alter table spoken
+add constraint fk_spokenlanguage
+foreign key (language)
+references language (name)
+deferrable initially deferred;
+
+alter table language
+add constraint fk_languagesuper
+foreign key (superlanguage)
+references language (name)
+deferrable initially deferred;
+
+alter table religion 
+add constraint fk_popcountry 
+foreign key (country) 
+references country (code)
+deferrable initially deferred;
+
+alter table ethnicgroup 
+add constraint fk_popcountry 
+foreign key (country) 
+references country (code)
+deferrable initially deferred;
+
+alter table encompasses 
+add constraint fk_enccountry 
+foreign key (country) 
+references country (code)
+deferrable initially deferred;
+
+alter table encompasses 
+add constraint fk_enccontinent 
+foreign key (continent) 
+references continent (name)
+deferrable initially deferred;
+
+alter table geo_desert 
+add constraint fk_desert 
+foreign key (desert) 
+references desert (name)
+deferrable initially deferred;
+
+alter table geo_desert 
+add constraint fk_desertprovince 
+foreign key (country, province) 
+references province (country, name)
+deferrable initially deferred;
+
+alter table geo_mountain
+add constraint fk_mountainprovince 
+foreign key (country, province) 
+references province (country, name)
+deferrable initially deferred;
+
+alter table geo_mountain
+add constraint fk_geomountain 
+foreign key (mountain) 
+references mountain (name)
+deferrable initially deferred;
+
+alter table geo_island
+add constraint fk_islandprovince 
+foreign key (country, province) 
+references province (country, name)
+deferrable initially deferred;
+
+alter table geo_island
+add constraint fk_geoisland
+foreign key (island) 
+references island (name)
+deferrable initially deferred;
+
+alter table geo_sea
+add constraint fk_seaprovince 
+foreign key (country, province) 
+references province (country, name)
+deferrable initially deferred;
+
+alter table geo_sea
+add constraint fk_geosea
+foreign key (sea) 
+references sea (name)
+deferrable initially deferred;
+
+alter table geo_estuary
+add constraint fk_gestprovince 
+foreign key (country, province) 
+references province (country, name)
+deferrable initially deferred;
+
+alter table geo_estuary
+add constraint fk_gestriver 
+foreign key (river) 
+references river (name)
+deferrable initially deferred;
+
+alter table geo_source
+add constraint fk_gsrcprovince 
+foreign key (country, province) 
+references province (country, name)
+deferrable initially deferred;
+
+alter table geo_source
+add constraint fk_gsrcriver 
+foreign key (river) 
+references river (name)
+deferrable initially deferred;
+
+alter table geo_river
+add constraint fk_griverprovince 
+foreign key (country, province) 
+references province (country, name)
+deferrable initially deferred;
+
+alter table geo_river
+add constraint fk_georiver 
+foreign key (river) 
+references river (name)
+deferrable initially deferred;
+
+alter table geo_lake
+add constraint fk_lakeprovince 
+foreign key (country, province) 
+references province (country, name)
+deferrable initially deferred;
+
+alter table geo_lake
+add constraint fk_geolake 
+foreign key (lake) 
+references lake (name)
+deferrable initially deferred;
+
+alter table city
+add constraint fk_cityprovince 
+foreign key (country, province) 
+references province (country, name)
+deferrable initially deferred;
+
+alter table provpops
+add constraint fk_ppopsprovince 
+foreign key (country, province) 
+references province (country, name)
+deferrable initially deferred;
+
+alter table mountainonisland
+add constraint fk_mtimountain 
+foreign key (mountain) 
+references mountain (name)
+deferrable initially deferred;
+
+alter table islandin
+add constraint fk_islandin
+foreign key (island) 
+references island (name)
+deferrable initially deferred;
+
+alter table islandin
+add constraint fk_insea
+foreign key (sea) 
+references sea (name)
+deferrable initially deferred;
+
+alter table mergeswith
+add constraint fk_sea1
+foreign key (sea1) 
+references sea (name)
+deferrable initially deferred;
+
+alter table mergeswith
+add constraint fk_sea2
+foreign key (sea2) 
+references sea (name)
+deferrable initially deferred;
+
+alter table river
+add constraint fk_riversea
+foreign key (sea) 
+references sea (name)
+deferrable initially deferred;
+
+alter table river
+add constraint fk_riverriver
+foreign key (river) 
+references river (name)
+deferrable initially deferred;
+
+alter table river
+add constraint fk_riverlake
+foreign key (lake) 
+references lake (name)
+deferrable initially deferred;
+
+alter table riverthrough
+add constraint fk_thriver
+foreign key (river) 
+references river (name)
+deferrable initially deferred;
+
+alter table riverthrough
+add constraint fk_thlake
+foreign key (lake) 
+references lake (name)
+deferrable initially deferred;
+
+alter table lake
+add constraint fk_lakeriver
+foreign key (river) 
+references river (name)
+deferrable initially deferred;
+
+alter table lakeonisland
+add constraint fk_lakeoisland
+foreign key (island) 
+references island (name)
+deferrable initially deferred;
+
+alter table lakeonisland
+add constraint fk_islandlake
+foreign key (lake) 
+references lake (name)
+deferrable initially deferred;
+
+alter table riveronisland
+add constraint fk_riveroisland
+foreign key (island) 
+references island (name)
+deferrable initially deferred;
+
+alter table riveronisland
+add constraint fk_islandriver
+foreign key (river) 
+references river (name)
+deferrable initially deferred;
+
+alter table provinceothername
+add constraint fk_provinceother
+foreign key (province, country) 
+references province (name, country)
+deferrable initially deferred;
+
+alter table provincelocalname
+add constraint fk_provincelocal
+foreign key (province, country) 
+references province (name, country)
+deferrable initially deferred;
