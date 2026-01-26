@@ -1,50 +1,85 @@
-# ![logo](mondialdb64.png) DockerDatabase
+# ![<img src="mondialdb64.png" width="25"/>](mondialdb64.png) DockerDatabase
 
-Welcome to the DockerDatabase! The project is dedicated to deliver free database models defined in SQL and stored in PostgreSQL database systems. It is called DockerDatabase because a Docker build file is included in order to deliver database models and data as part of docker images.
-
-A Docker image is also used in classroom environment at Hochschule Pforzheim. The main database utilized in this context is the [Mondial](http://www.dbis.informatik.uni-goettingen.de/Mondial/) database. Students may use this project to setup their own environment.
+A containerized PostgreSQL database with pre-loaded database schemas for educational purposes. This project provides ready-to-use Docker images containing the [Mondial](http://www.dbis.informatik.uni-goettingen.de/Mondial/) database and additional schemas.
 
 [![Publish Docker Image](https://github.com/hochschule-pforzheim/docker-database/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/hochschule-pforzheim/docker-database/actions/workflows/docker-publish.yml)
 
-## Database Models
-
-This project delivers different database models. All of them are implemented as PostgreSQL schema including corresponding data. Besides that all models also provide SQL instructions to delete (drop) the schema. Currently the project includes these schemas:
-
-- Mondial (`public`)
-- Warehouse (`warehouse`)
-
-## Get Ready
-
-In order to use these schemas within a docker container, you'll have to build a proper image first. Currently the Mondial schema is integrated by default. For other schemas you have to modify the Dockerfile or interact with the Docker container directly.
-
-### Environment Variables
-
-The Dockerfile comes with several environment variables which you may modify. Since our image relies on the official docker image of [PostgreSQL](https://hub.docker.com/_/postgres/), the mandatory admin password for postgres is included in these default presets as well.
-
-The following environment variables are pre-defined:
-
-| Variable            | Description                                         | Default Value | Source                                                                            |
-| ------------------- | --------------------------------------------------- | ------------- | --------------------------------------------------------------------------------- |
-| `POSTGRES_USER`     | postgres superuser (admin)                          | `postgres`      | [PostgreSQL](https://hub.docker.com/_/postgres/)                                  |
-| `POSTGRES_PASSWORD` | password for postgres superuser                     | `admin`         | [PostgreSQL](https://hub.docker.com/_/postgres/), preset by this image definition |
-| `MONDIALDB`         | the postgres name of the mondial database           | `mondial`     | defined by image definition                                                       |
-| `MONDIALUSER`       | the username for accessing the `MONDIALDB` database | `mondial`     | defined by image definition                                                       |
-| `USERPASSWORD`      | the password for the `MONDIALUSER`                  | `mondial!`    | defined by image definition                                                       |
-
-### Build and run DockerDatabase with Mondial
-
-In root directory of this project. Build the image by calling:
-
-```console
-foo@bar:~$ docker build -t ngmondial .
-```
-
-Run your image
+## Quick Start
 
 ```bash
-foo@bar:~$ docker run --name ngmondial -e "POSTGRES_PASSWORD=admin" -p 5432:5432 -d ngmondial
+# Build the image
+docker build -t ngmondial .
+
+# Run the container
+docker run --name ngmondial -e "POSTGRES_PASSWORD=admin" -p 5432:5432 -d ngmondial
 ```
 
-[Publishing ports](https://docs.docker.com/network/) as defined by `-p 5432:5432` is optional and only needed in case you want to have direct access to the database from your host.
+Or use Docker Compose (includes pgAdmin):
 
-In case you plan to store postgres data in a host directory (e.g. for backup of changes), you can add a volume option to your run command. Such as: `-v </path/to/host/directory>:/var/lib/postgresql/data/`.
+```bash
+docker compose up -d
+```
+
+Access points:
+- **PostgreSQL**: `localhost:5432` (User: `mondial`, Password: `mondial!`)
+- **pgAdmin**: `http://localhost:5050` (Email: `user@hs-pforzheim.de`, Password: `secret`)
+
+## Database Schemas
+
+| Schema | Description |
+|--------|-------------|
+| `public` | [Mondial Database](http://www.dbis.informatik.uni-goettingen.de/Mondial/) - Geographic and demographic world data |
+| `warehouse` | Data Warehouse schema with sales, articles, customers, stores, and time dimensions |
+
+## Project Structure
+
+```
+├── Dockerfile              # PostgreSQL image with pre-loaded data
+├── docker-compose.yml      # Multi-container setup (DB + pgAdmin)
+├── sql/                    # SQL schema and data files
+│   ├── mondial_*.sql       # Mondial database schema and data
+│   └── mondial_warehouse_*.sql  # Warehouse schema and data
+├── scripts/                # Initialization scripts
+└── models/                 # Database models (pgModeler format)
+```
+
+## Environment Variables
+
+| Variable            | Description                               | Default     |
+| ------------------- | ----------------------------------------- | ----------- |
+| `POSTGRES_USER`     | PostgreSQL superuser                      | `postgres`  |
+| `POSTGRES_PASSWORD` | Superuser password                        | `admin`     |
+| `MONDIALDB`         | Database name                             | `mondial`   |
+| `MONDIALUSER`       | Application user                          | `mondial`   |
+| `USERPASSWORD`      | Application user password                 | `mondial!`  |
+
+## Advanced Usage
+
+### Persistent Storage
+
+Mount a volume to persist data across container restarts:
+
+```bash
+docker run --name ngmondial \
+  -e "POSTGRES_PASSWORD=admin" \
+  -p 5432:5432 \
+  -v /path/to/data:/var/lib/postgresql/data \
+  -d ngmondial
+```
+
+### Connect with psql
+
+```bash
+docker exec -it ngmondial psql -U mondial -d mondial
+```
+
+## Branches
+
+| Branch | Description |
+|--------|-------------|
+| `main` | Core database container (Mondial + Warehouse) |
+| `superset` | Adds Apache Superset for data visualization |
+
+## License
+
+This project is used in classroom environments at Hochschule Pforzheim.

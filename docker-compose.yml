@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   db:
     image: ngmondial
@@ -17,3 +16,6 @@ services:
     volumes:
       - ./servers.json:/pgadmin4/servers.json
       - pgadmin-data:/var/lib/pgadmin
+
+volumes:
+  pgadmin-data:
