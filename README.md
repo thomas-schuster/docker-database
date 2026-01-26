@@ -6,23 +6,43 @@ A containerized PostgreSQL database with pre-loaded database schemas for educati
 
 ## Quick Start
 
-```bash
-# Build the image
-docker build -t ngmondial .
+### 1. Configuration (Optional)
+This project uses environment variables for configuration. You can use the default settings or create a custom configuration:
 
-# Run the container
-docker run --name ngmondial -e "POSTGRES_PASSWORD=admin" -p 5432:5432 -d ngmondial
+```bash
+cp .env.example .env
+# Edit .env to change passwords if desired
 ```
 
-Or use Docker Compose (includes pgAdmin):
+### 2. Build and Run
+Use Docker Compose to build the local image and start PostgreSQL and pgAdmin:
 
 ```bash
+docker compose up -d --build
+```
+
+### 3. Access
+- **PostgreSQL Database**: Port `5432`
+  - **Admin User**: `postgres` (Password: Check `.env`, Default: `admin`)
+  - **Mondial User**: `mondial` (Password: Check `.env`, Default: `mondial!`)
+  - **Database name**: `mondial`
+- **pgAdmin Interface**: [http://localhost:5050](http://localhost:5050)
+  - **Login**: `user@hs-pforzheim.de` (Password: Check `.env` -> `PGADMIN_PASSWORD`, Default: `secret`)
+  - **Server Connection**: "Mondial DB (Docker)" is pre-configured. If prompted for a password when connecting to the server within pgAdmin, use the Postgres admin password (`admin`).
+
+### Using Pre-built Images (GitHub Registry)
+Instead of building locally, you can pull the image from the GitHub Container Registry:
+
+```bash
+docker pull ghcr.io/thomas-schuster/docker-database:latest
+# Tag it to match docker-compose expectation
+docker tag ghcr.io/thomas-schuster/docker-database:latest ngmondial
 docker compose up -d
 ```
 
-Access points:
-- **PostgreSQL**: `localhost:5432` (User: `mondial`, Password: `mondial!`)
-- **pgAdmin**: `http://localhost:5050` (Email: `user@hs-pforzheim.de`, Password: `secret`)
+## Management
+- **Stop containers**: `docker compose down`
+- **Stop and remove data**: `docker compose down -v`
 
 ## Database Schemas
 
@@ -79,7 +99,3 @@ docker exec -it ngmondial psql -U mondial -d mondial
 |--------|-------------|
 | `main` | Core database container (Mondial + Warehouse) |
 | `superset` | Adds Apache Superset for data visualization |
-
-## License
-
-This project is used in classroom environments at Hochschule Pforzheim.

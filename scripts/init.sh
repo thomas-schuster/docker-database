@@ -16,6 +16,10 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" -d mondial -f /sql/mondial_w
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" -d mondial -f /sql/mondial_warehouse_time_data.sql
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" -d mondial -f /sql/mondial_warehouse_sales_data.sql
 
+# Add Attractions Extension to Mondial
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" -d mondial -f /sql/mondial_attractions_schema.sql
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" -d mondial -f /sql/mondial_attractions_data.sql
+
 # Grant necessary privileges to the application user
 echo "Granting privileges to ${MONDIALUSER} on database ${MONDIALDB}..."
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$MONDIALDB" <<-EOSQL
