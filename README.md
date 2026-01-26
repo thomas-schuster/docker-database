@@ -1,4 +1,4 @@
-# ![<img src="mondialdb64.png" width="25"/>](mondialdb64.png) DockerDatabase
+# <img src="mondialdb64.png" width="48" style="vertical-align: middle;"> DockerDatabase
 
 A containerized PostgreSQL database with pre-loaded database schemas for educational purposes. This project provides ready-to-use Docker images containing the [Mondial](http://www.dbis.informatik.uni-goettingen.de/Mondial/) database and additional schemas.
 
@@ -6,7 +6,7 @@ A containerized PostgreSQL database with pre-loaded database schemas for educati
 
 ## Quick Start
 
-### 1. Configuration (Optional)
+### 1. Configuration
 This project uses environment variables for configuration. You can use the default settings or create a custom configuration:
 
 ```bash
