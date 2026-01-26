@@ -1,14 +1,20 @@
-version: "3.8"
 services:
   db:
     image: ngmondial
+    container_name: mondial-db
     ports:
       - "5432:5432"
     environment:
       POSTGRES_PASSWORD: admin
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mondial -d mondial"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   pgadmin:
     image: dpage/pgadmin4:latest
+    container_name: mondial-pgadmin
     ports:
       - "5050:80"
     environment:
@@ -17,3 +23,30 @@ services:
     volumes:
       - ./servers.json:/pgadmin4/servers.json
       - pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      db:
+        condition: service_healthy
+
+  superset:
+    image: apache/superset:latest
+    container_name: mondial-superset
+    ports:
+      - "8088:8088"
+    environment:
+      SUPERSET_SECRET_KEY: "your-super-secret-key-change-in-production"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - superset-data:/app/superset_home
+    command: >
+      bash -c "
+        superset db upgrade &&
+        superset fab create-admin --username admin --firstname Admin --lastname User --email admin@hs-pforzheim.de --password admin || true &&
+        superset init &&
+        superset run -h 0.0.0.0 -p 8088 --with-threads --reload
+      "
+
+volumes:
+  pgadmin-data:
+  superset-data:
