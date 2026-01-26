@@ -1,7 +1,7 @@
 {
     "Servers": {
         "1": {
-            "Name": "db",
+            "Name": "Mondial DB (Docker)",
             "Group": "Servers",
             "Host": "db",
             "Port": 5432,

@@ -2,10 +2,17 @@ services:
   db:
     image: ngmondial
     container_name: mondial-db
+    hostname: db
+    build: .
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-admin}
+      POSTGRES_DB: ${POSTGRES_DB:-mondial}
+      MONDIALUSER: ${MONDIAL_USER:-mondial}
+      USERPASSWORD: ${MONDIAL_PASSWORD:-mondial!}
+      MONDIALDB: ${MONDIAL_DB:-mondial}
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U mondial -d mondial"]
       interval: 5s
@@ -19,8 +26,8 @@ services:
     ports:
       - "5050:80"
     environment:
-      PGADMIN_DEFAULT_EMAIL: user@hs-pforzheim.de
-      PGADMIN_DEFAULT_PASSWORD: secret
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:-user@hs-pforzheim.de}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-secret}
     volumes:
       - ./servers.json:/pgadmin4/servers.json
       - pgadmin-data:/var/lib/pgadmin

@@ -11,6 +11,16 @@
 
 set -e
 
+# Lade Umgebungsvariablen aus .env
+if [ -f .env ]; then
+  export $(grep -v '^#' .env | xargs)
+fi
+
+# Standardwerte setzen, falls nicht in .env
+MONDIAL_USER=${MONDIAL_USER:-mondial}
+MONDIAL_PASSWORD=${MONDIAL_PASSWORD:-mondial!}
+MONDIAL_DB=${MONDIAL_DB:-mondial}
+
 # Farben für Output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -75,7 +85,7 @@ echo -e "${YELLOW}[4/5] Konfiguriere Datenbankverbindung in Superset...${NC}"
 # Erstelle Datenbankverbindung via Superset CLI (der zuverlässigste Weg)
 docker exec mondial-superset superset set-database-uri \
     -d "Mondial DB" \
-    -u 'postgresql+psycopg2://mondial:mondial!@db:5432/mondial' \
+    -u "postgresql+psycopg2://${MONDIAL_USER}:${MONDIAL_PASSWORD}@db:5432/${MONDIAL_DB}" \
     2>/dev/null
 
 echo -e "${GREEN}      ✓ Datenbankverbindung erstellt${NC}"
@@ -106,9 +116,9 @@ echo -e "${GREEN} Setup abgeschlossen!${NC}"
 echo -e "${GREEN}========================================${NC}"
 echo ""
 echo "Zugriff:"
-echo -e "  • Superset:   ${GREEN}http://localhost:8088${NC}  (admin / admin)"
-echo -e "  • pgAdmin:    ${GREEN}http://localhost:5050${NC}  (user@hs-pforzheim.de / secret)"
-echo -e "  • PostgreSQL: ${GREEN}localhost:5432${NC}        (mondial / mondial!)"
+echo -e "  • Superset:   ${GREEN}http://localhost:8088${NC}  - User: admin / Pass: admin"
+echo -e "  • pgAdmin:    ${GREEN}http://localhost:5050${NC}  - User: user@hs-pforzheim.de / Pass: secret"
+echo -e "  • PostgreSQL: ${GREEN}localhost:5432${NC}         - User: mondial / Pass: mondial!"
 echo ""
 echo "In Superset verfügbar:"
 echo -e "  • Dashboard:  ${GREEN}http://localhost:8088/superset/dashboard/mondial-warehouse/${NC}"
