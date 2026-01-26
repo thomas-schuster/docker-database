@@ -1,11 +1,11 @@
 database_name: Mondial DB
-sqlalchemy_uri: postgresql+psycopg2://mondial:XXXXXXXXXX@172.22.0.4:5432/mondial
+sqlalchemy_uri: postgresql+psycopg2://mondial:XXXXXXXXXX@db:5432/mondial
 cache_timeout: null
 expose_in_sqllab: true
 allow_run_async: false
 allow_ctas: false
 allow_cvas: false
-allow_dml: false
+allow_dml: true
 allow_file_upload: false
 extra:
   allows_virtual_table_explore: true
