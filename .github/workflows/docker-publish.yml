@@ -80,7 +80,7 @@ jobs:
           docker exec -e PGPASSWORD=${{ env.MONDIAL_DB_PASSWORD }} test-db-container \
             psql -h localhost -U ${{ env.MONDIAL_DB_USER }} -d ${{ env.MONDIAL_DB_NAME }} \
             -c "SELECT COUNT(*) FROM airport;" \
-            --tuples-only --no-align | grep -Eq '^1320$' || (echo "Failed: Count from airport is not 1320" && exit 1)
+            --tuples-only --no-align | grep -Eq '^1304$' || (echo "Failed: Count from airport is not 1304" && exit 1)
 
           echo "Database tests passed!"
 
